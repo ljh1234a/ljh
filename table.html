@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            /* css : 하위의 설정이 위의 설정을 덮어씀 
+            % : 부모의 몇% 인지 나타냄, table의 부모는 body, body의 부모는 html 
+            */
+
+            /*
+            html, body {
+                height: 100%;
+            }
+
+            table {
+                width: 100%;
+                height: 100%;
+                
+            }
+            */
+
+            table, tr, th, td {
+                /* border: 1px solid red; */
+                /*
+                border-width: 1px;
+                border-style: solid;
+                border-color: red;
+                */
+                /* border-collapse: collapse; */
+                /* border-radius: 50%; */
+                border-spacing: 10px;
+                
+                /*
+                border-style: dashed;
+                border-color: transparent; /* 투명 
+                padding: 20px;
+                background-color: pink;
+                border-radius: 50%;
+                
+                /* 단일 실선 */
+                /* border-collapse: collapse; */
+            }
+
+            /* even : 짝수번째, odd : 홀수번째 */
+            tr:nth-child(2n) {
+                background-color: pink;
+            }
+
+            tr:nth-child(odd) {
+                background-color: rgb(175, 211, 235);
+            }
+
+            /*
+            td:hover {
+                border-bottom: 3px solid violet;
+            }
+            */
+
+            tr:hover {
+                background-color: rgb(204, 187, 155);
+                border-bottom: 3px rgb(255, 0, 0);
+                cursor: pointer;
+            }
+
+            /* class는 .으로, id는 #으로 시작 */
+            .mytable, .mytable tr, .mytable th, .mytable td {
+                border-color: rgb(34, 212, 138);
+                border-spacing: 0;
+                width: 90px;
+                height: 30px;
+            }
+
+            #yourTable {
+                width: 100%;
+                border-collapse: collapse;
+                caption-side: bottom;
+            }
+
+            #yourTable tr, #yourTable th, #yourTable td {
+                background-color: transparent;
+            }
+
+            #yourTable th {
+                border-bottom: 2px solid darkblue;
+            }
+
+            #yourTable tr {
+                border-bottom: 1px solid #000;
+            }
+
+            #yourTable td{
+                padding-left: 10px;
+            }
+
+            #yourTable tr:hover {
+                background-color: rgb(189, 212, 212);
+            }
+            
+            /*
+            #yourTable td:nth-child(1) {
+                background-color: red; 
+            }
+            */
+            
+        </style>
+    </head>
+    <!-- Ctrl + D : 같은 문자 선택 -->
+    <body>
+        <table border="1">
+            <tr>
+                <th><img src="/img/Pizza.jpg" alt="Pizza" width="100"></th>
+                <th colspan="2">1</th>
+                
+            </tr>
+
+            <tr>
+                <th>2</th>
+                <td>3</td>>
+                <td>4</td>
+            </tr>
+            <tr>
+                <th rowspan="2">5</th>
+                <td>6</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="mytable">
+            <tr>
+                <td colspan="2">1</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td colspan="3">7</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="mytable">
+            <tr>
+                <td rowspan="2">1</td>
+                <td>2</td>
+                <td rowspan="3">3</td>
+            </tr>
+            <tr>
+                <td>5</td>   
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>              
+            </tr>
+        </table>
+        <hr>
+        <table class="mytable">
+            <tr>
+                <td rowspan="2" colspan="2">1</td>      
+                <td>3</td>
+            </tr>
+            <tr>   
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+        </table>
+        <hr>
+        <table id="yourTable">
+            <caption>테이블 제목</caption>
+            <colgroup>
+                <col>
+                <col span="2" style="background-color: #cee2e2">
+            </colgroup>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Savings</th>
+            </tr>
+            <tr>
+                <td>Peter</td>
+                <td>Griffin</td>
+                <td>$100</td>
+            </tr>
+            <tr>
+                <td>Lois</td>
+                <td>Griffin</td>
+                <td>$150</td>
+            </tr>
+            <tr>
+                <td>Joe</td>
+                <td>Swanson</td>
+                <td>$300</td>
+            </tr>
+        </table>
+    </body>
+</html>
