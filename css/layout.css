@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+#header, #footer {
+    height: 130px;
+    background-color: rgb(117, 117, 117);
+    text-align: center;
+    line-height: 130px;
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+#main {
+    overflow: hidden;
+}
+#left, #contents{
+    float: left;
+}
+div#left {
+    height:250px;
+    width: 250px;
+    background-color: lightgray;
+    padding-top: 40px;
+    padding-left: 20px;
+}
+div#contents {
+    padding-top: 40px;
+    padding-left: 20px;
+}
+div#contents h1 {
+    margin-bottom: 25px;
+}
+div#contents p {
+    margin-bottom: 15px;
+}
+div#footer {
+    background-color: rgb(160, 157, 157);
+    font-size: 20px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* class의 선택자는 . */
+        body.yourUl {   /* 11점 */
+            background-color: rgb(156, 241, 237);
+        }
+        body {  /* 1점 -> 적용안됨 , !important쓰면 최고 우선순위 */
+            background-color: blueviolet;
+        }
+        .yourUl {
+            border: 2px solid rgb(238, 32, 18);
+        }
+        .title {
+
+        }
+        .mainList {
+            border-bottom: 2px solid rgb(186, 85, 233);
+        }
+        .title.mainList {
+            background-color: rgb(105, 219, 105);
+        }
+    </style>
+</head>
+<body class="yourUl"> <!--인라인 우선 -->
+    <a href="/">Home</a>
+    <h3>Class는 모든 요소에 추가할 수 있으며 요소들을 그룹으로 묶는 역할을 하고 CSS나 JS에서 선택자로 사용</h3>
+    <ul class="myUl">
+        <li class="title mainList">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+    <ul class="yourUl">
+        <li>1</li>
+        <li>2</li>
+        <li class="title mainList">3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+    <ul class="myUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+    <button>change color</button>
+    <script>
+        // 요소 선택 : getElements...
+        let btn = document.getElementsByTagName("button");
+        let titles = document.getElementsByClassName("title");
+        let i = 0;
+        console.dir(btn[0]);
+        
+        btn[0].onclick = function(e) {
+            if(i == 0) {
+                titles[0].style.backgroundColor = "red";
+                titles[1].style.backgroundColor = "orange";
+                i++;
+            }
+            else {
+                titles[0].style.backgroundColor = "rgb(105, 219, 105)";
+                titles[1].style.backgroundColor = "rgb(105, 219, 105)";
+                i = 0;
+            }
+        };
+    </script>
+</body>
+</html>
