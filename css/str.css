@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;   
+}
+
+#wrap * {
+    border: 2px solid;
+    padding: 10px; 
+}
+header, main {
+    margin-bottom: 20px;
+}
+main {
+    border: none !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+main > section {
+    float: left;
+}
+main > section:first-child {
+    width: 75%;
+    margin-right: 20px;
+}
+
+main > section:last-child {
+    width: calc(25% - 20px);
+}
+
+main > section {
+    height: 550px;
+}
+
+main > section  section {
+    margin-bottom: 20px;
+}

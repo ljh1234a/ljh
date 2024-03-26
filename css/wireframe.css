@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin-left: 20px;
+}
+
+h2 {
+    color: rgb(14, 192, 133);
+}
+
+#multiple {
+    font-weight: lighter;
+}
+
+header {
+    border: 2px solid;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 30%;
+}
+
+nav {
+    border: 2px solid;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+main {
+    overflow: hidden;
+}
+main > section {
+    height: 270px;
+}
+section {
+    border: 2px solid;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+    width: 18%;
+    float: left;
+    
+}
+section section {
+    float: none;
+}
+article {
+    border: 2px solid;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+    width: 92%;
+    padding-top: 5px;
+    height: 150px;
+}
+article header, article section, article footer {
+    width: 95%;
+    height: 25px;
+}
+article section {
+   width: 93%;
+   padding-top: 0; 
+}
+article footer {
+    margin-bottom: 10px;
+    margin-top: 10px; 
+    padding-bottom: 0;
+}
+
+aside {
+    border: 2px solid;
+    width: 10.7%;
+    float: left;
+    padding-left: 10px;
+    margin-left: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 270px;
+}
+aside section {
+    width: 88%;
+    height: 65px;
+}
+
+footer {
+   border: 2px solid;
+   padding-left: 5px;
+   width: 30%;
+   padding-bottom: 15px;
+   padding-left: 5px;
+}
