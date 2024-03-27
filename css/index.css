@@ -1,5 +1,6 @@
-body {
-    background-color: aquamarine;
+
+#wrap {
+    margin-left: 20px;
 }
 
 /* 색상이 변경되는 속도를 지정 */
@@ -9,13 +10,13 @@ a {
 
 /* 방문 전 상태 */
 a:link { 
-    color: brown;
+    color: rgb(42, 165, 128);
     text-decoration: none;
 }
 
 /* 방문 후 상태 */
 a:visited { 
-    color: red;
+    color: rgb(207, 79, 233);
     text-decoration:underline;
 }
 
@@ -26,6 +27,17 @@ a:active {
 
 /* 마우스 포인터를 위에 올린 상태 */
 a:hover { 
-    font-size: 20px;
     text-decoration:underline;
+}
+section {
+    overflow: hidden;
+}
+article {
+    float: left;
+}
+ol {
+    font-size: 20px;
+}
+#css {
+    margin-left: 20px;
 }

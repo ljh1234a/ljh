@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="5; url=/index.html">
+    <title>Document</title>
+    <style>
+        #counter {
+            position: absolute;
+            font-size: 100px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Home</a>
+    <div>공사중... 5초 후 처음으로 이동</div>
+    <div id="counter">5</div>
+    <script>
+        let counter = document.getElementById("counter");
+        let cnt = 4;
+        setInterval(function() {
+            counter.innerHTML = cnt;
+            cnt--;
+        }, 1000);
+        
+    </script>
+</body>
+</html>

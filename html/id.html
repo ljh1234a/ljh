@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Style the element with the id "myHeader" */
+        #myHeader { /* 100 */
+          background-color: lightblue;
+          color: black;
+          padding: 40px;
+          text-align: center;
+        }
+        
+        /* Style all elements with the class name "city" */
+        .city { /* 10 */
+          background-color: tomato;
+          color: white;
+          padding: 10px;
+          margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Home</a>
+
+    <!-- An element with a unique id -->
+    <h1 id="myHeader" class="city">My Cities</h1>
+
+    <!-- Multiple elements with same class -->
+    <h2 class="city">London</h2>
+    <p>London is the capital of England.</p>
+
+    <h2 class="city">Paris</h2>
+    <p>Paris is the capital of France.</p>
+
+    <h2 class="city">Tokyo</h2>
+    <p>Tokyo is the capital of Japan.</p>
+    <button>Hello</button>
+    <script>
+        let mh = document.getElementById("myHeader");
+        let btn = document.getElementsByTagName("button");
+        let i = 0;
+        
+        btn[0].onclick = function(e) {
+            if (i == 0) {
+                mh.innerHTML = "<marquee>Hello!</marquee>";
+                mh.style.color = "red";
+                i++
+            }
+            else {
+                mh.innerHTML = "My Cities";
+                mh.style.color = "black";
+                i = 0;
+            }
+        }
+    </script>
+</body>
+</html>

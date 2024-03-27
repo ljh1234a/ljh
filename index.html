@@ -4,38 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body style="background-image: url(https://img.freepik.com/premium-vector/abstract-grainy-gradient-background-with-vibrant-colors_336924-6082.jpg); 
             background-size: 100% 100%; background-attachment: fixed;">
-    <div id = "timer"></div>
-    <h1 style="margin: 15px;  color: rgb(0, 0, 0);" title="tooltip"  >AWS 풀스택</h1>
-    <h2 style="margin: 15px;">HTML</h2>
-    <ol style="font-size: 20px; font-family: sans-serif;">
-        <li><a href="first.html" title="첫째날"><b>컴퓨터 기초</b></a></li>
-        <li><a href="second.htm"><b>H1 태그</b></a></li>
-        <li><a href="s1/third.html"><b>경로</b></a></li>
-        <li><a href="usecss.html"><b>CSS 사용</b></a></li>
-        <li><a href="bookmark.html#d3"><b>Bookmark</b></a></li>
-        <li><a href="frame.html"><b>Frameset</b></a></li>
-        <li><a href="imgmap.html"><b>ImageMap</b></a></li>
-        <li><a href="picture.html"><b>Picture</b></a></li>
-        <li><a href="table.html"><b>Table</b></a></li>
-        <li><a href="list.html"><b>List</b></a></li>
-        <li><a href="div.html"><b>Div</b></a></li>
-        <li><a href="https://git-scm.com/" target="_blank"><b>Git</b></a></li>
-        <li><a href="class.html"><b>Class</b></a></li>
-        <li><a href="id.html"><b>Id</b></a></li>
-        <li><a href="iframe.html"><b>Iframe</b></a></li>
-        <li><a href="redirect.html"><b>Redirect</b></a></li>
-        <li><a href="layout.html"><b>Layout</b></a></li>
-        <li><a href="semantic.html"><b>Semantic</b></a></li>
-        <li><a href="music.html"><b>Music</b></a></li>
-        <li><a href="six.html"><b>Six</b></a></li>
-        <li><a href="wireframe.html"><b>wireframe</b></a></li>
-        <li><a href="str.html"><b>와이어프레임</b></a></li>
-        <li><a href="form.html"><b>Form</b></a></li>
-        <li><a href="회원가입.html"><b>회원가입</b></a></li>
-    </ol>
+    <div id="wrap">
+        <header>
+            <div id = "timer"></div>
+            <h1 title="tooltip">AWS 풀스택<a href="ex.html" style="margin-left: 50px;"> 연습용 페이지</a></h1>
+        </header>
+
+        <section>
+            <article>
+                <h2>HTML</h2>
+                <ol>
+                    <li><a href="/html/first.html" title="첫째날"><b>컴퓨터 기초</b></a></li>
+                    <li><a href="/html/second.htm"><b>H1 태그</b></a></li>
+                    <li><a href="/html/s1/third.html"><b>경로</b></a></li>
+                    <li><a href="/html/usecss.html"><b>CSS 사용</b></a></li>
+                    <li><a href="/html/bookmark.html#d3"><b>Bookmark</b></a></li>
+                    <li><a href="/html/frame.html"><b>Frameset</b></a></li>
+                    <li><a href="/html/imgmap.html"><b>ImageMap</b></a></li>
+                    <li><a href="/html/picture.html"><b>Picture</b></a></li>
+                    <li><a href="/html/table.html"><b>Table</b></a></li>
+                    <li><a href="/html/list.html"><b>List</b></a></li>
+                    <li><a href="/html/div.html"><b>Div</b></a></li>
+                    <li><a href="https://git-scm.com/" target="_blank"><b>Git</b></a></li>
+                    <li><a href="/html/class.html"><b>Class</b></a></li>
+                    <li><a href="/html/id.html"><b>Id</b></a></li>
+                    <li><a href="/html/iframe.html"><b>Iframe</b></a></li>
+                    <li><a href="/html/redirect.html"><b>Redirect</b></a></li>
+                    <li><a href="/html/layout.html"><b>Layout</b></a></li>
+                    <li><a href="/html/semantic.html"><b>Semantic</b></a></li>
+                    <li><a href="/html/music.html"><b>Music</b></a></li>
+                    <li><a href="/html/six.html"><b>Six</b></a></li>
+                    <li><a href="/html/wireframe.html"><b>wireframe</b></a></li>
+                    <li><a href="/html/str.html"><b>와이어프레임</b></a></li>
+                    <li><a href="/html/form.html"><b>Form</b></a></li>
+                    <li><a href="/html/회원가입.html"><b>회원가입</b></a></li>
+                    <li><a href="/html/media.html"><b>Media</b></a></li>
+                </ol>
+            </article>
+            
+            <article id="css">
+                <h2>CSS</h2>
+                <ol>
+                    <li><a href="/style/firstcss.html"><b>CSS 기초</b></a></li>
+                </ol>
+            </article>
+        </section>
+    </div>
     <script>
         let timer = document.getElementById("timer");
         timer.innerText = new Date();

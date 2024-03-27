@@ -2,12 +2,12 @@ td {
     border: 1px solid rgb(211, 211, 172);
     width: 100px;
 }
-td:nth-child(2n-1) {
+td:nth-child(1) {
     text-align: center;
     font-weight: bold;
     background-color: rgba(185, 173, 173, 0.301);
 }
-td:nth-child(2n) {
+td:nth-child(2) {
     width: 400px;
 }
 button {
@@ -15,4 +15,7 @@ button {
 }
 #mail {
     font-size: 13px;
+}
+.btnArea {
+    margin-top: 10px;
 }

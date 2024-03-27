@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    rock {
+        display: block;
+        height: 100px;
+        background-color: lightcoral;
+        font-size: 72px;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+    }
+    rock::after {
+        content: "";
+        height: 1px;
+        width: 0;
+        background-color: red;
+        position: absolute;
+        bottom: 8px;
+        left: 385px;
+        transition: .7s;
+    }
+    rock::before {
+        content: ♥;
+        color: lightgreen;
+    }
+    rock:hover::after {
+        width: 332px;
+    }
+    .d1 {
+        text-decoration: underline;
+    }
+    span.d1 {
+        background-color: green;
+    }
+    .d1.fly.large {
+
+    }
+    [class] {
+        background-color: blue;
+    }
+    [class=d1] {
+        background-color: blueviolet !important;
+    }
+    [title~="페이지로..."] {
+        background-color: pink;
+    }
+    [lang|=ko] {
+        background-color: chocolate;
+    }
+    [lang^=ko] {
+        background-color: chocolate;
+    }
+    [class$="1"] {
+        background-color: red !important;
+    }
+    input[type=checkbox] {
+        width: 10px;
+        transition: .7s;    
+    }
+    input[type=checkbox]:checked {
+        width: 20px;
+    }
+    #cb + label[for=cb]::after {
+        content: "\2610";
+    }
+    #cb:checked + label[for=cb]::after {
+        content: "\2611";
+    }
+</style>
+</head>
+<body>
+    <div id="wrap" lang="ko">
+        <a href="/" title="메인 페이지로...">Home</a>
+        &lt;rock&gt;
+        <rock>CSS</rock>
+        <div class="d1 fly age">div1</div>
+        <div>div2</div>
+        <div class="d1">div3</div>
+        <span class="d1">span1</span>
+        <input type="checkbox" id="cb">
+        <label for="cb"></label>
+    </div>
+</body>
+</html>
