@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+        * {
+            box-sizing: border-box;
+        }
+        */
+        html, body {
+            height: 200%;
+        }
+        body {
+            margin: 0;
+            background-color: rgb(168, 228, 198);
+            background-image: url(/img/back1.jfif);
+            background-size: 100px;
+            background-repeat: no-repeat;
+            background-position: 100px 100px;
+            background-attachment: fixed;
+        }
+        body > div {
+            background-color: rgba(7, 166, 172, 0.3); /* rgba(투명도) -> 자신만 투명 */
+            
+            /* opacity: 0.7;  opacity(투명도) -> 자식도 투명해짐 */
+        }
+        #fixedBackground {
+            height: 300px;
+            background-image: url(/img/back1.jfif);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: 0 -100px;
+            background-attachment: fixed;
+            position: relative;
+            opacity: 1;
+        }
+        #fixedBackground > span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            font-size: 100px;
+            color: white;
+        }
+        p.round3 {
+            width: 100px;
+            height: 100px;
+            border: 2px solid blue;
+            padding :5px;
+            text-align: center;
+            border-radius: 50%;
+            position: relative;
+            margin: 30px 30px;
+            transition: 1s;
+        }
+        body > p.round3 {
+            background-color: rgba(215, 69, 228, 0.57);
+            cursor: pointer;
+        }
+        p.round3 > span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+        }
+        p.round3:hover {
+            color: rgb(58, 236, 236);
+            transition: 5s;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 30px 30px;
+        }
+        #wrap {
+            border: 1px solid green;
+        }
+        #wrap > div:first-of-type {
+            /* margin-top: 100px; */
+        }
+        div.box {
+            width: 100px;
+            height: 50px;
+            margin-bottom: 10px;
+            background-color: rgba(24, 156, 112, 1);
+            padding-left: 10px;
+            padding-right: 10px;
+            opacity: 1;
+            border: 5px solid brown;
+            margin: 0 5px 10px;
+        }
+        div.sizing {
+            box-sizing: border-box;
+        }
+        #mw {
+            width: 100%;
+            max-width: 500px;
+            min-width: 300px;
+        }
+        i[class^=fa] {
+            font-size: 20px;
+            color: blueviolet;
+        }
+        #topMargin {
+            padding-top: 20p;
+            height: 100px;
+            background-color: lightblue;
+        }
+        /* css는 대소문자 구분함 */
+        #topMargin > div {
+            background-color: blue;
+            height: 50px;
+        }
+    </style>
+    <!-- CDN 
+        캐시에 파일을 저장 후 두번째부터는 로딩 속도가 빨라짐-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div id="wrap">
+        <i class="fa-solid fa-splotch"></i>
+        <i class="fa-solid fa-cube"></i>
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <div>
+            <a href="/" title="메인 페이지로...">Home</a>
+            <h2>CSS 적용 방법</h2>
+            <ol>
+                <li>인라인 스타일시트 - 태그에 바로 적용</li>
+                <li>내부 스타일시트 - 페이지마다 적용</li>
+                <li>외부 스타일시트 - css파일을 생성해서 적용</li>
+            </ol>
+            <h2>적용 방식에 따른 우선순위</h2>
+            <div>인라인 > 내부 & 외부(아래에 있는 것이 우선) > 브라우저 스타일</div>
+            <div>
+                <a href="https://iridescent-zeal.tistory.com/90" target="_blank">선택자 우선순위</a>
+            </div>
+        </div>
+        <div id="fixedBackground"><span>Hello</span></div>
+        <p class="round3"><span>Roundtest border</span></p>
+        <img src="/img/Pizza.jpg" alt="피자">
+        <div style="font-weight: bold; font-size: 20px;">테두리(margin, padding)값 지정</div>
+        <ol>
+            <li>값 4개 : top, right, bottom, left -> 시계방향</li>
+            <li>값 3개 : top, right/left, bottom</li>
+            <li>값 2개 : top/bottom, right, left</li>
+            <li>값 1개 : 모든 설정</li>
+        </ol>
+        <h2>margin Collapse(마진 상쇄)</h2>
+        <ol>
+            <li>위와 아래의 요소의 마진 중 큰 값만 적용됨</li>
+            <li>부모의 첫 요소의 윗 마진은 부모에게도 적용됨</li>
+        </ol>
+    </div>
+    <div class="box">normal</div>
+    <div class="box sizing">use sizing</div>
+    <img src="/img/Pizza.jpg" alt="Pizza" id="mw">
+    <div id="topMargin">
+        <div></div>
+    </div>
+</body>
+</html>

@@ -67,7 +67,7 @@
             background-color: lightgray;
         }
         table > tbody tr:hover {
-            background-color: white ;
+            background-color: rgb(237, 192, 243) ;
         }
         .trHeading + tr {
             background-color: orange;
@@ -78,9 +78,11 @@
         .trHeading ~ tr {
             border-bottom: 2px solid;
         }
+        /*
         .trHeading ~ tr:hover {
             border-bottom: 2px solid red;
         }
+        */
         [class] {
             background-color: rgb(176, 176, 228);
         }
@@ -128,9 +130,11 @@
         label:empty {
             background-color: aqua;
         }
+        /*
         #wrap td:first-child {
             background-color: rgb(237, 245, 123) !important;
         }
+        */
         #wrap td:first-child::first-letter {
             font-size: 20px;
         }
@@ -168,7 +172,7 @@
             background-color: rgb(233, 194, 236);
         }
         tr:nth-child(even) {
-            background-color: #ceb9f3;
+            background-color: #ffffff;
         }
         tr:nth-last-child(2) {
             background-color: rgb(138, 223, 223);
@@ -245,7 +249,7 @@
             </tr>
             <tr>
                 <td>parent > child</td>
-                <td>parent요소의 직계 child만 선택(div > p)</td>
+                <td>div > p (parent요소의 직계 child만 선택)</td>
                 <td>div요소 하위 직계 p요소만 선택</td>
             </tr>
             <tr>
@@ -296,7 +300,7 @@
             <tr>
                 <td>:active</td>
                 <td>div:active</td>
-                <td>요소에 마우스를 누르고 있는 상태</td>
+                <td>div요소에 마우스를 누르고 있는 상태</td>
             </tr>
             <tr>
                 <td>::after</td>
@@ -456,7 +460,7 @@
             <tr>
                 <td>:read-only</td>
                 <td>:read-only</td>
-                <td>input요소의 readony 선택</td>
+                <td>input요소의 readonly 선택</td>
             </tr>
             <tr>
                 <td>:read-write</td>
