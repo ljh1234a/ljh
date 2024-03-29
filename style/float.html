@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div:not(.div4, .overfow, .clearfix) {
+          float: left;
+          padding: 15px; 
+        }
+      
+        .div1 {
+          background: red;
+        }
+      
+        .div2 {
+          background: yellow;
+        }
+      
+        .div3 {
+          background: green;
+          float: right !important;
+        }
+        .div4 {
+          clear: both;
+          background: pink;
+          padding: 50px;
+        }
+        .inClear {
+          clear: both;
+        }
+        .overfow {
+            overflow: auto;
+        }
+        .clearfix::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+    </style>
+    </head>
+    <body>
+        <a href="/" title="메인 페이지로...">Home</a> 
+      
+        <h2>Float Next To Each Other</h2>
+      
+        <p>In this example, the three divs will float next to each other.</p>
+      
+        <div class="div1">Div 1</div>
+        <div class="div2">Div 2</div>
+        <div class="div3">Div 3</div>
+        <div class="div4">Div 4</div>
+        <hr>
+        <div class="div1">Div 1</div>
+        <div class="div2">Div 2</div>
+        <div class="div3">Div 3</div>
+        <div class="div4 inClear">Div 4</div>
+        <hr>
+        <div class="overflow">
+            <div class="div1">Div 1</div>
+            <div class="div2">Div 2</div>
+            <div class="div3">Div 3</div>
+        </div>
+        <div class="div4">Div 4</div>
+        <hr>
+        <div class="claerfix">
+            <div class="div1">Div 1</div>
+            <div class="div2">Div 2</div>
+            <div class="div3">Div 3</div>
+        </div>
+        <div class="div4">Div 4</div>
+</body>
+</html>

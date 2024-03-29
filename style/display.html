@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #wrap {
+            color: white;
+            text-align: center;
+            
+        }
+
+        label[for=showOrNot] {
+            display: block;
+            background-color: rgb(54, 219, 150);
+            padding: 10px;
+            cursor: pointer;
+        }
+        #showOrNot {
+            display: none;
+        }
+        #showOrNot + div {
+            /* display: none; */
+            background-color: rgb(54, 219, 150);
+            margin-top: 2px;
+            padding: 20px;
+            line-height: 40px;
+            visibility: hidden;
+            transition: 1s;
+            opacity: 0;
+        }
+        #showOrNot:checked + div {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+        }
+        /* #try {
+            width: 300px;
+            height: 50px;
+            border: 1px solid;
+            background-color: rgb(77, 252, 129);
+            border-radius: 10px;
+        } */
+        #remove, #hidden, #resetAll {
+            display: none;
+        }
+        #try {
+            margin-left: 20px;
+            margin-top: 20px;
+            overflow: hidden;
+            
+        }
+        #try > div {
+            width: 100px;
+            height: 100px;
+            float: left;
+            border-radius: 10px;
+            position: relative;
+            margin-left: 10px;
+        }
+        #try > div > label {
+            display: block;
+            background-color: rgb(77, 221, 178);
+            cursor: pointer;
+            padding: 10px;
+            width: 100px;
+            position: absolute;
+            border-radius: 10px;
+        }
+        label[for=remove] {
+            
+        }
+
+        #remove:checked + div {
+            display: none !important;
+        }
+        #hidden:checked + div {
+            visibility: hidden !important;
+            
+        }
+        #resetAll:checked ~ div:nth-of-type(1) {
+            display: block;
+        }
+        #resetAll:checked + div:nth-of-type(2) {
+            visibility: visible;
+        }
+        label[for=hidden] {
+            
+        }
+        label[for=resetAll] {
+            
+            
+        }
+    </style>
+</head>
+<body>
+    <a href="/" title="메인 페이지로...">Home</a>
+    <div id="wrap" lang="ko">
+        <label for="showOrNot">Click to show panel</label>
+        <input type="checkbox" id="showOrNot">
+        <div>
+            <p>This panel contains a &lt;div&gt; element, which is hidden by default ().display: none;.</p>
+            <p>It is styled with CSS, and we use JavaScript to show it (change it to ().display: block;.</p>
+        </div>
+        <hr>
+        <div id="try">
+            <div>
+            <input type="checkbox" id="resetAll">
+            </div>
+            <input type="checkbox" id="remove">
+            <div>
+                <label for="remove">Remove</label>
+            </div>
+            <input type="checkbox" id="hidden">
+            <div>
+                <label for="hidden">Hidden</label>
+            </div>
+            <div>
+                <label for="resetAll">Reset All</label>
+            </div>
+        </div>
+    </div>
+    <script>
+        let label = document.querySelector("label[for=resetAll]");
+        label.onclick = function(e) {
+            remove.checked = false;
+            hidden.checked = false;
+        };
+    </script>
+</body>
+</html>

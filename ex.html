@@ -4,49 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<style>
-    .container {
-        position: relative;
-    }
-    .black-box {
-        position: relative;
-        z-index: 1;
-        border: 2px solid;
-        height: 100px;
-        margin: 30px;
-    }
-    .gray-box {
-        position: absolute;
-        z-index: 3;
-        width: 70%;
-        height: 60px;
-        left: 50px;
-        top: 50px;
-        background-color: lightgray;
-    }
-    .green-box {
-        position: absolute;
-        z-index: 2;
-        background: lightgreen;
-        width: 35%;
-        left: 270px;
-        top: -15px;
-        height: 100px;
-    }
-    
-</style>
+    <style>
+        .center {
+            height: 200px;
+            border: 3px solid green;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-    <a href="/" title="메인 페이지로...">Home</a><br>
+    <a href="/" title="메인 페이지로...">Home</a>
+    <h2>Flexbox Centering</h2>
+
+    <p>A container with both the justify-content and the align-items properties set to <em>center</em> will align the item(s) in the center (in both axis).</p>
     
-    <h1>Z-index Example</h1>
-
-    <p>An element with greater stack order is always above an element with a lower stack order.</p>
-
-    <div class="container">
-    <div class="black-box">Black box (z-index: 1)</div>
-    <div class="gray-box">Gray box (z-index: 3)</div>
-    <div class="green-box">Green box (z-index: 2)</div>
+    <div class="center">
+      <p>I am vertically and horizontally centered.</p>
     </div>
-
+    
+</body>
 </html>

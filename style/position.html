@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { 
+            height: 10000px;
+        }
+        div {
+            text-align: center;
+        }
+        div:not(#wrap, .parent) {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(245, 149, 149);
+            border: 1px solid;
+            
+        }
+        .static {
+            position: static;
+            top: 100px;
+            left: 100px;
+            transform: translateX(100px);
+            background-color: aqua !important;
+        }
+        .relative {
+            position: relative;
+            background-color: rgb(106, 247, 148) !important;
+            top: 100px;
+            left: 100px;
+        }
+        .fixed {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            background-color: pink !important;
+        }
+        .parent {
+            height: 500px;
+            border: 2px solid green;
+            position: relative; /*absolute의 부모 지정*/
+        }
+        .absolute {
+            position: absolute;
+            background-color: cadetblue !important;
+            top: 200px;
+            left: 200px;
+        }
+        .sticky {
+            position: sticky;
+            background-color: chartreuse !important;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" title="메인 페이지로...">Home</a>
+    <div id="wrap" lang="ko">
+        <!-- 
+            position: static -> 자리를 차지하며 위치 이동이 안됨.(transform은 가능) 
+            position: relative -> 자리를 차지하지만 위치가 이동됨.
+            position: fixed -> 윈도우에 고정됨(자리를 차지하지 않음)
+            position: absolute -> 부모기준에 위치 이동(자리 차지하지 않음, 높이, 넓이 사라짐)
+            position: sticky -> 반드시 top값을 지정해 줌(스크롤이 자신에게 올때까지는 static
+                                처럼 작동하고 스크롤이 오면 fixed처럼 작동)
+        -->
+        <div class="static">static</div>
+        <div>normal</div>
+        <div class="relative">relative</div>
+        <div>normal</div>
+        <div class="fixed">fixed</div>
+        <div>normal</div>
+        <div class="parent">
+            <div class="absolute">absolute</div>
+            <div>normal</div>
+        </div>
+        <div class="sticky">sticky</div>
+        <div>normal</div>
+    </div>
+</body>
+</html>
