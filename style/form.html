@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            width: 100%;
+            /* outline: 1px solid white; */
+            outline: none;
+            border: 1px solid;
+            transition: .4s;
+            padding: 0;
+            background-color: white;
+            box-shadow: 0 0 0 black;
+        }
+        input:focus {
+            width: 70%;
+            /* outline: 1px solid red; */
+            border: 1px solid red;
+            padding: 15px;
+            background-color: yellow;
+            box-shadow: 10px 10px 10px black;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" title="메인 페이지로...">Home</a>
+    <h2>A full-width input field</h2>
+    <form>
+        <label for="fname">First name</label>
+        <input type="text" id="fname" name="fname">
+    </form>
+</body>
+</html>

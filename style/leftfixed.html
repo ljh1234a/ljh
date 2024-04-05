@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            padding: 10px;
+        }
+        li:nth-child(1) {
+            background-color: rgb(23, 228, 132);
+            color: white;
+        }
+        li:hover:not(:nth-child(1)) {
+            background-color: gray;
+            
+        }
+        #leftmenu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 250px;
+            background-color: rgb(211, 208, 208);
+        }
+        
+        #leftmenu + div {
+            padding-left: 52px;
+            padding-top: 25px;
+            margin-left: 250px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="leftmenu">
+            <ul>
+                <li>Home</li>
+                <li>News</li>
+                <li>Contact</li>
+                <li>About</li>
+            </ul>
+        </div>
+        <div>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+            some text...<br>
+        </div>
+    </div>
+</body>
+</html>

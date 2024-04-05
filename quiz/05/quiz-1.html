@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        form {
+            margin: 15px;
+            border: 1px solid #b9b9b9;
+            width: 50%;
+        }
+        form h1 {
+            margin: 10px;
+        }
+        form li {
+            list-style-type: none;
+            
+        }
+        input {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+       
+        input[type=submit] {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h1>예약 정보</h1>
+        <ul>
+            <li>
+                <label for="r-name">이 름</label>
+                <input type="text" id="r-name">
+            </li>
+            <li>
+                <label for="tel">전 화</label>
+                <input type="tel" id="r-phone">
+            </li>
+            <li>
+                <label for="r-email">이메일</label>
+                <input type="email" id="r-email" style="margin-left: 10px;">
+            </li>
+            <li>
+                <input type="submit" value="예약하기">
+            </li>
+        </ul>
+    </form>
+</body>
+</html>

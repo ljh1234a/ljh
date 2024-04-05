@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #imgList {
+      margin: 0 auto;;
+      width: calc(170px * 3 + 15px * 2 + 6px);
+    }
+    #imgList::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    #imgList > div {
+      width: 170px;
+      height: 100px;
+      border: 1px solid;
+      overflow: hidden;
+      position: relative;
+      float: left;
+      margin-right: 15px;
+    }
+    #imgList > div:last-child {
+      margin-right: 0;
+    }
+    
+    img {
+      opacity: 0.5;
+      transition: .5s;
+    }
+    #imgList > div:hover > img {
+      opacity: 1.0;
+      /* width: 110%;
+      height: 110%; */
+      transform: scale(1.5);
+      transform-origin: center bottom;
+    }
+    #imgList > div > div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-transform: capitalize;
+      color: white;
+      font-weight: 800;
+      letter-spacing: 7px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Transparency</h1>
+    <p>The opacity property is often used together with the :hover selector to change the opacity on mouse-over:</p>
+      <div id="imgList">
+        <div>
+            <img src="https://www.w3schools.com/css/img_forest.jpg" alt="Forest" width="170" height="100">
+            <div>test</div>
+        </div>
+        <div>
+            <img src="https://www.w3schools.com/css/img_mountains.jpg" alt="Mountains" width="170" height="100">
+            <div>victory</div>
+        </div>
+        <div>
+            <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="Italy" width="170" height="100">
+            <div>today</div>
+        </div>
+      </div>
+</body>
+</html>
