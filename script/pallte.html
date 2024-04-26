@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            
+        }
+        button {
+            margin-left: 10px;
+            padding: 7px;
+            background-color: #ddd;
+            border: 0;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #bbb !important;
+            cursor: pointer;
+        }
+        /* #color {
+            height: 30px;
+            position: relative;
+        }
+        #displayColor {
+            display: inline-block;
+            position: absolute;
+            width: 30px;
+            
+            left: 30%;
+            height: 100%;
+        }
+        #bgColor {
+            display: inline-block;
+            
+            left: 40%;
+            position: absolute;
+        }
+        #bgColor:hover {
+            opacity: 0.5;
+        } */
+    </style>
+</head>
+<body>
+    <div id="area"></div>
+    <!-- <div id="color"> -->
+        <!-- <div id="displayColor"></div>
+        <div id="bgColor"></div> -->
+    <!-- </div> -->
+    
+    
+    
+    <script src="/js/pallte.js"></script>
+    <script>
+        let cc = new changeColor();
+        cc.init('area');
+    </script>
+</body>
+</html>

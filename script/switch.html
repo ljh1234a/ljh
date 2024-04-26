@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span id="demo"></span>
+    <script>
+        var t = true;
+
+        console.log(!t);
+        console.log(t === true)
+        /* 
+            순수 자바스크립트 - 바닐라 스크립트
+
+            && : 모든 조건이 참(거짓일 확률이 높은 것을 앞에 둔다.)
+            조건1 && 조건2
+
+            || 하나라도 참이면 참(참일 확률이 높은 것을 앞에 둔다.)
+            조건1 || 조건2
+
+            Boolean - 0, null, undefined, " " -> 거짓
+        */
+
+        demo.innerHTML = true && "<h1>Hello</h1>";
+        demo.innerHTML = "" || null;
+
+        /*
+            switch(조건) {
+                case 값1:
+                    구문1
+                    break;
+                case 값2:
+                    구문2
+                    break;
+                ...
+                default:
+                    기본구문
+            }
+        */
+
+        document.body.style = `
+            background-color: #aaa; 
+            color: white;
+            font-weight: bold;
+            font-size: 32px;
+        `;
+
+        var session = prompt("관심 세션을 선택해주세요. 1-마케팅, 2-개발, 3-디자인");
+
+        switch(session) {
+            case "1":
+                document.write("<p>마케팅 세션은 <strong>201호</strong>에서 ...</p>");
+                break;
+            case "2":
+                document.write("<p>개발 세션은 <strong>203호</strong>에서 ...</p>");
+                break;
+            case "3":
+                document.write("<p>디자인 세션은 <strong>205호</strong>에서 ...</p>");
+                break;
+            default:
+                alert("잘못 입력했습니다.");
+                location.reload();
+        }
+
+        // 태그가 정의되고 난 후 써야함.
+        document.getElementsByTagName('strong')[0].style = `
+            font-size: 52px;
+            color : green;
+        `;
+    </script>
+</body>
+</html>

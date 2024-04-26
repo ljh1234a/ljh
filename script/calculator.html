@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        #wrap {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px;
+        }
+        input[type=text] {
+            width: 100%;
+            height: 75px;
+            text-align: right;
+            padding-right: 15px;
+            cursor: auto;
+        }
+        button {
+            width: 75px;
+            height: 75px;
+            border: 1px solid #ccc;
+        }
+        button:hover {
+            background-color: #ccc;
+        }
+        button:last-child {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="text" id="display" value="0" readonly>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>÷</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>x</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+        <button>0</button>
+        <button>.</button>
+        <button>=</button>
+        <button>+</button>
+        <button>C</button>
+    </div>
+    <script>
+        let buttons = document.getElementsByTagName('button');
+        let str = '', op = '', equal = '';
+        let num = 0, firstNum = 0, secondNum = 0;
+
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function() {
+                clickButton(buttons[i].innerText);
+            };
+        }
+
+        function clickButton(val) {
+            // val 값이 숫자가 아닐 때
+            if (isNaN(val)) {
+                equal = val;
+                if (equal === '=') {
+                    secondNum = num;
+                    display.value = calc(op, firstNum, secondNum).toLocaleString('ko-KR');
+                    initCalc();
+                } else if (equal === 'C') {
+                    str = '';
+                    op = equal;
+                    firstNum = num;
+                    display.value = '0';
+                } else if (equal === '.') {
+                    str += val;
+                    num = str;
+                    display.value = num.toLocaleString('ko-KR');
+                } else {
+                    str = '';
+                    op = equal;
+                    firstNum = num;
+                    display.value = '';
+                }
+            } else {    // val 값이 숫자일 때
+                str += val;
+                num = Number(str);
+                display.value = num.toLocaleString('ko-KR');
+            }
+        }
+
+        function calc(op, firstNum, secondNum) {
+            switch (op) {
+                case '+':
+                    return firstNum + secondNum;
+                case '-':
+                    return firstNum - secondNum;
+                case 'x':
+                    return firstNum * secondNum;
+                case '÷':
+                    return firstNum / secondNum;
+                case 'C':
+                    initCalc();
+                    break;
+            }
+        }
+
+        function initCalc() {
+            str = '', op = '', equal = '';
+            num = 0, firstNum = 0, secondNum = 0;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo"></div>
+    <script>
+        const PI = 3.14;
+        // PI = 75;
+        const arr = ["홍길동", "김길동", "최길동"];
+        console.log("변경 전 : " + arr);
+        arr.sort(); // .sort : 정렬
+        console.log(arr[3]);    // 배열의 인덱스를 넘어서므로 undefined
+        console.log(arr[0]);                 // 배열의 처음
+        console.log(arr[arr.length - 1]);    // 배열의 마지막
+        console.log("정렬 후 : " + arr);
+        console.log(`arr의 크기 : ${arr.length}`);
+
+        arr[1] = "마길동";  // 가능
+        console.log("변경 후 : " + arr.join('#')); // .join : 구분자 변경(기본은 쉼표(,))
+        // arr = ["조길동", "임길동", "윤길동"]; // 불가능
+        const arr2 = []; // 배열의 초기화
+        arr2[0] = "이길동";
+        console.log(arr2);
+
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        document.getElementById("demo").innerHTML = fruits;
+
+        const arr3 = [
+            "박길동",
+            {mem1: 1, mem2: 2},
+            34
+        ];
+        console.log(arr3);
+
+        const points1 = [40];           // 40요소를 가짐 length : 1
+        console.log(points1.length);
+        const points2 = new Array(40);  // 크기가 40개인 배열을 만듦, length : 40
+        console.log(points2.length);
+
+        // 배열이면 true 아니면 false
+        console.log(Array.isArray(points1));
+        console.log(points1 instanceof Array);
+        // Class 추상적인 의미 - 사람
+        // Object 구체적인 의미(인스턴스) - 홍길동
+        </script>
+</body>
+</html>

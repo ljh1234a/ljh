@@ -7,14 +7,11 @@
 </head>
 <body>
     <script>
-        let arrayLike = {
-            0: "Hello",
-            1: "World",
-            length: 2
-        };
+        let arr = ['사과', '오렌지', '배'];
 
-        let arr = Array.from(arrayLike);
-        console.log(arr.pop());
-    </script> 
+        for (let key in arr) {
+            console.log(arr[key]);
+        }
+    </script>
 </body>
 </html>

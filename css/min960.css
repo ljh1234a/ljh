@@ -1,0 +1,11 @@
+    .media {
+        height: auto;
+    }
+    .media > div {
+        float: none;
+        width: 100% !important;
+        height: 250px;
+    }
+    .media > div:last-child {
+        display: none;
+    }

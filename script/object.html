@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 객체: 속성(변수), 메서드(함수)
+        // 사람(추상적, 클래스): 속성: 키, 몸무게, 눈 색상 / 메서드(함수): 걷기, 일어나기, 말하기
+        // 홍길동(구체적, 객체, 인스턴스): 173, 73
+
+        // let str = new String("홍길동");
+        // console.log(str);
+        // let name = "홍길동";
+        // console.log(name);
+
+        // let num1 = new Number(100); // 생성자 함수
+        // console.log(num1);  // 리터럴 타입(순수 값)
+        // let num2 = 100;
+        // console.log(num2);
+
+        // let now = new Date();
+        // console.log(now);
+        // let last = new Date("2023-12-18 15:15:15")
+        // console.log(last);
+
+        // let today = new Date();
+        // console.log(today.toLocaleString());
+
+        function Car(maker, model, color, cc) {
+            // 속성(property)
+            this.maker = maker;
+            this.model = model;
+            this.color = color;
+            this.cc = parseInt(cc);
+
+            // 메서드
+            this.start = function(key) {
+                if(key) {
+                    document.body.innerHTML += `<div id='${this.model}' style='width:100px;height:100px;background-color:${this.color};border:1px solid;transition:1s;'>${this.maker}</div>`;
+                }
+            }
+
+            this.move = function(distance) {
+                document.getElementById(this.model).style.position = 'relative';
+                document.getElementById(this.model).style.left = distance + 'px';
+            }
+        }
+
+        let myCar = new Car('현대', '투싼', 'gray', '3000'); // 객체의 인스턴스
+        console.log(myCar.maker)
+        console.log(myCar['maker']);
+        myCar.start(true);
+        // myCar.move(100);
+
+        let yourCar = new Car('삼성', 'SM5', 'white', '3000');
+        yourCar.start(true);
+        // yourCar.move(200);
+
+        function goMyCar(dis) {
+            if (dis == 100)
+                myCar.move(dis);
+            else 
+                myCar.move(0);
+        }
+
+        let Hong = {
+            name: "홍길동",
+            age: 20,
+            say: function(word) {
+                alert(word);
+            },
+            walk: (dis) => {
+                console.log(dis + 'km 걷기');
+            }
+        };  // 객체의 리터럴
+
+        console.log(Hong);
+        // Hong.say("Hello!");
+        Hong.walk(10);
+
+        console.dir(Hong);
+        console.dir(console);
+        console.dir(myCar);
+        console.dir(document.body);
+        console.dir(window);
+
+        console.dir(Array);
+        var numbers = new Array();
+        console.log(numbers.length);
+
+        numbers[0] = 1;
+        console.log(numbers.length);
+
+        var numbers = new Array(4);     // 크기
+        console.log(numbers.length);    // 4
+        var numbers = new Array(4, 2);  // 값
+        console.log(numbers.length);    // 2
+
+        var numbers = ['one', 'two', 'three', 'four'];
+        numbers.name = '나의 배열';
+        console.log(numbers.name);
+
+        var numbers = Array('one', 'two', 'three', 'four');
+        console.log(numbers.name);
+
+        var arr1 = [1, 2, 3];
+        var arr2 = [4, 5, 6];
+        var arr3 = arr1
+                    .concat(arr2)
+                    .concat(numbers);
+        console.log(arr1);
+        console.log(arr3);
+
+        console.log(arr3.join('#'));
+
+        let nums = [1, 2, 3];
+
+        let ret1 = nums.push(4, 5);
+        console.log(ret1, nums);
+        let ret2 = nums.unshift(0);
+        console.log(ret2, nums);
+
+        let alphabet = ['a', 'b', 'c', 'd'];
+
+        let popAl = alphabet.pop();
+        console.log(popAl);
+        console.log(alphabet);
+        let shiftAl = alphabet.shift();
+        console.log(shiftAl);
+        console.log(alphabet);
+
+        var numbers = [1, 2, 3, 4, 5];
+        var newNumbers = numbers.splice(2);
+
+        console.log(newNumbers); // 3, 4, 5 삭제
+        console.log(numbers);   // 1, 2 남음
+
+        var study = ['html', 'css', 'web', 'jquery'];
+        // var newStudy = study.splice(1, 2);
+        var newStudy2 = study.splice(1, 2, 'js');
+        
+        // console.log(newStudy);  // 'css', 'web' 삭제
+        console.log(study); // html, jquery 남음
+        console.log(newStudy2); // 'css', 'web' 삭제하고 'js' 추가
+        console.log(study); // html, js, jquery
+
+        var colors = ['red', 'green', 'blue', 'white', 'black'];
+        var colors2 = colors.slice(2);
+        console.log(colors2);
+        var color3 = colors.slice(2, 4);
+        console.log(color3);
+
+    </script>
+    <button onclick="goMyCar(100)">myCar go</button>
+    <button onclick="goMyCar(-100)">myCar back</button>
+</body>
+</html>

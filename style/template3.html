@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .topmenu {
+            font-family: "Times New Roman", Georgia, Serif;
+            font-size: 16px;
+            letter-spacing: 5px;
+            height: 60px;
+            border-bottom: 1px solid #ccc;
+            box-shadow: 0 1px 5px 0 rgb(0, 0, 0, 0.5);
+            top: 0;
+            position: sticky;
+            background-color: #fff;
+            z-index: 9999;
+        }
+        .topmenu > div {
+            display: inline-block;
+        }
+        .topmenu > div a {
+            color: black;
+            text-decoration: none;
+        }
+        .topmenu > div, .topmenu ul li {
+            padding: 10px;
+            margin: 10px;
+        }
+        .topmenu > div:hover, .topmenu ul li:hover {
+            background-color: #ccc;
+            transition: .7s;
+            border-radius: 10px;
+        }
+        .topmenu ul {
+            float: right;
+            list-style: none;
+        }
+        .topmenu ul li {
+            float: left;
+        }
+        .topmenu ul li a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .clearfix {
+            clear: both;
+            display: table;
+            content: "";
+        }
+        .wrap {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .hamburger {
+            position: relative;
+        }
+        .hamburger img {
+            width: 100%;
+            
+        }
+        .hamburger p {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            font-size: 40px;
+            padding: 25px;
+            letter-spacing: 3px;
+            opacity: 0.5;
+        }
+        .about {
+            width: 70%;
+            height: auto;
+            margin: 0 auto;
+            padding: 85px 0;
+            
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+        }
+        .about img {
+            float: left;
+            width: 50%;
+            opacity: 0.7;
+            margin-right: 50px;
+        }
+        .about .content1 {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .about .content1 h1, .about .content1 h3 {
+            letter-spacing: 5px;
+            font-weight: normal;
+        }
+        .about .content1 h3 {
+            margin-top: 50px;
+        }
+        .about .content1 p {
+            text-align: left;
+            margin-top: 25px;
+            line-height: 1.5;
+        }
+        .about .content1 .p2 {
+            opacity: 0.7;
+        }
+        .menu {
+            width: 70%;
+            padding: 85px 0;
+            margin: 0 auto;
+            overflow: hidden;
+            border-bottom: 1px solid #ccc;
+        }
+        .menu .content2 {
+            width: 50%;
+            float: left;
+            line-height: 40px;
+        }
+        .menu .content2 h1 {
+            text-align: center;
+            padding: 10px 0 30px 0;
+        }
+        .menu .content2 h1, .menu .content2 h3 {
+            font-weight: normal;
+            letter-spacing: 5px;
+        }
+        .menu .content2 p {
+            margin-bottom: 30px;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        .menu img {
+            float: right;
+            opacity: 0.7;
+        }
+        .contact {
+            width: 70%;
+            margin: 0 auto;
+            padding-top: 75px;
+            margin-bottom: 100px;
+        }
+        .contact h1 {
+            font-weight: normal;
+            padding-bottom: 35px;
+        }
+        .contact p {
+            margin: 20px 0;
+        }
+        .contact h4 {
+            color: #607d8b;
+        }
+        .contact input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ccc;
+        }
+        .contact button {
+            padding: 10px 20px;
+            border: none;
+            margin-top: 20px;
+        }
+        .contact button:hover {
+            background-color: #bbb;
+            transition: .7s;
+            cursor: pointer;
+        }
+        .footer {
+            text-align: center;
+            padding: 45px;
+            
+            background-color: #e9e9e9;
+            font-size: 14px;
+        }
+        .footer a {
+            color: black;
+        }
+        .footer a:hover {
+            color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="topmenu">
+        <div><a href="#">Gourmet au Catering</a></div>
+        <ul class="clearfix">
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="wrap">
+        <div class="hamburger">
+            <img src="https://www.w3schools.com/w3images/hamburger.jpg" alt="hamburger">
+            <p>Le Catering</p>
+        </div>  
+        <div class="about" id="about">
+            <img src="https://www.w3schools.com/w3images/tablesetting2.jpg">
+            <div class="content1">
+                <h1>About Catering</h1>
+                <h3>Tradition since 1889</h3>
+                <p class="p1">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use seasonal ingredients.</p>
+                <p class="p2">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+        <div class="menu" id="menu">
+            <div class="content2">
+                <h1>Our Menu</h1>
+
+                <h3>Bread Basket</h3>
+                <p>Assortment of fresh baked fruit breads and muffins 5.50</p>
+
+                <h3>Honey Almond Granola with Fruits</h3>
+                <p>Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p>
+
+                <h3>Belgian Waffle</h3>
+                <p>Vanilla flavored batter with malted flour 7.50</p>
+
+                <h3>Scrambled eggs</h3>
+                <p>Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p>
+
+                <h3>Blueberry Pancakes</h3>
+                <p>With syrup, butter and lots of berries 8.50</p>
+            </div>
+            <img src="https://www.w3schools.com/w3images/tablesetting.jpg">
+        </div>
+        <div class="contact" id="contact">
+            <h1>Contact</h1>
+            <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
+            <h4>Catering Service, 42nd Living St, 43043 New York, NY</h4>
+            <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
+            <input type="text" id="username" placeholder="Name" required>
+            <label for="username"></label>
+            <input type="number" id="usernumber" placeholder="How many people" required>
+            <label for="usernumber"></label>
+            <input type="datetime-local" value="2024-04-11T14:00" required>
+            <input type="text" id="usermessage" placeholder="Message \ Special requirements" required>
+            <label for="usermessage"></label>
+            <button type="submit">SEND MESSAGE</button>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp">w3.css</a></p>
+    </div>
+</body>
+</html>

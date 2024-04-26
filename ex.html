@@ -4,40 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html, body {
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-        }
-        .videoArea {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            top: 0;
-        }
-        .videoArea > video {
-            position: absolute;
-            height: 105vmax;
-        }
-        .videoArea > div {
-            position: absolute;
-            top: 50vh;
-            right: 27%;
-            color: blue;
-            font-size: 40px;
-        }
-    </style>
 </head>
 <body>
-    <div class="videoArea">
-        <video src="/media/flame.mp4" autoplay muted loop></video>
-        <div>text</div>
-    </div>
+    <script>
+        // 1번
+        // function greet() {
+        //     let hello = "안녕 내 이름은 제시카야";
+        //     console.log(hello);
+        // }
+        // greet();
+
+        // 2번
+        // function myName(userName) {
+        //     let myName = `안녕 내 이름은 ${userName}야`;
+        //     console.log(myName);
+        // }
+        // myName('이준호');
+
+        // 3번
+        // function today(year, month, day) {
+        //     if (day) {
+        //         return `${year}년 ${month}월 ${day}일`;
+        //     } else if (month) {
+        //         return `${year}년 ${month}월`;
+        //     } else {
+        //         return `${year}년`;
+        //     }
+        // }
+        // console.log(today(1000, 10));
+
+        // 4번 - 첫번째 방법
+        // function findSmallesteElement() {
+        //     const arr = [100, 57, 58, 3, 75];
+        //     let minValue = Math.min.apply(null, arr);
+        //     console.log(minValue);
+        // }
+
+        // findSmallesteElement();
+
+        // 4번 - 두번째 방법
+        // function findSmallesteElement(arr) {
+        //     let min = arr[0];
+
+        //     for (let i = 0; i < arr.length; i++) {
+        //         if (arr[i] < min) {
+        //             min = arr[i];
+        //         }
+        //     }
+        //     return min;
+        // }
+
+        // const arr = [100, -30, 65, -50, 240];
+        // console.log(findSmallesteElement(arr));
+
+        // 5번
+        // const coin = [50000, 10000, 5000, 1000, 500, 100, 50, 10]
+
+        // function countMoney(money) {
+        //     for (i = 0; i < coin.length; i++) {
+        //         let count = parseInt(money / coin[i]);
+        //         console.log(`${coin[i]}원 : ${count}개`)
+        //         if (count > 0) {
+        //             money = money - (coin[i] * count);
+        //         }
+        //     }
+        // }
+
+        // countMoney(76410);
+
+
+        // function countMoney(money) {
+        //     let count = parseInt(money / 50000);
+        //     console.log(`50000원 : ${count}장`);
+        //     if (count > 0) {
+        //         money = money - (50000 * count);
+        //     }
+        // }
+
+
+
+
+        // function countMoney(money) {
+        //     let num = parseInt(money / 50000);
+        //     console.log(`50000 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (50000 * num);
+        //     }
+
+        //     num = parseInt(money / 10000);
+        //     console.log(`10000 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (10000 * num);
+        //     }
+
+        //     num = parseInt(money / 5000);
+        //     console.log(`5000 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (5000 * num);
+        //     }
+
+        //     num = parseInt(money / 1000);
+        //     console.log(`1000 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (1000 * num);
+        //     }
+
+        //     num = parseInt(money / 500);
+        //     console.log(`500 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (500 * num);
+        //     }
+
+        //     num = parseInt(money / 100);
+        //     console.log(`100 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (100 * num);
+        //     }
+
+        //     num = parseInt(money / 50);
+        //     console.log(`50 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (50 * num);
+        //     }
+
+        //     num = parseInt(money / 10);
+        //     console.log(`10 x ${num}`);
+        //     if (num > 0) {
+        //         money = money - (10 * num);
+        //     }
+        // }
+        // countMoney(135270);
+
+        
+    </script>
 </body>
 </html>

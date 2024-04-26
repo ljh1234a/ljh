@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+</head>
+<body>
+    <!-- <div id="display" onclick="ageCal();">나이계산</div>  -->
+    <script>
+        /*
+          변수 종류 : 전역변수(글로벌), 지역변수(로컬)
+          변수선언 키워드 : var, let, const
+
+          var - 함수단위 스코프(재선언, 재할당, 호이스팅)
+          let, const - 블록단위 스코프(재선언 x, 재할당 o, 호이스팅 x)
+        */
+        
+        // 매개변수의 개수를 지정할 수 없는 경우
+        // function sum() {
+        //     // console.dir(arguments);
+        //     let sum = 0;
+        //     for (let i = 0; i < arguments.length; i++) {
+        //         sum += arguments[i];
+                
+        //     }
+
+        //     return sum;
+        // }
+
+        // console.log(sum(2, 5, 8, 3, 7, 35));
+
+        // function sum2(num1, num2, ...nums) {
+        //     console.log(num1);
+        //     console.log(num2);
+        //     console.dir(nums);
+        // }
+
+        // console.log(sum2(15, 22, 29, 36, 43));
+
+        // function calcSum(n) {
+        //     let sum = 0;
+
+        //     for (let i = 0; i <= n; i++) {
+        //         sum += i;
+        //     }
+        //     return sum;
+        // }
+
+        // function isRightNum() {
+        //     let userNum = prompt('1부터 몇까지 더할까요?');
+        //     let sum = (+userNum);
+
+        //     return sum;
+        // };
+
+        // function useCalcSum() {
+        //     let sum;
+            
+        //     while (true) {
+        //         sum = isRightNum();
+        //         if(!(isNaN(sum) || sum < 1)) {
+        //             break;
+        //         } else {
+        //             alert('1이상 숫자만 입력해주세요.');
+        //         }
+        //     }
+
+        //     document.body.innerHTML = calcSum(sum);
+        //     console.log(calcSum(sum));
+        // };
+           
+        // useCalcSum();
+        
+        function calcSum(n) {
+            let sum = 0;
+
+            for (let i = 1; i <= n; i++) {
+                sum += i;
+            }
+
+            return sum;
+        };
+
+        function isRightNum() {
+            let userNum = prompt('1부터 몇까지 숫자를 더할까요?');
+            let sum = Number(userNum);
+
+            return sum;
+        };
+
+        function useCalcSum() {
+            let sum;
+
+            while (true) {
+                sum = isRightNum();
+                if (!(isNaN(sum) || sum < 1)) {
+                    break;
+                } else {
+                    alert('1이상 숫자를 다시 입력해주세요.');
+                }
+            }
+
+            document.body.innerHTML = calcSum(sum);
+            console.log(calcSum(sum));
+        };
+
+        useCalcSum();
+        
+
+        // let userNum = +prompt('1부터 몇까지 더할까요?');
+        
+        // if (!(userNum == null || userNum <= 0)) {
+        //     calcSum(userNum);
+        // } else {
+        //     location.reload();
+        //     alert('숫자를 다시 입력하세요.');
+        // }
+    </script>
+</body>
+</html>

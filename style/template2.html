@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .topmenu {
+            height: 65px; 
+            box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.5);
+            top: 0;
+            position: sticky;
+            z-index: 1004;
+            background-color: #fff;
+        }
+        .topmenu > ul {
+            list-style: none;
+        }
+        .topmenu > ul:nth-child(2) {
+            float: right;
+        }
+        .topmenu > ul > li:first-child {
+            float: left;
+        }
+        .topmenu > ul > li:nth-child(2), .topmenu > ul > li:nth-child(3), .topmenu > ul > li:nth-child(4) {
+            float: left;
+        }
+        .topmenu > ul > li {
+           padding: 10px;
+           font-family: Verdana,sans-serif;
+           line-height: 45px;
+           letter-spacing: 5px;
+        }
+        .topmenu > ul > li a {
+            color: black;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .topmenu > ul > li a:hover {
+            background-color: #ccc;
+            border-radius: 10px;
+            transition: .7s;
+        }
+        .clearfix::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        .wrap {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .img1 {
+            position: relative;
+            height: 100%;
+        }
+        .img1 > img {
+            max-width: 100%;
+            height: auto;
+        }
+        .img1 > p {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            font-size: 35px;
+            color: white;
+            letter-spacing: 5px;
+        }
+        .img1 > p > span {
+            background-color: rgba(0, 0, 0, 0.699);
+            padding: 5px 15px;
+            font-weight: bold;
+        }
+        .projects {
+            padding-top: 70px;
+            font-size: 25px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .projects > h2 {
+            border-bottom: 1px solid #ccc;
+            padding: 0 0 20px 0;
+            font-size: 24px;
+            font-weight: normal;
+        }
+        .projects .row1 {
+            margin-top: 50px;
+            width: 100%;
+        }
+        .projects p {
+            font-size: 16px; 
+            color: white;    
+            background-color: black;
+            display: inline-block;
+            padding: 8px 12px;
+            position: absolute;
+         }
+        .projects > [class^=row] > [class^=back] {
+            float: left;
+            width: calc((100% - 45px) / 4);
+            height: auto;
+            margin-right: 15px;
+            margin-top: 10px;
+        }   
+        .projects > .row1 > .back4, .projects > .row2 > .back8 {
+            margin-right: 0;
+        }
+        .projects > [class^=row] > [class^=back] > img {
+            width: 100%;
+        } 
+        @media screen and (max-width: 1200px) {
+            .projects > [class^=row] > [class^=back] {
+                width: calc((100% - 15px) / 2);
+            }
+            .projects > [class^=row] > div:nth-child(2n) {
+                margin-right: 0;
+            }
+            .projects > [class^=row] > div:nth-child(2n+1) {
+                clear: both;
+            }
+        } 
+        @media screen and (max-width: 800px) {
+            .projects > [class^=row] > [class^=back] {
+                width: 100%;
+            }
+            .projects > [class^=row] > [class^=back]:not:first-child {
+                clear: both;
+            }
+        }
+        .about {
+            width: 100%;
+            height: 100%;
+            padding-top: 70px;
+            overflow: hidden;
+        }
+        .about > h2 {
+            padding: 0 0 20px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        .about h2 {
+            font-size: 25px;
+            font-weight: normal;
+            
+        }
+        .about > p {
+            margin-bottom: 30px;
+            padding: 15px 0;
+        }
+        .about .person {
+            width: 100%;
+            overflow: hidden;
+        }
+        .about .person h2 {
+            margin-top: 10px;
+        }
+        .about .person > div {
+            float: left;
+            width: calc((100% - 60px) / 4);
+            margin-right: 15px;
+        }
+        .about .person > div p:first-of-type {
+            opacity: 0.7;
+            margin: 20px 0;
+        }
+        .about .person img {
+            width: 100%;
+            filter: grayscale(0.7);
+        }
+        @media screen and (max-width: 1200px) {
+            .about > .person > div {
+                width: calc((100% - 15px) / 2);
+            }
+            .about > .person > div:nth-child(2n) {
+                margin-right: 0;
+            }
+            .about .person .mike {
+                clear: both;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            .about > .person > div {
+                width: 100%;
+            }
+            .about .person > div:not(:first-child) {
+                clear: both;
+            }
+        }
+        .about .person button {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0 30px 0;
+            border-style: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .about .person button:hover {
+            background-color: #bbb;
+            transition: .7s;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            font-size: 16px;
+            border: 1px solid #aaa;
+        }
+        .contact {
+            padding-top: 70px;
+        }
+        .contact h2 {
+            font-weight: normal;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 30px;
+            padding: 0 0 20px 0 ;
+        }
+        .contact button {
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin: 30px 0 40px 0;
+        }
+        .contact button:hover {
+            background-color: #bbb;
+            color: black;
+            transition: .7s;
+        }
+        .footer img {
+            width: 100%;
+        }
+        .bottom {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="topmenu">
+        <ul class="br">
+            <li><a href="#"><b>BR</b> Architects</a></li>
+        </ul>
+        <ul class="clearfix">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="wrap">
+        <div class="header">
+            <div class="img1">
+                <img src="https://www.w3schools.com/w3images/architect.jpg" alt="BR Architects" width="1500" height="800">
+                <p><span>BR</span> Architects</p>
+            </div>
+        </div>
+        <div class="projects" id="projects"><h2>Projects</h2>
+            <div class="row1">
+                <div class="back1">
+                    <div class="summerhouse"><p>Summer House</p></div>
+                    <img src="https://www.w3schools.com/w3images/house5.jpg">
+                </div>
+                <div class="back2">
+                    <div class="brickhouse"><p>Brick House</p></div>
+                    <img src="https://www.w3schools.com/w3images/house2.jpg">
+                </div>
+                <div class="back3">
+                    <div class="renovated"><p>Renovated</p></div>
+                    <img src="https://www.w3schools.com/w3images/house3.jpg">
+                </div>
+                <div class="back4">
+                    <div class="barnhouse"><p>Barn House</p></div>
+                    <img src="https://www.w3schools.com/w3images/house4.jpg">
+                </div>
+            </div>
+            <div class="row2">
+                <div class="back5">
+                    <div class="summerhouse"><p>Summer House</p></div>
+                    <img src="https://www.w3schools.com/w3images/house2.jpg">
+                </div>
+                <div class="back6">
+                    <div class="brickhouse"><p>Brick House</p></div>
+                    <img src="https://www.w3schools.com/w3images/house5.jpg">
+                </div>
+                <div class="back7">
+                    <div class="renovated"><p>Renovated</p></div>
+                    <img src="https://www.w3schools.com/w3images/house4.jpg">
+                </div>
+                <div class="back8">
+                    <div class="barnhouse"><p>Barn House</p></div>
+                    <img src="https://www.w3schools.com/w3images/house3.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="about" id="about"><h2>About</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div class="person">
+                <div class="john">
+                    <img src="https://www.w3schools.com/w3images/team2.jpg">
+                    <h2>John Doe</h2>
+                    <p>CEO & Founder</p>
+                    <p>Phasellus eget enim eu lectus faucibus<br>
+                    vestibulum. Suspendisse sodales pellentesque<br>
+                    elementum.</p>
+                    <button type="submit">Contact</button>
+                </div>
+                <div class="jane">
+                    <img src="https://www.w3schools.com/w3images/team1.jpg">
+                    <h2>Jane Doe</h2>
+                    <p>Architect</p>
+                    <p>Phasellus eget enim eu lectus faucibus<br>
+                    vestibulum. Suspendisse sodales pellentesque<br>
+                    elementum.</p>
+                    <button type="submit">Contact</button>
+                </div>
+                <div class="mike">
+                    <img src="https://www.w3schools.com/w3images/team3.jpg">
+                    <h2>Mike Ross</h2>
+                    <p>Architect</p>
+                    <p>Phasellus eget enim eu lectus faucibus<br>
+                    vestibulum. Suspendisse sodales pellentesque<br>
+                    elementum.</p>
+                    <button type="submit">Contact</button>
+                </div>
+                <div class="dan">
+                    <img src="https://www.w3schools.com/w3images/team4.jpg">
+                    <h2>Dan Star</h2>
+                    <p>Architect</p>
+                    <p>Phasellus eget enim eu lectus faucibus<br>
+                    vestibulum. Suspendisse sodales pellentesque<br>
+                    elementum.</p>
+                    <button type="submit">Contact</button>
+                </div>
+            </div>
+        </div>
+        <div class="contact" id="contact"><h2>Contact</h2>
+            <p>Lets get in touch and talk about your next project.</p>
+            <form>
+                <label for="username"></label>
+                <input type="text" id="username" placeholder="Name" required>
+                <label for="useremail"></label>
+                <input type="email" id="useremail" placeholder="Email" required>
+                <label for="usersubject"></label>
+                <input type="text" id="usersubject" placeholder="Subject" required>
+                <label for="usercomment"></label>
+                <input type="text" id="usercomment" placeholder="Comment" required>
+                <button type="submit">SEND MESSAGE</button>
+            </form>
+            
+        </div>
+        <div class="footer">
+            <img src="https://www.w3schools.com/w3images/map.jpg">
+        </div>
+    </div>
+    <div class="bottom">Powered by <u>w3.css</u></div>
+</body>
+</html>

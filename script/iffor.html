@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="memNum">입장객 수 : </label>
+        <input type="number" id="memNum">
+    </div>
+    <div>
+        <label for="colNum">한 줄에 앉을 사람 수 : </label>
+        <input type="number" id="colNum">
+    </div>
+    <div>
+        <button onclick="Calculate()">계산하기</button>
+    </div>
+    <div id="display"></div>
+    
+    <script>
+    // console.dir(memNum);
+
+    function Calculate() {
+        let intRowNum = 0;
+        let intMemNum = parseInt(memNum.value);
+        let intColNum = parseInt(colNum.value);
+        
+
+        if (intMemNum % intColNum === 0) {
+            intRowNum = intMemNum / intColNum;
+        }
+        else {
+            intRowNum = parseInt((intMemNum / intColNum) + 1);
+        }
+
+        display.innerHTML = `모두 ${intRowNum}개의 줄이 필요합니다.`;
+
+        makeTable(intRowNum, intColNum);
+    }
+    
+        function makeTable(intRowNum, intColNum) {
+            // console.log("intRowNum : " + intRowNum + ", intColNum : " + intColNum);
+        
+
+        let table = "";
+        table += "<table border= '1'>";
+           
+        for (let i = 0; i < intRowNum; i++) {
+            table += "<tr>";
+
+            for (let j = 0; j < intColNum; j++) {
+                table += `<td>${i + j}</td>`;
+                
+            }
+            table += "</tr>";
+        }
+       table += "</table>";
+
+       display.innerHTML += "<hr>" + table;
+    }
+
+        // for(let i = 0; i < 10; i++) {
+        //     console.log(i);
+        // }
+    </script>
+    
+</body>
+</html>

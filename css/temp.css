@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#demo {
+    font-size: 20px;
+}
+span {
+    font-weight: bold;
+}
+.wrong {
+    color: red;
+}
+.correct {
+    color: green;
+}

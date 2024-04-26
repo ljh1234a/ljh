@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .low {
+            background-color: yellow;
+        }
+        .normal {
+            background-color: lightgreen;
+        }
+        .big1 {
+            background-color: aqua;
+        }
+        .big2 {
+            background-color: blueviolet;
+        }
+        p {
+            font-size: 20px;
+        }
+        span {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="display"></div>
+    <script>
+        var name = "홍길동";
+        var age = 7;
+
+        
+        
+        if (name == "홍길동") {
+            if (age >= 19) {
+            console.log("성인");
+            }
+            else if (age >= 14) {
+                console.log("청소년");
+            }
+            else if (age >= 8) {
+                console.log("초등학생")
+            }
+            else {
+                console.log("유아")
+            }
+        }
+        else {
+            console.log("이름을 다시 입력해주세요.");
+        }
+         
+        // var userNumber = prompt("숫자를 입력해주세요.");
+        // console.log(userNumber === "");
+
+        // if (userNumber !== "") {
+        //     if (userNumber > 0) {
+        //         if (userNumber % 3 === 0) {
+        //         alert("3의 배수입니다.");
+        //     }
+        //         else {
+        //             alert("3의 배수가 아닙니다.");
+        //         }
+        //     }
+        //     else {
+        //         alert("양수를 입력해주세요.");
+        //     }
+        // }
+        // else {
+        //     alert("입력이 취소되었습니다.");
+        // }
+
+        
+    </script>
+    <script src="/js/if.js"></script>
+</body>
+</html>

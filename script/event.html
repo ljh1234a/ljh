@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+        }
+        #wrap {}
+        #images {
+            width: calc(140px * 3);
+            position: absolute;
+            left: 50%;
+            top: 25%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+        }
+        #images > div {
+            float: left;
+        }
+        #images > div > img { 
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        #images > div > img:hover {
+            opacity: 0.7;
+        }
+        #display {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #display > img {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <ul>
+        <li><a href="#" onclick="changeBg('red')">Red</a></li>
+        <li><a href="#" onclick="changeBg('green')">Green</a></li>
+        <li><a href="#" onclick="changeBg('blue')">Blue</a></li>
+    </ul> -->
+    <!-- <div id="result"></div> -->
+    <div id="wrap">
+        <div id="images">
+            <div id="naver" onmouseover="bigImage('naver')">
+                <img src="/img/naver.jpg">
+            </div>
+            <div id="google" onmouseover="bigImage('google')">
+                <img src="/img/google.jpg">
+            </div>
+            <div id="daum" onmouseover="bigImage('daum')">
+                <img src="/img/daum.jpg">
+            </div>
+        </div>
+        <div id="display">
+            <img src="">
+        </div>
+    </div>
+    
+    
+    <script>
+        /*
+            이벤트: 일어난 사건
+            이벤트 처리기(이벤트 핸들러, event handler): 일어난 사건을 처리하는 함수
+            이벤트 핸들링(event handling): 일어난 사건을 처리
+        */
+
+        // let changeBg = (color) => {
+        //     const result = document.querySelector('#result');
+        //     result.style.width = '100px';
+        //     result.style.height = '100px';
+        //     result.style.borderRadius = '10px';
+        //     result.style.backgroundColor = color;
+        // };
+
+        let bigImage = (web) => {
+            let display = document.querySelector('#display');
+            switch (web) {
+                case "naver":
+                    showImage('/img/naver.jpg');
+                    // display.style.backgroundImage = "url(/img/naver.jpg)";
+                    break;
+                case "google":
+                    showImage('/img/google.jpg');
+                    // display.style.backgroundImage = "url(/img/google.jpg)";
+                    break;
+                case "daum":
+                    showImage('/img/daum.jpg');
+                    // display.style.backgroundImage = "url(/img/daum.jpg)";
+                    break;
+            }
+        };
+
+        let showImage = (src) => {
+            document.querySelector('#display > img').src = src;
+        };
+    </script>
+</body>
+</html>

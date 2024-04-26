@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        [id*=wrap] {
+            
+            border: 1px solid;
+            padding: 5px;
+            /* height: 100vh; */
+            /* 명시적 행과 열을 설정 
+                단위 : fr은 비율    
+                repeat(3, 1fr) -> 너비 1fr 칼럼을 3번 반복 
+                minmax(50px, 1fr) -> 높이가 최소 50px 최대 1fr
+            */
+            /*
+            grid-template-columns: repeat(3, 1fr);  열(컬럼)의 너비 
+            grid-template-rows: minmax(50px, 1fr) 250px repeat(2, 1fr);  행(줄)의 높이 
+            */
+        }
+        [id*=wrap] > div {
+            border: 1px solid red;
+            margin: 5px;
+        }
+        #wrap1 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: minmax(50px, 1fr) 250px repeat(2, 1fr);
+            grid-auto-rows: minmax(250px, 1fr);
+            grid-auto-columns: minmax(250px, auto);
+            /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+            margin-bottom: 200px;
+            /* grid-column-gap: 10px;
+            grid-row-gap: 10px; */
+            grid-gap: 10px 10px;
+            
+        }
+        #wrap1 > div:nth-child(2) {
+            /* grid-column-start: 1;
+            grid-column-end: 3; */
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+        #wrap2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            margin-bottom: 20px;
+            /* grid-column-gap: 10px;
+            grid-row-gap: 10px; */
+            grid-gap: 20px 30px;
+        }
+        #boxes {
+            display: grid;
+            height: 500px;
+            grid-template-columns: repeat(3, auto);
+            grid-template-rows: repeat(3, auto);
+            border: 1px solid;
+            margin-bottom: 30px;
+        }
+        #boxes [class^=box] {
+            color: white;
+            text-align: center;
+            line-height: 100px
+        }
+        #boxes .box1 {
+            background-color: blue;
+            /* grid-column-start: 1;
+            grid-column-end: 4; */
+            grid-column: 1 / 4;
+            grid-column: 1 / span 3; /* span 3 -> 3개를 합친다는 것 */
+        }
+        #boxes .box2 {
+            background-color: green;
+            /* grid-row-start: 2;
+            grid-row-end: span 2; */
+            grid-row: 2 / span 2;
+            /* grid-row: 2 / 4; */
+            line-height: 200px;
+        }
+        #boxes .box3 {
+            background-color: orangered;
+            grid-column-start: 2;
+            grid-column-end: 4;
+        }
+        #boxes .box4 {
+            background-color: yellow;
+            grid-column-start: 3;
+            grid-column-end: 4;
+        }
+        #boxes2 {
+            display: grid;
+            grid-template-areas: 
+                "box1 box1 box1"
+                "box2 box3 box3"
+                "box2 . box4";
+        }
+        #boxes2 [class^=box] {
+            color: #fff;
+            text-align: center;
+            line-height: 100px;
+        }
+        #boxes2 .box1 {
+            background-color: blue;
+            grid-area: box1;
+        }
+        #boxes2 .box2 {
+            background-color: green;
+            grid-area: box2;
+            line-height: 200px;
+        }
+        #boxes2 .box3 {
+            background-color: orangered;
+            grid-area: box3;
+        }
+        #boxes2 .box4 {
+            background-color: yellow;
+            grid-area: box4;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap1">
+        <div class="items">1</div>
+        <div class="items">2</div>
+        <div class="items">3</div>
+        <div class="items">4</div>
+        <div class="items">5</div>
+        <div class="items">6</div>
+    </div>
+    <div id="wrap2">
+        <div class="items">1</div>
+        <div class="items">2</div>
+        <div class="items">3</div>
+        <div class="items">4</div>
+        <div class="items">5</div>
+        <div class="items">6</div>
+    </div>
+    <div id="boxes">
+        <div class="box1">box1</div>
+        <div class="box2">box2</div>
+        <div class="box3">box3</div>
+        <div class="box4">box4</div>
+    </div>
+    <div id="boxes2">
+        <div class="box1">box1</div>
+        <div class="box2">box2</div>
+        <div class="box3">box3</div>
+        <div class="box4">box4</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="maxNum">숫자를 입력하세요.</label>
+        <input type="number" id="maxNum" max="10000" min="5">
+        <button onclick="makeSum()">누적</button>
+    </div>
+    <div id="display"></div>
+    <script>
+        /*
+            반복문
+            for(초기화; 조건식; 증감식) {
+                반복 구문
+            }
+
+            for(;;) {}
+        */
+
+        function makeSum() {
+            let i;
+            let sum = 0;
+            let max = parseInt(maxNum.value);
+
+            if (max > 100000) {
+                alert("100000 이하만 입력해주세요.");
+                maxNum.value = "";
+                maxNum.focus();
+            }
+
+            else {
+                for (i = 1; i <= parseInt(max); i++) {
+                sum += i;
+                }
+
+                display.innerHTML = `1부터 ${max}까지의 합은 ${sum}입니다.`;
+                
+                console.log(sum);
+                console.log(i);
+            }
+        }
+        
+        // console.log(`i의 값: ${i}`);
+    </script>
+</body>
+</html>

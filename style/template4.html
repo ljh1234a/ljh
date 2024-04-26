@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .wrap {
+            width: 70%;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            top: 0;
+            position: sticky;
+            background-color: #fff;
+            padding: 25px;
+        }
+        .header .sideba {
+            display: inline-block;
+            float: left;
+            padding: 10px;
+        }
+        .header .sideba:hover {
+            background-color: #aaa;
+            cursor: pointer;
+            transition: .7s;
+        }
+        .header .sideba > div { 
+            width: 18px;
+            height: 2px;
+            background-color: rgb(0, 0, 0);
+            margin: 5px;
+            border-bottom: 1px solid black;
+        }
+        .header .sidemenu {
+            width: 0;
+            height: 100%;
+            background-color: #111;
+            z-index: 1;
+            padding-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: left;
+            padding-top: 60px;
+            overflow-x: hidden;
+            transition: .7s;
+        }
+        .header .sidemenu a {
+            text-decoration: none;
+            color: #aaa;
+            margin: 0 20px;
+            padding: 10px;
+            display: block;
+        }
+        .header .sidemenu a:hover {
+            color: #fff;
+            transition: .7s;
+        }
+        .header .sidemenu .closebtn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 35px;
+        }
+        .header > div {
+            display: inline-block;
+        }
+        .header > div:last-child {
+            float: right;
+        }
+        .food {
+            margin: 0 auto;
+            padding-top: 60px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+        .food [class^=food] {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .food [class^=food] img{ 
+            width: 100%;
+        }
+        .food [class^=food] > div {
+            flex: calc((100% - 45px) / 4);
+            width: calc((100% - 45px) / 4);
+            margin-right: 15px;
+        }
+        .food [class^=food]> div:last-child {
+            margin-right: 0;
+        }
+        .food h2, .food p {
+            font-weight: normal;
+            padding: 10px 0;
+        }
+        .food p {
+            padding: 10px 0;
+        }
+        .food2 {
+            margin-top: 50px;
+        }
+        .food .buttonbar {
+            padding: 50px 0;
+            text-align: center;
+        }
+        .food .buttonbar > button {
+            padding: 12px 15px;
+            background-color: white;
+            border: none;
+        }
+        .food .buttonbar > button:nth-of-type(2) {
+            background-color: black;
+            color: white;
+        }
+        .food .buttonbar > button:hover {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+        .about {
+            text-align: center;
+            padding: 80px;
+            border-bottom: 1px solid #ccc;
+        }
+        .about h2 {
+            font-weight: normal;
+        }
+        .about p {
+            margin: 15px 0;
+        }
+        .about img {
+            margin: 40px auto;
+            width: 100%;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .container > div {
+            flex: calc(100% / 3);
+            max-width: calc(100% / 3);
+            padding: 30px 10px;
+        }
+        .container .footer > h3, .container .footer > p {
+            margin-bottom: 15px;
+        }
+        .container .footer a {
+            color: black;
+        }
+        .container .blog div {
+            padding: 20px 10px;
+        }
+        .container .blog h3 {
+            margin-bottom: 10px;
+        }
+        .container .blog img {
+            float: left;
+            width: 50px;
+            margin-right: 15px;
+        }
+        .container .blog > div:first-of-type {
+            border-bottom: 1px solid #ccc;
+        }
+        .container .blog [class]:hover {
+            background-color: #ccc;
+        }
+        .container .tag .tags span {
+            background-color: #8a8a8a;
+            margin: 10px 0;
+            display: inline-block;
+            padding: 0 10px;
+            color: white;
+            font-size: 14px;
+        }
+        .container .tag span:first-of-type {
+            background-color: black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="sideba" onclick="openNav()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="sidemenu" id="mySidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times</a>
+                <a href="#food">Food</a>
+                <a href="#about">About</a>
+            </div>
+            <div>My Food</div>
+            <div>Mail</div>
+        </div>
+        <div class="food" id="food">
+            <div class="food1">
+                <div>
+                    <img src="https://www.w3schools.com/w3images/sandwich.jpg">
+                    <h2>The Perfect Sandwich, A Real NYC Classic</h2>
+                    <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+                <div>
+                    <img src="https://www.w3schools.com/w3images/steak.jpg">
+                    <h2>Let Me Tell You About This Steak</h2>
+                    <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+                <div>
+                    <img src="https://www.w3schools.com/w3images/cherries.jpg">
+                    <h2>Cherries, interrupted</h2>
+                    <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                    <p>What else?</p>
+                </div>
+                <div>
+                    <img src="https://www.w3schools.com/w3images/wine.jpg">
+                    <h2>Once Again, Robust Wine and Vegetable Pasta</h2>
+                    <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+            </div>
+            <div class="food2">
+                <div>
+                    <img src="https://www.w3schools.com/w3images/popsicle.jpg">
+                    <h2>All I Need Is a Popsicle</h2>
+                    <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+                <div>
+                    <img src="https://www.w3schools.com/w3images/salmon.jpg">
+                    <h2>Salmon For Your Skin</h2>
+                    <p>Once again, some random text to lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+                <div>
+                    <img src="https://www.w3schools.com/w3images/sandwich.jpg">
+                    <h2>The Perfect Sandwich, A Real Classic</h2>
+                    <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+                <div>
+                    <img src="https://www.w3schools.com/w3images/croissant.jpg">
+                    <h2>Le French</h2>
+                    <p>Lorem lorem lorem lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+                </div>
+            </div>
+            <div class="buttonbar">
+                <button class="button"><<</button>
+                <button class="button">1</button>
+                <button class="button">2</button>
+                <button class="button">3</button>
+                <button class="button">4</button>
+                <button class="button">>></button>
+            </div>
+        </div>
+        <div class="about" id="about">
+            <h2>About Me, The Food Man</h2>
+            <img src="https://www.w3schools.com/w3images/chef.jpg">
+            <h3>I am Who I Am!</h3>
+            <p style="font-style: italic;">With Passion For Real, Good Food</p>
+            <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        </div>
+        <div class="container">
+            <div class="footer">
+                <h3>FOOTER</h3>
+                <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                <p>Powered by <u><a href="font-weight: normal;">w3.css</a></u></p>
+            </div>
+            <div class="blog">
+                <h3>BLOG POST</h3>
+                <div class="lorem">
+                    <img src="https://www.w3schools.com/w3images/workshop.jpg">
+                    <h4>Lorem</h4>
+                    <p>Sed mattis nunc</p>
+                </div>
+                <div class="ipsum">
+                    <img src="https://www.w3schools.com/w3images/gondol.jpg">
+                    <h4>Ipsum</h4>
+                    <p>Praes tinci sed</p>
+                </div>
+            </div>
+            <div class="tag">
+                <h3>POPULAR TAGS</h3>
+                <div class="tags">
+                    <span>Travel</span> <span>New York</span> <span>Dinner</span> <span>France</span> 
+                    <span>Drinks</span> <span>Ideas</span> <span>Flavors</span> <span>Cuisine</span> <span>Chicken</span>
+                    <span>Dressing</span> <span>Fried</span> <span>Fish</span> <span>Duck</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>

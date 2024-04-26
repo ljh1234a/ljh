@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 해당 요소를 옆으로 놓고 싶다면 해당 요소의 부모에게 display: flex 
+        .box-container의 부모는 body */
+        /* body {
+            display: flex;
+        } */
+        .box-container {
+            /* width: 500px; */
+            height: 300px;
+            border: 1px solid rgb(77, 218, 140);
+            padding: 10px;
+            display: flex;
+            /* flex-direction: row;
+            flex-wrap: wrap-reverse; */
+            flex-flow: row nowrap;
+            justify-content: center;
+            /* align-content: center;      우선 - 2줄 이상일 경우 , align-items, align-self 취소시킴 */
+            align-items: center;        /* 2번째 - 1줄일 경우 */
+            gap: 15px;                  /* 간격 */
+        }
+        .box {
+            width: 100px;
+            width: 33.333%;
+            height: 100px;
+            background-color: violet;
+            border: 1px solid black;
+            float: left;
+            font-size: 35px;
+            text-align: center;
+            line-height: 100px;
+        }
+        /* order가 작은 순서대로 앞에 옴 */
+        /* flex-grow : 늘어날 때의 너비 비율 */
+        /* flex-shrink : 줄어들 때의 너비 비율 */
+        /* flex-basis : (공간 배분 전) 기본 너비 */
+        .box:first-child {
+            order: 1; /* 3번째 */
+            /* align-self: flex-end; */
+            flex-grow: 3;
+            flex-shrink: 3;
+            flex-basis: 300px;
+            /* flex: 3 10 33.333333%; */
+        }
+        .box:nth-child(2) {
+            order: 0; /* 2번째 */
+            /* align-self: flex-start; */
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: 300px;
+        }
+        .box:last-child {
+            order: -1; /* 1번째 */
+            flex-grow: 2;
+            flex-shrink: 1;
+            flex-basis: 300px;
+        }
+        @media screen and (max-width: 700px) {
+            .box-container {
+                flex-direction: column;
+            }
+            .box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box-container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+    <div class="box-container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+    </div>
+</body>
+</html>

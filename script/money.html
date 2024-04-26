@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #display {
+            font-size: 20px;
+            width: 130px;
+            text-align: right;
+        }
+        #display span {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="display"></div>
+    <script>
+        function countMoney(money, target) {
+            const coin = [50000, 10000, 5000, 1000, 500, 100, 50, 10, 1];
+            let str = "";
+
+            for (let i = 0; i < coin.length; i++) {
+                let num = parseInt(money / coin[i]);
+                str += `<span>${coin[i]}</span>원 : <span>${num}</span>개<br>`;
+                // display.innerHTML += `<span>${coin[i]}</span>원 : <span>${num}</span>개` + `<br>`;
+
+                if (num > 0) {
+                    money = money - (coin[i] * num);
+                }
+            }
+            document.getElementById(target).innerHTML += str;
+       }
+
+       countMoney(137896, "display");
+    </script>
+</body>
+</html>

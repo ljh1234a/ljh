@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="t1"></div>
+    <div id="t2"></div>
+    <div id="t3"></div>
+    <script>
+        // 함수도 일급객체
+        // 재사용성
+        // function myFunction(target) {
+
+        //     // target - 0, null, undefined, " ", false
+        //     if(target) 
+        //         target.innerHTML = 'null';
+                
+        //     if(!target)
+        //         return null;  // 값을 반환, 함수 종료
+
+        //     console.log(target);
+        // }
+
+        // console.dir(myFunction);
+        // console.log(typeof myFunction);
+        // console.log(myFunction());
+        // alert(myFunction());
+
+        // myFunction(t1);
+        // myFunction(t3);
+
+        // function toCelsius(fahrenheit, i, j) {
+        //     console.log(i + j);
+        //     return (5/9) * (fahrenheit-32);
+        // }
+
+        // let value = toCelsius(77, 23, 'test');
+        // console.log(value);
+
+        /*
+            함수
+
+            익명함수
+            즉시실행함수
+            화살표함수
+
+            재귀함수
+            콜백함수
+        */
+
+        // console.dir(window);
+
+        // function ask(question, yes, no) {
+        //     if (confirm(question)) yes();
+        //     else no();
+        // }
+
+        // let test = function() {};
+
+        // ask("동의하십니까?", showOk, showCancel);
+        
+
+        // function showOk() {
+        //     alert("동의");
+        // }
+
+        // function showCancel() {
+        //     alert("취소");
+        // }
+
+        // 1. 일반함수 선언문
+        // function ask(question, yes, no) {
+        //     if (confirm(question)) yes();
+        //     else no();
+        // }
+
+        // 2. 무명함수 표현식
+        // let ask = function(question, yes, no) {
+        //     if (confirm(question)) yes();
+        //     else no();
+        // };
+
+        // 3. 화살표함수 표현식
+        // 매개변수가 없을 경우와 여러개일 경우 () 만든다.
+        // 매개변수가 하나만 있을 경우 () 생략 가능
+        // 실행문이 하나만 있을 경우 {} 생략 가능
+        // let ask = (question, yes, no) => {
+        //     if (confirm(question)) yes();
+        //     else no();
+        // };
+
+        // ask ("동의하십니까?",
+        //     () => alert("동의"),
+        //     () => alert("취소"));
+
+        let ask = (question, yes, no) => {
+            if (confirm(question)) yes();
+            else no();
+        };
+
+        ask(
+            "동의하십니까?",
+            () => alert("동의하셨습니다."),
+            () => alert("취소하셨습니다.")
+        );
+        
+    </script>
+</body>
+</html>

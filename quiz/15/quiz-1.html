@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="display"></div>
+    <script>
+        let x = Number(prompt("첫 번째 수를 입력하세요."));
+        let y = Number(prompt("두 번째 수를 입력하세요."));
+        let result = 0;
+
+        function sumMulti(x, y) {
+            if (x === y) {
+                result = `입력받은 두개의 수가 같으므로 두 수의 곱은 ${x * y} 입니다.`;
+                console.log(result);
+                display.innerHTML = result;
+            }
+            else {
+                result = `입력받은 두개의 수가 다르므로 두 수의 합은 ${x + y} 입니다.`;
+                console.log(result);
+                display.innerHTML = result;
+            }
+        };
+
+        if (!(x == "" || x == null) & !(y == "" || y == null)) {
+            sumMulti(x, y);
+        }
+        else {
+            alert("숫자를 다시 입력하세요.");
+            location.reload();
+        }
+    </script>
+</body>
+</html>

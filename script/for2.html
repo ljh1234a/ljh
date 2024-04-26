@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #gugudan {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        #gugudan > div {
+            /* border: 1px solid #aaa; */
+            box-sizing: border-box;
+            flex-basis: 33.333333333%;
+            line-height: 25px;
+            padding: 20px;     
+        }
+        #gugudan > div > div{
+            border: 1px solid;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 900px) {
+            #gugudan > div {
+                flex-basis: 50%;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            #gugudan {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>구구단</h1>
+    <div id="gugudan"></div>
+    <script>
+        let str = "";
+
+        for (let i = 1; i <= 9; i++) {
+            
+            str += `<div><div><h2>${i}단</h2>`;
+            for (let j = 1; j <= 9; j++) {
+                str += `${i} X ${j} = ${i * j}<br>`;
+            }
+            str += `</div></div>`;
+        }
+        
+        gugudan.innerHTML = str;
+        
+    </script>
+</body>
+</html>

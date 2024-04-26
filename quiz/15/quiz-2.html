@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="display"></div>
+    <script>
+        let num1 = Number(prompt("첫 번째 수를 입력하세요."));
+        let num2 = Number(prompt("두 번째 수를 입력하세요."));
+        let result = "";
+
+        function compNumber(x, y) {
+            if (x === y) {
+                alert("두 수는 같습니다.");
+            }
+            else if (x > y) {
+                alert(x + " 이(가) " + y + "보다 큽니다.")
+            }
+            else {
+                alert(y + " 이(가) " + x + "보다 큽니다.");
+            }
+        };
+
+        if (!(num1 == "" || num1 == null) & !(num2 == "" || num2 == null)) {
+            compNumber(num1, num2);
+        }
+        else {
+            alert("숫자를 다시 입력하세요.");
+            location.reload();
+        }
+    </script>
+</body>
+</html>
