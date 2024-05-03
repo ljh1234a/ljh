@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #wrap {
+            position: relative;  
+        }
+        #wrap > div {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        img {
+            width: 50%;
+            border-radius: 10px; 
+        }
+        #detail {
+            color: #ffffff;
+            margin: 10px;
+            display: none;
+            font-size: 20px;
+            animation-name: showDetail;
+            animation-duration: 1s;
+        }
+        
+        #btnDetail {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        @keyframes showDetail {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <img src="/img/mic.jpg">
+        <div>
+            <div id="detail">
+                <h3>등심붓꽃</h3>
+                <p>북아메리카 원산으로 ... 번식한다.</p>
+            </div>
+            <button id="btnDetail">상세 설명 보기</button>
+        </div>
+        
+    </div>
+    <script>
+        (function() {
+            let detail = document.querySelector('#detail');
+            let btnDetail = document.querySelector('#btnDetail');
+
+            function show() {
+                detail.style.display = 'block';
+                btnDetail.innerHTML = '상세 설명 닫기';
+            }
+
+            function hide() {
+                detail.style.display = 'none';
+                btnDetail.innerHTML = '상세 설명 보기';
+            }
+
+            btnDetail.addEventListener('click', () => { // 버튼 클릭시
+                console.dir(window.getComputedStyle(detail)['display']);    // detail display의 스타일시트 속성 읽기
+                if (detail.style.display == 'none' || detail.style.display == '') {   // 상세 설명이 안보이는 상태라면 보여주기
+                    show();
+                } else {                                // 상세 설명이 보이는 상태라면 숨기기
+                    hide();
+                }
+            })
+        })();
+
+        (function() {
+            let button = 'test';
+        })();
+             
+    </script>
+</body>
+</html>

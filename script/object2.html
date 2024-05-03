@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var now /* 객체의 인스턴스 */ = new Date(); // 객체 생성자 함수
+        document.write(now);
+        console.dir(now);
+
+        /*
+            객체- 속성(프로퍼티, 특징), 메서드(행위, 동작)
+            객체의 속성과 메서드는 .으로 사용
+            객체의 속성은 []를 사용할 수 있다. 
+        */
+
+        console.dir(document);
+        document.write('<br>');
+        document.write(document.URL);
+        document.write('<br>');
+        document.write(document.location);
+        document.write('<br>');
+        document.write(document.location.port);
+
+        document.write('<br>');
+        document.write(document['location']['port']); // 속성은 대괄호 []로 읽을 수 있음
+        document.write('<br>');
+        document['write']('test');
+
+        document.write('<hr>');
+        document.write(now.toLocaleString());
+        document.write('<br>');
+        console.dir(Array);
+        
+        var numbers = new Array();
+        var numbers = new Array(4);
+        var numbers = ['one', 'two', 'three', 'four'];
+        console.log(numbers);
+        var numbers = Array('one', 'two', 'three', 'four', 'five');
+        console.log(numbers);
+
+        if (Array.isArray(numbers)) {
+            console.log('do');
+            console.log(numbers.length);
+            for (let i = 0; i < numbers.length; i++) {
+                document.write('<p>' + numbers[i] + '</p>');
+            }
+        }
+        if (Array.isArray(now)) {
+            console.log('not do');
+        }
+
+        var nums = [1, 2, 3];
+        var chars = ['a', 'b', 'c', 'd'];
+
+        var numsChars = nums.concat(chars); // 합쳐진 배열을 리턴
+        var charNums = chars.concat(nums);
+        document.write(`nums에 chars 합치면 ${numsChars} <br> chars에 nums 합치면 ${charNums}`);
+
+        var string1 = nums.join('');   // join() 안에는 구분자, 지정하지 않으면 쉼표(,)
+        document.write(`<hr>구분자 없이: ${string1}`);
+        var string2 = nums.join('/');
+        document.write(`<hr>'/' 구분자 지정: ${string2}`);
+
+        var nums = [1, 2, 3];
+        var ret1 = nums.push(4, 5); // 배열의 마지막에 인수값을 추가하고 크기를 리턴
+        document.write(`<hr>length: ${ret1} | 배열: ${nums}`);
+        var ret2 = nums.unshift(-1, 0); // 배열의 처음에 인수값을 추가하고 크기를 리턴
+        document.write(`<hr>length: ${ret2} | 배열: ${nums}`);
+
+        var popped1 = nums.pop();   // 배열 마지막의 값을 잘라서 리턴
+        document.write(`<hr>length: ${nums.length} | 꺼낸 요소: ${popped1} | 배열: ${nums}`);
+        var popped2 = nums.shift(); // 배열 처음의 값을 잘라서 리턴
+        document.write(`<hr>length: ${nums.length} | 꺼낸 요소: ${popped2} | 배열: ${nums}`);
+
+        // splice(시작 인덱스[, 삭제할 개수[, 추가할 요소들]])
+        // 배열로 추가하면 하나로 취급
+        var newNumbers = nums.splice(2, 2, 5, 6, 7, 8, 12); // 인덱스가 2인 값부터 끝까지 삭제하고 반환
+        document.write(`<hr>length: ${nums.length} | 꺼낸 요소: ${newNumbers} | 배열: ${nums}`);
+
+        // slice() - 모든 배열을 복사
+        // slice([시작 인덱스[, 마지막 인덱스]) => 시작 인덱스부터 마지막 인덱스 - 1 까지 꺼내기
+        var sliceNumbers = nums.slice();
+        console.log(Array.isArray(sliceNumbers))
+        document.write(`<hr>length: ${nums.length} | 꺼낸 요소: ${sliceNumbers} | 배열: ${nums}`);
+        var sliceNumbers2 = nums.slice(2);
+        document.write(`<hr>length: ${nums.length} | 꺼낸 요소: ${sliceNumbers2} | 배열: ${nums}`);
+        console.log(nums);  // [0, 1, 5, 6, 7, 8, 4]
+        var sliceNumbers3 = nums.slice(2, 5);   // 인덱스 2에서 4(5-1) 까지 꺼냄 => [5, 6, 7]
+        document.write(`<hr>length: ${nums.length} | 꺼낸 요소: ${sliceNumbers3} | 배열: ${nums}`);
+
+        var sortNums = nums.sort();
+        document.write(`<hr>length: ${nums.length} | 정렬 요소: ${sortNums} | 배열: ${nums}`);
+        var sortNums2 = nums.sort(function(a, b) {  // 오름차순 정렬
+            console.log(`a: ${a} - b: ${b}`);
+            return a - b;
+        });
+        document.write(`<hr>length: ${nums.length} | 정렬 요소: ${sortNums2} | 배열: ${nums}`);
+
+        var chars = ['홍길동', '고길동', '박길동', '최길동'];
+        
+        var sortChars = chars.sort();
+        document.write(`<hr>length: ${chars.length} | 정렬 요소: ${sortChars} | 배열: ${chars}`);
+        var sortChars2 = chars.reverse();
+        document.write(`<hr>length: ${chars.length} | 정렬 요소: ${sortChars2} | 배열: ${chars}`);
+        var sortChars3 = chars.sort((a, b) => { // 내림차순 정렬
+            if (a > b) return -1;
+            else if(a === b) return 0;
+            else return 1;
+        });
+        document.write(`<hr>length: ${chars.length} | 정렬 요소: ${sortChars3} | 배열: ${chars}`);
+        document.write(`<hr>`);
+
+        var list = [
+            {id: 0, name: '홍길동', age: 18},
+            {id: 1, name: '고길동', age: 20},
+            {id: 1, name: '고길동', age: 23},
+            {id: 2, name: '최길동', age: 8},
+            {id: 3, name: '마길동', age: 38},
+        ];
+        console.dir(list);
+
+        document.write("<ul>")
+        for (let i = 0; i < list.length; i++) {
+            document.write(`<li>ID: ${list[i].id}, 이름: ${list[i].name}, 나이: ${list[i].age} </li>`);
+        }
+        document.write("</ul>")
+
+        list.sort((a, b) => {   
+            if (a.name < b.name) {
+                return -1; // 오름차순 <-> a.name > b.name: 내림차순
+            }
+            else if (a.name === b.name) {   // 이름이 같다면
+                if (a.age < b.age) {
+                    return -1  // id를 비교해서 오름차순
+                } else {
+                    return 0
+                }
+            }
+            else {
+                return 0;
+            }
+        });
+
+        document.write("<ul>")
+        for (let i = 0; i < list.length; i++) {
+            document.write(`<li>ID: ${list[i].id}, 이름: ${list[i].name}, 나이: ${list[i].age} </li>`);
+        }
+        document.write("</ul>")
+    </script>
+</body>
+</html>

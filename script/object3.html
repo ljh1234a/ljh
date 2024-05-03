@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습</title>
+    <style>
+        input {
+            padding: 5px;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+        }
+        input[type=button], button {
+            padding: 7px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            margin-top: 10px;
+            margin-left: 5px;
+            background-color: #ddd;
+        }
+        #search {
+            width: 100px;
+            margin-top: 10px;
+        }
+        input[type=button]:hover, button:hover {
+            background-color: #bbb;
+            cursor: pointer;
+        }
+        #display {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        table {
+            width: 260px;
+            border-collapse: collapse;
+            font-size: 18px;
+        }
+        th:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        td {
+            font-weight: bold;
+            text-align: center;
+        }
+        #oneEditBtn {
+            background-color: yellow;
+        }
+        #oneEditBtn:hover {
+            opacity: 0.5;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="mem"></div>
+    <script>
+        function Member(target) {
+            this.init = function() {
+                let str = `
+                <input type="hidden" id="arrIndex">
+                
+                <table>
+                    <tr>
+                        <td><label for="userIcon">아이콘</label></td>
+                        <td colspan="3"><input type="text" id="userIcon">
+                    </tr>
+                    <tr>
+                        <td><label for="userName">이름</label></td>
+                        <td colspan="3"><input type="text" id="userName" onkeyup="nameEnter(event)" autofocus></td>
+                    </tr>
+                    <tr>
+                        <td><label for="userAge">나이</label></td>
+                        <td colspan="3"><input type="number" id="userAge" onkeyup="chkEnter(event)"></td>
+                    </tr>
+                    
+                    <tr class="btn">
+                        <td><input type="button" value="확인" id="editBtn" onclick="editArray();"></td>
+                        <td><input type="button" value="취소" id="cancelBtn" onclick="cancelArray();"></td>
+                        <td><input type="button" value="전체 삭제" id="delBtn" onclick="del();"></td>
+                        <td><input type="button" value="등록" id="addBtn" onclick="add();"></td>
+                    </tr>
+                </table>
+                <input type="text" id="search" placeholder="이름 검색" onkeyup="searchArray(event)">
+                <div id="display"></div>
+                `;
+
+                let el = document.getElementById(target);
+                el.innerHTML = str;
+            }
+        }
+
+        let member = new Member('mem');
+        member.init();
+
+        let userIcon = document.querySelector('#userIcon');
+        let useEdit = false;
+        let display = document.querySelector('#display');
+        let userName = document.querySelector('#userName');
+        let userAge = document.querySelector('#userAge');
+        let search = document.querySelector('#search');
+        let searchBtn = document.querySelector('#searchBtn');
+        let userArr = [];
+        
+        addBtn.style.display = 'inline';
+        editBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+
+        displayArray();
+
+        function add() {
+            
+            let member = {
+                icon: (userIcon.value || userIcon.value !== '') ? userIcon.value : 'https://as2.ftcdn.net/v2/jpg/05/44/45/55/1000_F_544455506_eE2dvZMPKUnb6MtweImV84CaeQotEsHM.jpg',
+                name: userName.value,
+                age: userAge.value
+            };
+
+            if (userName.value === '') {
+                alert('이름을 입력해주세요.');
+                userName.focus();
+                return;
+            } else if (userAge.value == 0 || userAge.value === '') {
+                alert('나이를 입력해주세요.');
+                userAge.focus();
+                userAge.value = '';
+                return;
+            } else {
+                userArr.push(member);
+                displayArray();
+                clearInput();
+            }
+        }
+
+        function displayArray() {
+            display.innerHTML = '';
+            let str = `<table id = "memberList">
+                <tr>
+                    <th>아이콘</th>
+                    <th onclick="sortArray('name');">이름</th>
+                    <th onclick="sortArray('age');">나이</th>
+                    <th></th>
+                    <th></th>
+                </tr>`
+
+            for (let i = 0; i < userArr.length; i++) {
+                str += `<tr>
+                            <td><img src='${userArr[i].icon}' alt='${userArr[i].name}' style='width: 35px'></td>
+                            <td>${userArr[i].name}</td>
+                            <td>${userArr[i].age}</td>
+                            <td><button id = "oneEditBtn" onclick="oneEditArray(${i});">수정</button></td>
+                            <td><button id = "oneDelBtn" onclick='removeOneArray(${i})'>삭제</button></td>
+                        </tr>`
+            }
+            str += `</table>`;
+
+            display.innerHTML = str;
+        }
+
+        function del() {
+            let isOk = confirm('모든 데이터를 삭제하시겠습니까?');
+
+            if (isOk) {
+                userArr = [];
+                displayArray();
+            }
+        }
+
+        function clearInput() {
+            userIcon.value = '';
+            userName.value = '';
+            userAge.value = '';
+            userName.focus();
+        }
+
+        function nameEnter(event) {
+            if (event.keyCode === 13) {
+                userAge.focus();
+            }
+        }
+
+        function chkEnter(event) {
+            if (event.keyCode === 13) {
+                add();
+            }
+        }
+
+        // function searchEnter(event) {
+        //     if (event.keyCode === 13) {
+        //         serachArray();
+        //     }
+        // }
+
+        function removeOneArray(index) {
+            if (!useEdit) {
+                let member = userArr[index];    // 배열의 내용을 객체로 받음
+
+                // 구조분해 할당
+                let {name, age} = userArr[index];
+
+                let isOk = confirm(`${name}의 데이터를 삭제하시겠습니까?`); 
+
+                if (isOk) {
+                    userArr.splice(index, 1);
+                    displayArray();
+                }
+            }
+        }
+
+        let flag = {
+            name: 0,
+            age: 0
+        };
+
+        function sortArray(key) {
+            if (!useEdit) {
+                if (!flag[key]) {
+                    userArr.sort((a, b) => {
+                        if (a[key] < b[key]) return -1;
+                        else return 0;
+                    });
+                    flag[key] = 1;
+                } else {
+                    userArr.sort((a, b) => {
+                        if (a[key] > b[key]) return -1;
+                        else return 0;
+                    });
+                    flag[key] = 0;
+                }
+
+                displayArray();
+            }
+        }
+
+        function oneEditArray(index) {
+            useEdit = true;
+
+            let {icon, name, age} = userArr[index];
+            
+            userIcon.value = icon;
+            userName.value = name;
+            userAge.value = age;
+
+            addBtn.style.display = 'none';
+            editBtn.style.display = 'inline';
+            cancelBtn.style.display = 'inline';
+
+            arrIndex.value = index;
+            userName.focus();
+        }
+
+        function cancelArray() {
+            useEdit = false;
+
+            userIcon.value = '';
+            userName.value = '';
+            userAge.value = '';
+            addBtn.style.display = 'inline';
+            editBtn.style.display = 'none';
+            cancelBtn.style.display = 'none';
+            arrIndex.value = '';
+        }
+
+        function editArray() {
+            userArr[arrIndex.value] = {
+                icon: userIcon.value,
+                name: userName.value,
+                age: userAge.value
+            };
+
+            cancelArray();
+            displayArray();
+        }
+
+        function searchArray() {
+            if (search.value === '') {
+                displayArray();
+            } else {
+                display.innerHTML = '';
+
+                let str = `<table>
+                    <tr>
+                        <th>아이콘</th>
+                        <th onclick="sortArray('name');">이름</th>
+                        <th onclick="sortArray('age');">나이</th>
+                        <th></th>
+                        <th></th>
+                    </tr>`
+
+                for (let i = 0; i < userArr.length; i++) {
+                    if (search.value === userArr[i].name || 
+                        search.value === userArr[i].age || 
+                        userArr[i].name.includes(search.value)) {
+                        
+                        str += 
+                        `<tr>
+                            <td><img src='${userArr[i].icon}' alt='${userArr[i].name}' style='width: 35px'></td>
+                            <td>${userArr[i].name}</td>
+                            <td>${userArr[i].age}</td>
+                            <td><button id = "oneEditBtn" onclick="oneEditArray(${i});">수정</button></td>
+                            <td><button id = "oneDelBtn" onclick='removeOneArray(${i})'>삭제</button></td>
+                        </tr>`
+                    } 
+                }
+                str += `</table>`;
+
+                display.innerHTML = str;
+            }
+            
+            
+        }
+    </script>
+</body>
+</html>

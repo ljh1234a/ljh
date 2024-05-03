@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        .swiper {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slider main container -->
+    <div class="swiper" id="s1">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+        <!-- Slides -->
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div class="swiper" id="s2">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+        <!-- Slides -->
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+    
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <script>
+        const swiper1 = new Swiper('#s1', {
+            // Optional parameters
+            // direction: 'vertical',
+            loop: true,
+            autoplay: {
+                delay: 1000
+            },
+
+            // If we need pagination
+            pagination: {
+                el: '#s1 .swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '#s1 .swiper-button-next',
+                prevEl: '#s1 .swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '#s1 .swiper-scrollbar',
+            },
+        });
+        const swiper2 = new Swiper('#s2'); 
+    </script>
+</body>
+</html>

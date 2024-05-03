@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>click</button>
+    <script>
+        // 이벤트 추가하기
+        console.dir(window);
+        console.dir(document.querySelector('button'));
+        // 1. 객체.on이벤트명 = 익명함수, 화살표함수, 함수명 중 하나
+        // 단점: 기존 내용 삭제
+        window.onresize = chBgColor;    // window의 사이즈가 바뀔 때
+        window.onload = twoFunc;        // window가 로드될 때(처음)
+        // window.onload = () => {
+        //     console.log('새로운 함수');
+        // }
+        
+        function twoFunc() {    // 두개의 함수를 하나로 모음
+            chBgColor();
+            otherFunc();
+        }
+
+        function chBgColor() {
+            let winWidth = window.innerWidth;
+            if (winWidth > 1000) {
+                document.body.style.backgroundColor = "red";
+            } else if (winWidth > 600) {
+                document.body.style.backgroundColor = "lightgreen";
+            } else {
+                document.body.style.backgroundColor = "blue";
+            }
+        }
+
+        function otherFunc() {
+            console.log('test');
+        }
+        
+        // 2. 객체.addEventListener('이벤트명', 함수(이벤트 핸들러))
+        // 새로운 이벤트 추가
+        function addLoader() {
+            alert('add');
+        }
+
+        window.addEventListener('load', addLoader);
+        window.removeEventListener('load', addLoader);
+
+
+        window.addEventListener('load', () => {
+            let form = document.querySelector('form');
+            // console.log(document.querySelector('#userId'));
+            // console.log(form[0]);
+
+            form.onsubmit = () => {
+                if (form[0].value == '') {  // input(text)에 입력하지 않고 submit(전송) 했다면
+                    alert('값을 입력해주세요');
+                    form[0].focus();    // 커서를 input(text) 창으로
+                    return false;
+                } 
+                
+                return true;    // else 안써도 됨
+           };
+
+
+           form.addEventListener('submit', () => {
+
+           });
+        })
+    </script>
+    <!-- 3. 객체에 인라인으로 추가 -->
+    <div onclick="this.style.background='yellow'">yellow</div>
+    <form>
+        <input type="text" name="userId" id="userId">
+        <input type="submit" value="전송">
+    </form>
+</body>
+</html>
