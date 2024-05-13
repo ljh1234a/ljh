@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            background-color: #eee;
+        }
+        .container > div {
+            padding: 15px;
+            font-size: 16px;
+        }
+        .active, 
+        .container > div:hover {
+            background-color: #ccc;
+            transition: .6s;
+            cursor: pointer;
+        }
+        .content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tabs</h2>
+    <div class="container">
+        <div class="country" onclick="openCity(event, 'London')">London</div>
+        <div class="country" onclick="openCity(event, 'Paris')">Paris</div>
+        <div class="country" onclick="openCity(event, 'Tokyo')">Tokyo</div>
+    </div>
+    <div id="London" class="content">
+        <h3>London</h3>
+        <p>London is the capital city of England</p>
+    </div>
+    <div id="Paris" class="content">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France</p>
+    </div>
+    <div id="Tokyo" class="content">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan</p>
+    </div>
+    <script>
+        function openCity(evt, cityName) {
+            let country = document.getElementsByClassName("country");
+            let content = document.getElementsByClassName("content");
+
+            for (let i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+            }
+            
+            for (let i = 0; i < country.length; i++) {
+                country[i].className = country[i].className.replace(" active", "");
+            }
+
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>

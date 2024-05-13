@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .tab {
+            display: flex;
+        }
+        .tabMenu {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #aaa;
+            color: white;
+            font-weight: bold;
+        }
+        .tabMenu:hover {
+            background-color: #ccc;
+        }
+        .content {
+            padding: 50px;
+            display: none;
+            color: white;
+        }
+        .content > div {
+            height: 200px;
+        }
+        .content p {
+            margin-top: 20px;
+        }
+        #Home {
+            background-color: red;
+        }
+        #News {
+            background-color: green;
+        }
+        #Contact {
+            background-color: blue;
+        }
+        #About {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tab">
+            <div class="tabMenu" onclick="openMenu('Home', this, 'red')" id="defaultMenu">Home</div>
+            <div class="tabMenu" onclick="openMenu('News', this, 'green')">News</div>
+            <div class="tabMenu" onclick="openMenu('Contact', this, 'blue')">Contact</div>
+            <div class="tabMenu" onclick="openMenu('About', this, 'orange')">About</div>
+        </div>
+        <div id="Home" class="content">
+            <h1>Home</h1>
+            <p>Home is where the heart is..</p>
+        </div>
+        <div id="News" class="content">
+            <h1>News</h1>
+            <p>Some news this find day!</p>
+        </div>
+        <div id="Contact" class="content">
+            <h1>Contact</h1>
+            <p>Get in touch, or swing by for a cup of coffee..</p>
+        </div>
+        <div id="About" class="content">
+            <h1>About</h1>
+            <p>Who we are and what we do.</p>
+        </div>
+    </div>
+    <script>
+        function openMenu(menuName, element, color) {
+            let tabMenu = document.getElementsByClassName("tabMenu");
+            let content = document.getElementsByClassName("content");
+
+            for (let i = 0; i < tabMenu.length; i++) {
+                tabMenu[i].style.backgroundColor = "";
+            }
+
+            for (let i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+            }
+
+            document.getElementById(menuName).style.display = "block";
+            element.style.backgroundColor = color;
+        }
+        
+        defaultMenu.click();
+    </script>
+</body>
+</html>

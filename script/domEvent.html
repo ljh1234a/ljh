@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#outDiv {
+            padding: 50px;
+            background-color: rgb(126, 126, 238);
+        }
+        div#inDiv {
+            padding: 50px;
+            background-color: rgb(224, 224, 110);
+        }
+        p {
+            height: 50px;
+            background-color: green;
+            transition: 1s;
+        }
+        #rect {
+            margin-top: 20px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+        }
+        body.pink {
+            background-color: pink;
+        }
+        body.pink p {
+            width: 100%;
+            background-attachment: green;
+        }
+        body.green {
+            background-color: green;
+        }
+        body.green p {
+            background-color: red;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="outDiv">
+        body에 pink 클래스 추가
+        <div id="inDiv">
+            body에 green 클래스 추가
+            <p></p>
+        </div>
+    </div>
+    <a href="https://www.naver.com" target="_blank">네이버</a>
+    <img src="/img/1.jpg" id="cover">
+    <br>
+    <div id="rect"></div>
+    <script>
+        outDiv.onclick = function(e) {
+            if (document.body.classList.contains("green")) { // 클래스 이름에 green을 포함한다면
+                document.body.classList.remove("green");
+            }
+            document.body.classList.add("pink");
+        };
+        inDiv.onclick = function(e) {
+            e.stopPropagation();
+            if (document.body.classList.contains("pink")) { // 클래스 이름에 pink을 포함한다면
+                document.body.classList.remove("pink");
+            }
+            document.body.classList.add("green");
+        };
+
+        // 부모의 이벤트를 가져가는 것: 캡처링
+        // 자식의 이벤트를 가져가는 것: 버블링 ★
+        // target 이벤트가 일어난 요소
+        // outDiv.onclick = function(e) {
+        //     alert(e.target.tagName + ": " + this.id);
+        // };
+        // inDiv.onclick = function(e) {
+        //     alert(e.target.tagName + ": " + this.id);
+        // };
+        // document.querySelector("p").onclick = function(e) {
+        //     e.stopPropagation(); // 버블링 차단
+        //     alert(e.target.tagName + ": " + this.tagName);
+        // };
+
+        // outDiv.addEventListener("click", function(e) {
+        //     alert(e.target.tagName + ": " + this.id);
+        // }, true);
+
+        // inDiv.addEventListener("click", function(e) {
+        //     alert(e.target.tagName + ": " + this.id);
+        // }, true);
+
+        // document.querySelector("p").addEventListener("click", function(e) {
+        //     alert(e.target.tagName + ": " + this.tagName);
+        // }, true);
+
+        document.querySelector("a").onclick = function(e) {
+            e.preventDefault(); // 태그의 기본 작동을 막음
+            console.log(e.defaultPrevented); // preventDefault값 체크 속성
+            alert("test");
+        }
+
+        cover.addEventListener("mouseover", function(e) {
+            e.target.src = "/img/2.jpg";
+            console.log(e.target);
+        });
+        cover.addEventListener("mouseout", function(e) {
+            e.target.src = "/img/1.jpg";
+            console.log(e.target);
+        });
+
+        // function changeImg(e) {
+        //     e.target.src = "/img/2.jpg";
+        //     console.log(e.target);
+        // }
+
+        // function originImg(e) {
+        //     e.target.src = "/img/1.jpg";
+        //     console.log(e.target);
+        // }
+
+        rect.addEventListener("mouseover", function() {
+            rect.style.backgroundColor = "green";
+            rect.style.borderRadius = "50%";
+        })
+
+        rect.addEventListener("mouseout", function() {
+            rect.style.backgroundColor = "";
+            rect.style.borderRadius = "";
+        })
+
+        console.dir(document.body.classList);
+    </script>
+</body>
+</html>

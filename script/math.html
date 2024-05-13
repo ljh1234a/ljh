@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="btnArea">
+        <button>바위</button>
+        <button>가위</button>
+        <button>보</button>
+    </div>
+    <div id="display"></div>
+    <script>
+        console.dir(Math);
+        // Math 객체의 속성과 메서드느 정적이므로 인스턴스가 필요없음
+        console.log(Math.sign(35));
+        console.log(Math.PI);
+        console.log(Math.max(2, 3, 4, 5));
+        // random: 0 ~ 1 사이의 난수를 발생
+        for (let i = 0; i < 10; i++)
+            console.log(Math.random() * 10); // 0 ~ 9
+
+        console.log("=============================================");
+
+        for (let i = 0; i < 10; i++)
+            console.log(Math.random() * 10 + 1); // 1 ~ 10
+
+        console.log("=============================================");
+
+        // ceil - 올림, round - 반올림, floor - 내림
+
+        for (let i = 0; i < 10; i++)
+            console.log(Math.floor(Math.random() * 10 + 1)); // 1 ~ 10
+
+        function minToMaxRand(start, end) {
+            return Math.floor(Math.random() * (end - start + 1) + start) // start ~ end 사이 랜덤값
+        }
+
+        console.log("=============================================");
+        for (let i = 0; i < 10; i++)
+            console.log(minToMaxRand(100, 150)); // 100 ~ 150 랜덤값
+
+        // var seed = prompt('전체 응모자 수: ', '');
+        // var picked = Math.floor(Math.random() * seed + 1);
+
+        // document.write(`전체 응모자 수: ${seed}명`);
+        // document.write('<br>');
+        // document.write(`당첨자: ${picked}번`);
+
+        // 묵찌빠 
+        // 바위 - 1
+        // 가위 - 2
+        // 보 - 3
+        let maxNum = 3;
+        let minNum = 1;
+
+        // console.log(btnArea);
+        btnArea.onclick = function(e) { // 이벤트 위임
+            // console.dir(e.target);
+            let com = Math.floor(Math.random() * maxNum + 1);
+
+            if (e.target.tagName === 'BUTTON') {
+                let btn = e.target;
+                let win, human;
+                switch(btn.innerText) {
+                    case '바위':
+                        human = 1;
+                        break;
+                    case '가위':
+                        human = 2;
+                        break;
+                    case '보': 
+                        human = 3;
+                        break;
+                    default:
+                        console.log('error');
+                }
+                win = human + 1 <= maxNum ? human + 1 : 1;
+                let str = "사람: " + whatis(human) + ", 컴퓨터: " + whatis(com) + '<br>' + '<p style="color: red">' + whoIsWin(human, com, win) + '</p>';
+                
+                display.innerHTML = str;
+            }
+        };
+        
+        // let com1 = Math.floor(Math.random() * maxNum + 1);
+        // let com2 = Math.floor(Math.random() * maxNum + 1);
+        // console.log(com1 + " : " + com2);
+        // console.log(com1 == com2? '무승부' : '') // 무승부
+        // console.log(com1++ == com2 ? 'com1 승리' : '');
+        // console.log(com1 != com2 && com1++ != com2 ? 'com2 승리' : '');
+        // let win = com1 + 1 <= maxNum ? com1 + 1 : 1;    // com1이 3보다 작다면 그대로, 크다면 1로 바꿈
+        
+        // console.log(`com1: ${whatis(com1)} | com2: ${whatis(com2)}`);
+        
+        // whoIsWin(com1, com2);
+
+        function whoIsWin(com1, com2, win) {
+            if (com1 == com2) {
+                return '무승부';
+            } else if (win == com2) {
+                return '승리!'
+            } else {
+                return '패배!';
+            }
+        }
+
+        function whatis(val) {
+            switch(val) {
+                case 1:
+                    return '바위';
+                case 2:
+                    return '가위';
+                case 3:
+                    return '보';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #read {
+            width: 250px;
+            height: 250px;
+            border: 3px solid;
+            text-align: center;
+            border-radius: 50%;
+            background-color: rgb(195, 225, 235);
+        }
+        #read h1 {
+            margin-top: 45px;
+        }
+        #result {
+            color: red;
+            font-weight: bold;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Date 객체</h1>
+    <p>정적 메서드(Static method): 인스턴스를 만들지 않고 바로 사용하는 메서드</p>
+    <p>인스턴스 메서드(instance method): 인스턴스를 만들어서 사용하는 메서드</p>
+    <div id="read">
+        <h1>책 읽기</h1>
+        <p><span id="result"></span>일 연속으로<br>책 읽기를 달성했군요.</p>
+        <p>축하합니다!</p>
+    </div>
+    
+    <script>
+        // 정적 메서드
+        document.write(Date.now()); // number: 1970년 1월 1일 0시 0분 0초부터 지금까지 1000을 1초로 계산한 값
+
+        document.write("<hr>");
+
+        // 인스턴스 메서드
+        // 숫자를 날짜 객체로 변환
+        let date = new Date(Date.now());
+        document.write(date + "<br>");
+        document.write(date.getDate() + "일");
+
+        document.write("<hr>");
+
+        let date2 = new Date("2000-07-19");
+        document.write(date2.getDate() + "<br>");
+        switch(date2.getDay()) {
+            case 0:
+                document.write('일요일');
+                break;
+            case 1:
+                document.write('월요일');
+                break;
+            case 2:
+                document.write('화요일');
+                break;
+            case 3:
+                document.write('수요일');
+                break;
+            case 4:
+                document.write('목요일');
+                break;
+            case 5:
+                document.write('금요일');
+                break;
+            case 6:
+                document.write('토요일');
+                break;
+        }
+
+        document.write("<br>");
+
+        document.write(showKrDay(new Date('2000-10-28').getDay()));
+
+        function showKrDay(intValue) {
+            let days = ['일', '월', '화', '수', '목', '금', '토'];
+            return days[intValue] + '요일';
+        }
+
+        var now = new Date('2020-10-15');
+        var firstday = new Date('2020-10-01');
+
+        var toNow = now.getTime(); // 타임 스탬프
+        console.log(toNow);
+        var toFirst = firstday.getTime();
+        console.log(toFirst);
+        var passedTime = toNow - toFirst;
+        console.log(passedTime);
+        console.log(`밀리세컨드의 하루 값: ${1000 * 60 * 60 * 24}`)
+
+        // Math - 수학객체 (정적 메서드)
+        passedTime = Math.round(passedTime / (1000 * 60 * 60 * 24)); // 초 분 시 일
+        console.log(`소요된 하루 단위: ${passedTime}`);
+        document.querySelector('#result').innerHTML = passedTime;
+    </script>
+    <hr>
+    <input type="date" id="startDate">
+    <div id="endDate"></div>
+    <div class="showDate"></div>
+    <div class="showDate2"></div>
+    <div class="showDate3"></div>
+    <div class="showDate4"></div>
+    <div class="showDate5"></div>
+    <div class="showDate6"></div>
+    <script>
+        let startDate = document.querySelector('#startDate');
+        let endDate = document.querySelector('#endDate');
+        // console.dir(startDate);
+        let strStartDate = '';
+        startDate.oninput = function(e) {
+            strStartDate = e.target.value;
+            
+            endDate.innerHTML = `${gapDate(strStartDate)}일 경과`;
+        };
+
+        function gapDate(startDate) {
+            let whileDate = 0;
+            return Math.round((new Date().getTime()
+                - new Date(strStartDate).getTime()) 
+                / (1000 * 60 * 60 * 24));
+        }
+
+        function GapDate(target) {
+            let t = document.querySelector(target);
+            // let stamp = new Date().getTime();   
+            let stamp = Math.floor(window.performance.now() * 100); // 아이디 충돌 방지
+            console.log(stamp);
+            // console.log(t);
+            let startDate = null;
+            let endDate = null;
+            this.init = function() {
+                t.innerHTML = `<input type="date" id="startDate_${stamp}">
+                                <div id="endDate_${stamp}"></div>`;
+
+
+                startDate = document.querySelector(`#startDate_${stamp}`);
+                endDate = document.querySelector(`#endDate_${stamp}`);
+                startDate.oninput = function(e) {
+                    
+                    endDate.innerHTML = `${getDate(e.target.value)}일 경과`;
+                }
+            }
+
+            let getDate = function(startDate) {
+                return Math.round((new Date().getTime()
+                    - new Date(startDate).getTime()) 
+                    / (1000 * 60 * 60 * 24));
+            }
+        }
+
+        let myDate = new GapDate('.showDate');
+        myDate.init();
+        let myDate2 = new GapDate('.showDate2');
+        myDate2.init();
+        let myDate3 = new GapDate('.showDate3');
+        myDate3.init();
+        let myDate4 = new GapDate('.showDate4');
+        myDate4.init();
+        let myDate5 = new GapDate('.showDate5');
+        myDate5.init();
+        let myDate6 = new GapDate('.showDate6');
+        myDate6.init();
+        
+    </script>
+</body>
+</html>

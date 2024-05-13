@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .accordion {
+            width: 100%;
+            text-align: left;
+            padding: 15px;
+            background-color: #eee;
+            border: none;
+            font-size: 16px;
+        }
+        .accordion:hover {
+            background-color: #ccc;
+            transition: .6s;
+        }
+        p {
+            margin-left: 10px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Accordion</h2>
+    <button class="accordion">Section1</button>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <button class="accordion">Section2</button>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <button class="accordion">Section3</button>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <script>
+        let p = document.getElementsByTagName("p");
+        let acc = document.getElementsByClassName("accordion");
+
+        
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                if (p[i].style.display === "none" || p[i].style.display == "") {
+                    p[i].style.display = "block";
+                } else {
+                    p[i].style.display = "none";
+                }
+            });
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="intext">innerText로 표시하기</button>
+    <button id="inhtml">innerHTML로 표시하기</button>
+    <h1>현재 시각</h1>
+    <div id="current"></div>
+    <img src="/img/mic.jpg" width="100%" alt="바다" data-width="100" data-date="2024-05-08" test="test">
+    <div>data-xxx: 속성을 사용자가 지정</div>
+    <script>
+        let now = new Date();
+
+        intext.onclick = () => {
+            current.innerText = `<em>${now}</em>`;
+        }
+
+        inhtml.onclick = () => {
+            current.innerHTML = `<em>${now}</em>`;
+        }
+
+        var btn = document.getElementById("intext");
+        console.dir(btn);
+        var btns = document.getElementsByTagName("button");
+        console.dir(btns);
+
+        var qBtn = document.querySelector("#intext");
+        console.dir(qBtn);
+        var qBtn2 = document.querySelector("button");
+        console.dir(qBtn2);
+        var qBtnA = document.querySelectorAll("button");
+        console.dir(qBtnA);
+
+        console.log(document.querySelector("img").getAttribute("src"));
+
+        function changeImage() {
+            if (window.innerWidth < 600) {
+                document.querySelector("img").setAttribute("src", "/img/naver.jpg");
+                document.querySelector("img").setAttribute("alt", "네이버");
+                console.log(document.querySelector("img").getAttribute("src"));
+            } else {
+                document.querySelector("img").setAttribute("src", "/img/mic.jpg");
+                document.querySelector("img").setAttribute("alt", "바다");
+                console.log(document.querySelector("img").getAttribute("src"));
+            }
+        }
+        window.onresize = (e) => {
+            console.dir(e);
+            changeImage();
+        }
+        
+        window.onload = () => {
+            changeImage();
+        }
+
+        console.log(document.querySelector("img").dataset);
+        document.querySelector("img").style.width = document.querySelector("img").dataset.width + "px";
+        console.log(document.querySelector("img").getAttribute("test"));
+        console.log(document.querySelector("meta").getAttribute("charset"));
+
+    </script>
+</body>
+</html>

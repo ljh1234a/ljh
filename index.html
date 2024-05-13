@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css">
+    <script src="/js/GapDate.js"></script>
     <!-- <base href="/ljh/"> -->
     <style>
         li {
@@ -18,6 +19,7 @@
         <header>
             <div id = "timer"></div>
             <h1 title="tooltip">AWS 풀스택<a href="ex.html" style="margin-left: 50px;"> 연습용 페이지</a></h1>
+            <div id="gd"></div>
         </header>
 
         <section>
@@ -110,6 +112,13 @@
                     <li><a href="script/object2.html">객체 2</a></li>
                     <li><a href="script/object3.html">객체 3</a></li>
                     <li><a href="script/swiper.html">swiper 사용하기</a></li>
+                    <li><a href="script/date.html">Date 객체 사용하기</a></li>
+                    <li><a href="script/math.html">Math 객체 사용하기</a></li>
+                    <li><a href="script/browser.html">브라우저 내장 객체 사용하기</a></li>
+                    <li><a href="script/navigator.html">navigator 내장 객체 사용하기</a></li>
+                    <li><a href="script/dom.html">DOM 객체 사용하기</a></li>
+                    <li><a href="script/domEvent.html">DOM 이벤트 사용하기</a></li>
+                    <li><a href="script/arDom.html">DOM 객체 추가/삭제하기</a></li>
                 </ol>
             </article>
         </section>
@@ -117,6 +126,8 @@
     <script>
         let timer = document.getElementById("timer");
         timer.innerText = new Date();
+
+        new GapDate('#gd').init();
     </script>
 </body>
 </html>

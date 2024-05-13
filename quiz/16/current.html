@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            
+        }
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 100vh;
+        }
+        #display {
+            font-size: 24px;
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p>현재 시각 <span id="display"></span></p>
+    </div>
+    <script>
+        function displayCurTime() {
+            let currentTime = new Date().toLocaleTimeString();
+            display.innerHTML = currentTime;
+        }
+
+        setInterval(displayCurTime, 1000);
+    </script>
+</body>
+</html>

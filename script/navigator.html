@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="hisBack">이전</button>
+    <button id="hisForward">다음</button>
+    <button id="goHyosung">효성</button>
+    <div id="display"></div>
+    <script>
+        console.dir(navigator);
+        var user = window.navigator.userAgent.toLowerCase();
+        console.log(user);
+        var broswer = user.indexOf("edge") > -1 ? "edge"    // > -1: 값이 있으면
+                        : user.indexOf("edg/") > -1 ? "edge(chromium based)"
+                        : user.indexOf("opr") > -1 ? "opera"
+                        : user.indexOf("chrome") > -1 ? "chrome"
+                        : user.indexOf("trident") > -1 ? "ie"
+                        : user.indexOf("firefox") > -1 ? "firefox"
+                        : user.indexOf("safari") > -1 ? "safari"	
+						: user.indexOf("whale") > -1 ? "whale"
+                        : "other browser";
+        console.log(broswer);
+        console.log(navigator.language);	
+
+        console.dir(history);
+        
+        hisBack.onclick = function(e) {
+            history.back();
+        };
+
+        hisForward.onclick = function(e) {
+            history.forward();
+        };
+
+        console.dir(location);
+
+        goHyosung.onclick = function(e) {
+            // location.href = "http://hscampus.com";   // href 속성
+            location.replace("http://hscampus.com");    // replace 메서드
+        };
+
+        console.dir(screen);
+
+        console.dir(window);
+
+        // popWin = window.open("doit-event.html", "popup", "width=900, height=600");
+        // popWin.opener = self;
+
+        display.innerHTML += `screen.availWidth: ${screen.availWidth}<br>`;
+        display.innerHTML += `screen.availHeight: ${screen.availHeight}<br>`;
+        display.innerHTML += `screen.width: ${screen.width}<br>`;
+        display.innerHTML += `screen.height: ${screen.height}<br>`;
+
+        
+
+        function openCenter(doc, win, w, h) {
+            let left = (screen.availWidth - w) / 2;
+            let top = (screen.availHeight - h) / 2;
+            let opt = "left=" + left + ", top=" + top + ", width=" + w + ", height=" + h;
+            window.open(doc, win, opt);
+        }
+
+        openCenter("notice.html", "pop", 500, 400);
+    </script>
+</body>
+</html>

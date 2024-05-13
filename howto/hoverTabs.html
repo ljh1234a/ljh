@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            border: 1px solid #ccc;
+            height: 300px;
+        }
+        .menubar {
+            background-color: #ccc;
+            float: left;
+            height: 100%;
+            margin-right: 15px;
+        }
+        .menu {
+            padding: 20px;
+        }
+        .menu:hover {
+            background-color: #aaa;
+            cursor: pointer;
+        }
+        .contentbar {
+            
+            display: none;
+        }
+        .content {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Hover Tabs</h2>
+    <p>Move the mouse over a button inside the tabbed menu:</p>
+    <div class="container">
+        <div class="menubar">
+            <div class="menu" onmouseover="openCity(event, 'London')">London</div>
+            <div class="menu" onmouseover="openCity(event, 'Paris')">Paris</div>
+            <div class="menu" onmouseover="openCity(event, 'Tokyo')">Tokyo</div>
+        </div>
+        <div class="contentbar">
+            <div id="London" class="content">
+                <h3>London</h3>
+                <p>London is the capital city of England.</p>
+            </div>
+            <div id="Paris" class="content">
+                <h3>Paris</h3>
+                <p>Paris is the capital of France.</p>
+            </div>
+            <div id="Tokyo" class="content">
+                <h3>Toyko</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openCity(e, cityName) {
+            let menu = document.getElementsByClassName("menu");
+            let content = document.getElementsByClassName("content");
+
+            for (let i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+            }
+
+            for (let i = 0; i < menu.length; i++) {
+                menu[i].className = menu[i].className.replace( " active", "");
+            }
+
+            document.getElementById(cityName).style.display = "block";
+            e.currentTarget.className += " active";
+        }
+        
+        
+    </script>
+</body>
+</html>

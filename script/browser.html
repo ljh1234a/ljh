@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #btnArea {
+            width: 150px;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ddd;
+        }
+        button:hover {
+            cursor: pointer;
+            background-color: #bbb;
+        }
+        button:active {
+            background-color: #aaa;
+        }
+        #leftKey {
+            float: left;
+        }
+        #rightKey {
+            float: right;
+            margin-left: 50px;
+        }
+        #topArea, #bottomArea {
+           text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="btnArea">
+        <div id="topArea">
+            <button id="topKey">↑</button>
+        </div>
+        <div id="sideArea">
+            <button id="leftKey">←</button>
+            <button id="rightKey">→</button>
+        </div>
+        <div id="bottomArea">
+            <button id="bottomKey">↓</button>
+        </div>
+    </div>
+    <script>
+        console.dir(Window); // 생성자 함수
+        console.dir(window); // 해당 윈도우
+        console.dir(this);
+
+        
+        let childWin = window.open('about:blank', "tester", "left=0, top=0, width=100, height=100")
+
+        btnArea.onclick = function(e) {
+            console.log(this);
+            switch(e.target.innerText) {
+                case '↑':
+                    up(childWin);
+                    break;
+                case '→':
+                    right(childWin);
+                    break;
+                case '↓':
+                    down(childWin);
+                    break;
+                case '←':
+                    left(childWin);
+                    break;
+            }
+        }
+        
+
+        function up(win) {
+            childWin.moveTo(childWin.screenX, childWin.screenY - 10);
+            
+        }
+
+        function right(win) {
+            childWin.moveTo(childWin.screenX + 10, childWin.screenY);
+            
+        }
+
+        function down(win) {
+            childWin.moveTo(childWin.screenX, childWin.screenY + 10);
+            
+        }
+
+        function left(win) {
+            childWin.moveTo(childWin.screenX - 10, childWin.screenY);
+            
+        }
+
+        document.body.onkeydown = function(e) {
+            if (childWin) {
+                switch (e.key) {
+                    case 'ArrowUp':
+                        up(childWin);
+                        break;
+                    case 'ArrowRight':
+                        right(childWin);
+                        break;
+                    case 'ArrowDown':
+                        down(childWin);
+                        break;
+                    case 'ArrowLeft':
+                        left(childWin);
+                        break;
+                }
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

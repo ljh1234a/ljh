@@ -97,47 +97,36 @@
             <div class="text">Caption Three</div>
         </div>
     
-        <a class="prev" onclick="plusSlides(-1)">❮</a>
-        <a class="next" onclick="plusSlides(1)">❯</a>
-        
         <br>
         <div style="text-align: center;">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
     </div>
     <script>
-        let slidesIndex = 1;
-        showSlides(slidesIndex);
-
-        function plusSlides(n) {
-            showSlides(slidesIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slidesIndex = n);
-        }
+        let slidesIndex = 0;
+        showSlides();
 
         function showSlides(n) {
             let slides = document.getElementsByClassName("mySlides");
             let dots = document.getElementsByClassName("dot");
 
-            if (n > slides.length) {    // 슬라이드 개수를 넘어서면
-                slidesIndex = 1;        // 슬라이드 인덱스 1로 초기화
-            }
-            if (n < 1) {    // 슬라이드가 인덱스가 1에서 작아지면
-                slidesIndex = slides.length;    // 슬라이드 마지막 인데스로
-            }
-
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
+            slidesIndex++;
+
+            if (slidesIndex > slides.length) {    
+                slidesIndex = 1;        
+            }
+            
             for (let i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
             }
             slides[slidesIndex - 1].style.display = "block";
             dots[slidesIndex - 1].className += " active";
+            setTimeout(showSlides, 2000);   // 2초마다 슬라이드 넘어감
         }
     </script>
 </body>

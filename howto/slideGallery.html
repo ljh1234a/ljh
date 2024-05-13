@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        img {
+            vertical-align: middle;
+        }
+        .wrap {
+            position: relative;
+        }
+        .mySlides {
+            display: none;
+            
+        }
+        .mySlides > img {
+            width: 100%;
+        }
+        .number {
+            position: absolute;
+            color: #fff;
+            font-size: 18px;
+            margin: 10px;
+        }
+        #prev, #next {
+            padding: 15px;
+            color: white;
+            position: absolute;
+            top: 40%;
+        }
+        #next {
+            right: 0;
+        }
+        #prev:hover, #next:hover {
+            background-color: black;
+            cursor: pointer;
+        }
+        .caption-container {
+            text-align: center;
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            color: white;
+        }
+        .small {
+            width: 100%;
+            display: flex;
+        }
+        .demo {
+            opacity: 0.5;
+            width: 100%;
+        }
+        .active,
+        .demo:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="mySlides">
+            <div class="number">1 / 6</div>
+            <img src="https://www.w3schools.com/howto/img_woods_wide.jpg">
+        </div>
+        <div class="mySlides">
+            <div class="number">2 / 6</div>
+            <img src="https://www.w3schools.com/howto/img_5terre_wide.jpg">
+        </div>
+        <div class="mySlides">
+            <div class="number">3 / 6</div>
+            <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg">
+        </div>
+        <div class="mySlides">
+            <div class="number">4 / 6</div>
+            <img src="https://www.w3schools.com/howto/img_lights_wide.jpg">
+        </div>
+        <div class="mySlides">
+            <div class="number">5 / 6</div>
+            <img src="https://www.w3schools.com/howto/img_nature_wide.jpg">
+        </div>
+        <div class="mySlides">
+            <div class="number">6 / 6</div>
+            <img src="https://www.w3schools.com/howto/img_snow_wide.jpg">
+        </div>
+        <div class="moveSlides">
+            <a id="prev" onclick="plusSlides(-1)">◀</a>
+            <a id="next" onclick="plusSlides(+1)">▶</a>
+        </div>
+
+        <div class="caption-container">
+            <div id="caption"></div>
+        </div>
+
+        <div class="small">
+            <div class="smallImage">
+                <img class="demo" src="https://www.w3schools.com/howto/img_woods.jpg" onclick="currentSlide(1)" alt="The Woods">
+            </div>
+            <div class="smallImage">
+                <img class="demo" src="https://www.w3schools.com/howto/img_5terre.jpg" onclick="currentSlide(2)" alt="Cinque Terre">
+            </div>
+            <div class="smallImage">
+                <img class="demo" src="https://www.w3schools.com/howto/img_mountains.jpg" onclick="currentSlide(3)" alt="Mountains and fjords">
+            </div>
+            <div class="smallImage">
+                <img class="demo" src="https://www.w3schools.com/howto/img_lights.jpg" onclick="currentSlide(4)" alt="Northern Lights">
+            </div>
+            <div class="smallImage">
+                <img class="demo" src="https://www.w3schools.com/howto/img_nature.jpg" onclick="currentSlide(5)" alt="Nature and sunrise">
+            </div>
+            <div class="smallImage">
+                <img class="demo" src="https://www.w3schools.com/howto/img_snow.jpg" onclick="currentSlide(6)" alt="Snowy Mountains">
+            </div>
+        </div>
+    </div>
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+        
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        } 
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("demo");
+            let captionText = document.getElementById("caption");
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+            console.log(dots[slideIndex - 1].className);
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type], button {
+            padding: 10px;
+        }
+        input[type]:active {
+            border: 1px solid rgb(97, 97, 235);
+        }
+        button {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+        ul {
+            list-style: "★ ";
+        }
+    </style>
+</head>
+<body>
+    <h1>Web Programming</h1>
+    <p>공부할 주제를 기록해 보세요</p>
+    <div>
+        <input type="text" onkeyup="addEnter()" autofocus>
+        <button id="add">추가</button>
+    </div>
+    <ul></ul>
+    <script>
+        let input = document.querySelector("input");
+        let ul = document.querySelector("ul");
+
+        add.onclick = function() {
+            addRemoveSubject();
+        }
+        
+        function addRemoveSubject() {
+            let li = document.createElement("li");
+            let text = document.createTextNode(input.value);
+            let img = document.createElement("img");
+            let lis = document.querySelectorAll("li");
+
+            img.setAttribute("src", "/img/apple.jpg");
+            img.setAttribute("alt", "/img/apple.jpg");
+            img.style.width = '50px';
+            li.appendChild(text);
+            li.appendChild(img);
+            ul.appendChild(li);
+            
+            // ul.insertAdjacentElement("beforeend", li);
+            input.value = "";
+            input.focus();
+
+            for (let i = 0; i < lis.length; i++) {
+                lis[i].addEventListener("dblclick", function() {
+                    if (this.parentNode) {  // 부모 노드가 있다면
+                        this.parentNode.removeChild(this);  // 부모 노드에서 삭제
+                    }
+                });
+            }
+        }
+
+        function addEnter() {
+            if (window.event.keyCode == 13) {
+                addRemoveSubject();
+            }
+        }
+    </script>
+</body>
+</html>
