@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.container {
+    background: #E0EAFC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100vh;
+}
+.title {
+    text-align: center;
+}
+.title h1 {
+    padding-top: 20px;
+    text-decoration-color: rgb(150, 150, 228);
+}
+.title input[type=text] {
+    width: 500px;
+    padding: 10px;
+    font-size: 24px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+button {
+    border: none;
+    background: #34e89e;  
+    background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
+    background: linear-gradient(to right, #0f3443, #34e89e); 
+    border-radius: 10px;
+    padding: 12px !important;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 10px;
+    color: white;
+}
+button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+#delAllBtn {
+    padding: 18px !important;
+}
+ul {
+    width: 35%;
+    margin: 30px auto;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 20px;
+}
+ul li {
+    font-size: 24px;
+    border-radius: 20px;
+    padding: 10px;
+}
+/* #ul li button {
+    float: right;
+} */
+ul li button:hover {
+    cursor: pointer;
+}
+ul li:hover {
+    /* background-color: #ddd; */
+    /* cursor: pointer; */
+    border-radius: 20px;
+}

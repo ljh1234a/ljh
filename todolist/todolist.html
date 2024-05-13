@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/todolist/todolist.css" rel="stylesheet">
+    <title>My ToDoList</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>To Do List</h1>
+            <div id="showDate"></div>
+            <input type="text" placeholder="할 일을 입력한 후 Enter를 누르세요" 
+                    id="todo" onkeypress="EnterList(event)" autofocus>
+            <button id="delAllBtn" onclick="delAllList()">모두 삭제</button>
+            <!-- <button onclick="addList()">추가</button> -->
+        </div>
+        <ul id="ulList">
+            <div id="displayList"></div>
+            <!-- <li onclick="checkList()">First<span onclick="delList()">x</span></li>
+            <li onclick="checkList()">Second<span onclick="delList()">x</span></li>
+            <li onclick="checkList()">Third<span onclick="delList()">x</span></li> -->
+        </ul>
+    </div>
+    <script src="/todolist/todolist.js"></script>
+</body>
+</html>
