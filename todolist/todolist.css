@@ -3,11 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
-.container {
+body {
     background: #E0EAFC;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    height: 100vh;
+}
+.container {
+    background-color: #fff;
+    width: 50%;
+    height: calc(100vh - 60px);
+    border-radius: 50px;
+    margin: 30px auto;
+    
 }
 .title {
     text-align: center;
@@ -18,7 +25,7 @@
     font-family: "Raleway";
 }
 input[type=text] {
-    width: 30%;
+    width: 60%;
     padding: 10px;
     font-size: 18px;
     border: 1px solid #ccc;
@@ -42,28 +49,29 @@ button:hover {
     opacity: 0.5;
 }
 #delAllBtn {
-    width: 10%;
+    width: 20%;
     padding: 15px 10px;
 }
 #leftTodo {
-    width: 40%;
+    width: 80%;
     margin: 15px auto;
     text-align: left;
     font-style: oblique;
     
 }
 ul {
-    width: 40%;
+    width: 80%;
     margin: 30px auto;
     list-style: none;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 20px;
     font-family: "Raleway";
 }
 ul li {
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 20px;
     padding: 10px;
+    background-color: #eee;
 }
 /* #ul li button {
     float: right;

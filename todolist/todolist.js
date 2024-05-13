@@ -114,7 +114,7 @@ function checkList(e) {
     flag = 0;
 
     if (flag == 1 || chkBtn.innerHTML == "") {
-        check.style.backgroundColor = "#ddd";
+        check.style.backgroundColor = "#bbb";
         check.style.textDecoration = "line-through";
         check.style.opacity = "0.5";
         chkBtn.innerText = "✔";
@@ -125,7 +125,7 @@ function checkList(e) {
         doList += 1;
         leftTodo.innerHTML = `남은 일: ${undoList}개, 한 일: ${doList}개`;
     } else {
-        check.style.backgroundColor = "#fff";
+        check.style.backgroundColor = "#eee";
         check.style.textDecoration = "none";
         check.style.opacity = "1";
         chkBtn.innerHTML = "";
