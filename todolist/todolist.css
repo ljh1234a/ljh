@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
 .container {
     background: #E0EAFC;  /* fallback for old browsers */
@@ -16,13 +15,15 @@
 .title h1 {
     padding-top: 20px;
     text-decoration-color: rgb(150, 150, 228);
+    font-family: "Raleway";
 }
-.title input[type=text] {
-    width: 500px;
+input[type=text] {
+    width: 30%;
     padding: 10px;
-    font-size: 24px;
+    font-size: 18px;
     border: 1px solid #ccc;
-    border-radius: 20px;
+    border-radius: 10px;
+    font-style: italic;
 }
 button {
     border: none;
@@ -30,8 +31,8 @@ button {
     background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
     background: linear-gradient(to right, #0f3443, #34e89e); 
     border-radius: 10px;
-    padding: 12px !important;
-    font-size: 20px;
+    /* padding: 12px; */
+    font-size: 18px;
     font-weight: bold;
     line-height: 10px;
     color: white;
@@ -41,14 +42,23 @@ button:hover {
     opacity: 0.5;
 }
 #delAllBtn {
-    padding: 18px !important;
+    width: 10%;
+    padding: 15px 10px;
+}
+#leftTodo {
+    width: 40%;
+    margin: 15px auto;
+    text-align: left;
+    font-style: oblique;
+    
 }
 ul {
-    width: 35%;
+    width: 40%;
     margin: 30px auto;
     list-style: none;
     background-color: #fff;
     border-radius: 20px;
+    font-family: "Raleway";
 }
 ul li {
     font-size: 24px;
