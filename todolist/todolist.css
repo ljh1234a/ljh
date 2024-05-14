@@ -10,7 +10,7 @@ body {
 }
 .container {
     background-color: #fff;
-    width: 50%;
+    width: 600px;
     height: calc(100vh - 60px);
     border-radius: 50px;
     margin: 30px auto;
@@ -23,64 +23,96 @@ body {
     padding-top: 20px;
     text-decoration-color: rgb(150, 150, 228);
     font-family: "Raleway";
+    text-align: center;
+}
+#showDate {
+    text-align: center;
+    font-size: 24px;
+    padding: 10px;
+    background: #6190E8;  
+    background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  
+    background: linear-gradient(to right, #A7BFE8, #6190E8);
+    color: #fff; 
+    width: 70%;
+    margin: 10px auto;
+    border-radius: 50%;
+    font-weight: bold;
 }
 input[type=text] {
-    width: 60%;
+    width: 70%;
+    margin: 0 0 0 auto;
     padding: 10px;
     font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 10px;
     font-style: italic;
 }
+#addBtn {
+    width: 5%;
+    margin: 0 auto 0 10px;
+    font-size: 32px;
+    height: 42px;
+    background-color: #fff;
+    color: black;
+}
 button {
     border: none;
-    background: #34e89e;  
-    background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
-    background: linear-gradient(to right, #0f3443, #34e89e); 
-    border-radius: 10px;
-    /* padding: 12px; */
     font-size: 18px;
     font-weight: bold;
-    line-height: 10px;
-    color: white;
 }
 button:hover {
     cursor: pointer;
     opacity: 0.5;
 }
+.checkBtn {
+    background-color: none;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    float: left;
+    border: 1px solid #aaa;
+    color: black;
+}
+.trash {
+    color: black;
+    float: right;
+    padding: 4px;
+    line-height: 2px;
+}
 #delAllBtn {
     width: 20%;
-    padding: 15px 10px;
+    /* margin: 10px auto; */
+    padding: 12px;
+    background: #34e89e;  
+    background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
+    background: linear-gradient(to right, #0f3443, #34e89e);   
+    border-radius: 10px;
+    color: #fff;
 }
 #leftTodo {
-    width: 80%;
+    width: 75%;
     margin: 15px auto;
     text-align: left;
-    font-style: oblique;
-    
+    font-size: 18px;
+    font-weight: bold;
 }
 ul {
     width: 80%;
     margin: 30px auto;
     list-style: none;
-    background-color: #eee;
+    /* background-color: #eee; */
     border-radius: 20px;
     font-family: "Raleway";
+    text-align: left;
 }
 ul li {
     font-size: 20px;
-    border-radius: 20px;
     padding: 10px;
     background-color: #eee;
+    margin: 10px;
+    border-radius: 10px;
 }
-/* #ul li button {
-    float: right;
-} */
 ul li button:hover {
     cursor: pointer;
 }
-ul li:hover {
-    /* background-color: #ddd; */
-    /* cursor: pointer; */
-    border-radius: 20px;
-}
+

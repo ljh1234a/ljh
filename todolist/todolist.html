@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/todolist/todolist.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="https://kit.fontawesome.com/6cca727381.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <title>My ToDoList</title>
 </head>
@@ -13,17 +15,15 @@
             <h1>ToDoList</h1>
             <div id="showDate"></div>
             <div id="leftTodo"></div>
-            <input type="text" placeholder="할 일을 입력한 후 Enter를 누르세요" 
-                    id="todo" onkeypress="EnterList(event)" autofocus>
-            <button id="delAllBtn" onclick="delAllList()">모두 삭제</button>
-            <!-- <button onclick="addList()">추가</button> -->
+            <div style="display: flex;"> 
+                <input type="text" placeholder="할 일을 입력하세요" 
+                id="todo" onkeypress="EnterList(event)" autofocus>
+                <button id="addBtn" onclick="addList()"><i class="fa-solid fa-circle-plus"></i></button>
+            </div>
+            <ul id="todoList">
+            </ul>
+            <button id="delAllBtn" onclick="delAllList()">Clear</button>
         </div>
-        <ul id="todoList">
-            <div id="display"></div>
-            <!-- <li onclick="checkList()">First<span onclick="delList()">x</span></li>
-            <li onclick="checkList()">Second<span onclick="delList()">x</span></li>
-            <li onclick="checkList()">Third<span onclick="delList()">x</span></li> -->
-        </ul>
     </div>
     <script src="/todolist/todolist.js"></script>
 </body>
