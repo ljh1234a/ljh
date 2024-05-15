@@ -96,7 +96,7 @@ function addList(newTodo) {
         todo.focus();
     }
 
-    // console.log(li.innerText);
+    saveData();
 
     
 }
@@ -115,6 +115,7 @@ function checkList(e) {
     let chkBtn = e.target;  // 체크 버튼
     // let left = todoList.children.length - comp;
     flag = 0;
+    saveData();
 
     if (flag == 1 || chkBtn.innerHTML == "") {
         check.style.backgroundColor = "#bbb";
@@ -139,17 +140,20 @@ function checkList(e) {
         // compCal(-1); // comp - 1
 
         // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
-        // console.log(`comp: ${comp}, left: ${left}`);
+        
     }
+
+    
 }
 
 // 리스트 삭제 함수
 function delOneList(e) {
-    let li = e.target.parentNode;
-    todoList.removeChild(li);
+    e.target.parentElement.remove();
+    // let li = e.target.parentNode;
+    // todoList.removeChild(li);
 
     // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`
-    
+    saveData();
 }
 
 // 리스트 모두 삭제 함수
@@ -159,10 +163,23 @@ function delAllList() {
     if (todoList.innerHTML == "") {    // 리스트가 비어있다면
         alert("삭제할 리스트가 없습니다.");
     } else if (yesDel) {
-        todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기
+        todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기/
         // leftTodo.innerHTML = `남은 일: ${todoList.children.length - todoList.children.length}개, 완료한 일: ${comp}개`
     }
+    saveData();
 }
+
+function saveData() {
+    localStorage.setItem("data", JSON.stringify(todoList.innerHTML));;
+}
+
+function showList() {
+    todoList.innerHTML = JSON.parse(localStorage.getItem("data"));
+}
+
+showList();
+
+
 
 
 
