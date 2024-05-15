@@ -2,8 +2,8 @@ let todoList = document.getElementById("todoList"); // 리스트를 추가할 ul
 
 // 오늘 날짜 보이기
 let day = new Date();
-let options = {year: "numeric", month: "long", day: "numeric", weekday: "long"};
-let today = day.toLocaleDateString("kr-KR", options);
+let options = {year: "numeric", month: "long", day: "numeric", weekday: "short"};
+let today = day.toDateString("en-EN", options);
 showDate.innerHTML = today;
 
 // 플래그
@@ -12,6 +12,8 @@ let flag = 1;
 // 완료한 일 카운트
 let comp = 0;
 leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
+
+
 
 // 완료한 일 계산 함수
 function compCal(n) {
@@ -45,6 +47,9 @@ function addList() {
         leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
     }
     todo.focus();
+    // console.log(li.innerText);
+
+    
 }
 
 // 엔터로 리스트 추가 가능하게

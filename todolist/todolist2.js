@@ -1,157 +1,170 @@
-
+let todoList = document.getElementById("todoList"); // 리스트를 추가할 ul
 
 // 오늘 날짜 보이기
 let day = new Date();
-let options = {year: "numeric", month: "long", day: "numeric", weekday: "long"};
-let today = day.toLocaleDateString("ko-KR", options);
-let todoArr = [];
-let displayList = document.getElementById("displayList");
+let options = {year: "numeric", month: "long", day: "numeric", weekday: "short"};
+let today = day.toDateString("en-EN", options);
+showDate.innerHTML = today;
+
+// 플래그
 let flag = 1;
 
-showDate.innerHTML = today;
-showDate.style.fontSize = "28px";
-showDate.style.padding = "10px";
-showDate.style.color = "#fff";
-showDate.style.margin = "30px auto";
-showDate.style.fontWeight = "bold";
+// 완료한 일 카운트
+let comp = 0;
+// leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
 
 
+
+// 완료한 일 계산 함수
+// function compCal(n) {
+//     return comp += n;
+// }
+
+// let todoArr = [];
+
+// const todos = [
+//     { id: 1, text: 'JavaScript 공부하기', completed: false },
+//     { id: 2, text: '투두리스트 만들기', completed: true },
+//     // 더 많은 항목들
+// ];
+
+// const searchInput = document.getElementById("searchInput");
+// searchInput.addEventListener("input", function() {
+//     const searchText = searchInput.value.toLowercase();
+//     const filteredTodos = todos.filter(todo => todo.text.toLowerCase().includes(searchText));
+//     renderTodos(filteredTodos);
+// });
+
+// function renderTodos(todos) {
+//     const todoList = document.getElementById('todoList');
+//     todoList.innerHTML = '';
+//     todos.forEach(todo => {
+//         const todoItem = document.createElement('li');
+//         todoItem.textContent = todo.text;
+//         todoList.appendChild(todoItem);
+//     });
+// }
+
+// renderTodos(todos);
+
+// searchInput.addEventListener("input", function() {
+//     const searchText = searchInput.value.toLowerCase();
+//     const filteredTodos = todoList.filter(todo => todo.text.toLowerCase().includes(searchText));
+//     renderTodos(filteredTodos);
+// })
 
 
 // 리스트 추가 함수
-function addList() {
+function addList(newTodo) {
     let checkBtn = document.createElement("button");    // 체크 버튼
-    
     checkBtn.className = "checkBtn";  
-    checkBtn.style.background = "#fff";
-    checkBtn.style.width = "25px";
-    checkBtn.style.height = "25px";
-    checkBtn.style.marginRight = "10px";
-    // checkBtn.style.padding = "10px";
-    // checkBtn.style.marginBottom = "10px";
-    checkBtn.style.marginTop = "5px";
-    // checkBtn.style.marginBottom = "10px";
-    checkBtn.style.float = "left";
-    checkBtn.style.border = "1px solid #aaa";
-    // checkBtn.style.borderRadius = "10px";
-    checkBtn.style.color = "black";
-    
     checkBtn.addEventListener("click", checkList);  // 체크 버튼이 클릭되면 checkList 함수 작동
     
-    let li = document.createElement("li");
-    let modifyBtn = document.createElement("button"); // 수정 버튼
-    let deleteBtn = document.createElement("button");  // 삭제 버튼
-    let todoValue = document.getElementById("todo").value;  // input의 입력 값
-    // let todoInput = todo.value;
-    // let text = document.createTextNode(todoInput);
-    li.append(todoValue);
-    li.append(checkBtn);
-    li.append(deleteBtn);
-    li.append(modifyBtn);
-    
-    modifyBtn.innerHTML = "수정";
-    modifyBtn.style.float = "right";
-    modifyBtn.style.padding = "5px";
-    modifyBtn.style.marginRight = "5px";
-    modifyBtn.style.padding = "10px";
-    modifyBtn.addEventListener("click", modOneList);  // 수정버튼 클릭시 리스트 수정하기
+    let li = document.createElement("li");  // 리스트를 저장할 li
+    let span = document.createElement("span");
+    span.innerText = newTodo;
 
-    deleteBtn.innerHTML = "삭제";
-    deleteBtn.style.float = "right";
-    deleteBtn.style.padding = "10px";
+    let deleteBtn = document.createElement("button");  // 삭제 버튼
+    deleteBtn.setAttribute("class", "trash deleteBtn fa-solid fa-trash-can");
     deleteBtn.addEventListener("click", delOneList);  // 삭제버튼 클릭시 리스트 지우기
+
+    let todoValue = document.getElementById("todo").value;  // input의 입력 값
+
+    // let member = {
+    //     todoValue,
+    // };
+
+    // todoArr.push(member);
     
-    if (todoValue === "") { // 입력창이 비어있다면
-        alert("할 일을 입력해주세요");  // 경고창 띄욱
-    } else {
-        // document.getElementById("list").appendChild(li);
-        document.getElementById("displayList").appendChild(li);
+    // for (let i = 0; i < todoArr.length; i++) {
+        // li.append(todoArr[i].todoValue);
+        // li.append(checkBtn);
+        // li.append(deleteBtn);
+
+        if (todoValue === "") { // 입력창이 비어있다면
+            alert("할 일을 입력해주세요");  // 경고창 띄욱
+        } else {
+            li.append(todoValue);
+            li.appendChild(checkBtn);
+            li.appendChild(deleteBtn);
+            todoList.appendChild(li);
+            document.getElementById("todo").value = "";
+            console.log(todoList);
+            // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
+        // }
+        
+        todo.focus();
     }
+
+    // console.log(li.innerText);
+
+    
 }
 
-// 엔터로 리스트 추가되게 만들기
+// 엔터로 리스트 추가 가능하게
 function EnterList(event) {
     if (event.keyCode == "13") {
         addList();
-        todo.value = "";
     }
 }
 
-// 완료한 일 체크
+
+// 완료한 일 체크 함수
 function checkList(e) {
     let check = e.target.parentElement; // li
     let chkBtn = e.target;  // 체크 버튼
-    
-    // console.log(check);
-    // console.log(chkBtn);
-
+    // let left = todoList.children.length - comp;
     flag = 0;
 
     if (flag == 1 || chkBtn.innerHTML == "") {
-        check.style.backgroundColor = "#ddd";
+        check.style.backgroundColor = "#bbb";
         check.style.textDecoration = "line-through";
         check.style.opacity = "0.5";
-        chkBtn.innerText = "✔";
+        chkBtn.innerHTML = "✔";
         chkBtn.style.lineHeight = "5px";
-        console.log(`전 flag: ${flag}`);
         flag = 0;
-        console.log(`후 flag: ${flag}, 체크`);
+        
+        // compCal(1); // comp + 1
+        
+        // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
+        // console.log(`comp: ${comp}, left: ${left}`);
+        
     } else {
-        check.style.backgroundColor = "#fff";
+        check.style.backgroundColor = "#eee";
         check.style.textDecoration = "none";
         check.style.opacity = "1";
         chkBtn.innerHTML = "";
-        console.log(`전 flag: ${flag}`);
         flag = 1;
-        console.log(`flag: ${flag}, 체크 취소`);
+
+        // compCal(-1); // comp - 1
+
+        // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
+        // console.log(`comp: ${comp}, left: ${left}`);
     }
-    
-    console.log(flag);
-        // for (let i = 0; i < checkBtn.length; i++) {
-        //     if (checkBtn[i].onclick) {
-        //         console.log("a");
-        //     li[i].style.textDecoration = "line-through";
-        //     li[i].style.opacity = "0.5";
-        //     li[i].style.backgroundColor = "#ccc";
-        //     }
-            
-        // }
-        
-    
 }
 
-function modOneList(e) {
-    let modOne = e.target.parentElement;
-    console.log(modOne);
-    todo.focus();
-    
-}
-
-// 리스트 1개 삭제
+// 리스트 삭제 함수
 function delOneList(e) {
-    let delOne = e.target.parentElement;
-    delOne.remove();
+    let li = e.target.parentNode;
+    todoList.removeChild(li);
 
-    // let li = document.getElementsByTagName("li");
-    // let span = document.getElementsByTagName("span");
+    // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`
     
-    
-    // for (let i = 0; i < span.length; i++) {
-    //     span[i].onclick = function() {
-    //         li[i].style.display = "none";
-    //     }
-        
-    // }
 }
 
-// 리스트 모두 삭제
+// 리스트 모두 삭제 함수
 function delAllList() {
     let yesDel = confirm("정말로 모든 리스트를 삭제하시겠습니까?", "");
 
-    if (displayList.innerHTML == "") {    // 리스트가 비어있다면
+    if (todoList.innerHTML == "") {    // 리스트가 비어있다면
         alert("삭제할 리스트가 없습니다.");
     } else if (yesDel) {
-        displayList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기
+        todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기
+        // leftTodo.innerHTML = `남은 일: ${todoList.children.length - todoList.children.length}개, 완료한 일: ${comp}개`
     }
 }
+
+
+
+
 

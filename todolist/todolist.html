@@ -10,21 +10,30 @@
     <title>My ToDoList</title>
 </head>
 <body>
-    <div class="container">
-        <div class="title">
-            <h1>ToDoList</h1>
-            <div id="showDate"></div>
-            <div id="leftTodo"></div>
-            <div style="display: flex;"> 
-                <input type="text" placeholder="할 일을 입력하세요" 
-                id="todo" onkeypress="EnterList(event)" autofocus>
-                <button id="addBtn" onclick="addList()"><i class="fa-solid fa-circle-plus"></i></button>
+    <div class="container-wrap">
+        <div class="container">
+            <div class="title">
+                <h1>ToDoList</h1>
+                <div id="showDate"></div>
+                <div style="display: flex;">
+                    <div id="leftTodo"></div>
+                    <button id="delAllBtn" onclick="delAllList()">Clear</button>
+                </div>
+                
+                <div style="display: flex;"> 
+                    <input type="text" placeholder="할 일을 입력하세요" 
+                    id="todo" onkeypress="EnterList(event)" autofocus>
+                    <button id="addBtn" onclick="addList()"><i class="fa-solid fa-circle-plus"></i></button>
+                </div>
+                <ul id="todoList">
+                </ul>
             </div>
-            <ul id="todoList">
-            </ul>
-            <button id="delAllBtn" onclick="delAllList()">Clear</button>
         </div>
+        <!-- <div class="searchTodo">
+            <input id="searchInput" placeholder="검색">
+            <button onclick="searchList()">검색</button>
+        </div> -->
     </div>
-    <script src="/todolist/todolist.js"></script>
+    <script src="/todolist/todolist2.js"></script>
 </body>
 </html>

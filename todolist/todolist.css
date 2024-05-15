@@ -8,13 +8,17 @@ body {
     background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.container-wrap {
+    position: relative;
+}
 .container {
     background-color: #fff;
-    width: 600px;
+    width: 50%;
     height: calc(100vh - 60px);
     border-radius: 50px;
     margin: 30px auto;
-    
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 .title {
     text-align: center;
@@ -24,15 +28,17 @@ body {
     text-decoration-color: rgb(150, 150, 228);
     font-family: "Raleway";
     text-align: center;
+    /* position: sticky;
+    top: 0; */
 }
 #showDate {
     text-align: center;
     font-size: 24px;
     padding: 10px;
-    background: #6190E8;  
+    /* background: #6190E8;  
     background: -webkit-linear-gradient(to right, #A7BFE8, #6190E8);  
-    background: linear-gradient(to right, #A7BFE8, #6190E8);
-    color: #fff; 
+    background: linear-gradient(to right, #A7BFE8, #6190E8); */
+    color: rgb(115, 168, 252);
     width: 70%;
     margin: 10px auto;
     border-radius: 50%;
@@ -45,7 +51,6 @@ input[type=text] {
     font-size: 18px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    font-style: italic;
 }
 #addBtn {
     width: 5%;
@@ -66,9 +71,10 @@ button:hover {
 }
 .checkBtn {
     background-color: none;
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     margin-right: 10px;
+    margin-top: 5px;
     float: left;
     border: 1px solid #aaa;
     color: black;
@@ -76,25 +82,28 @@ button:hover {
 .trash {
     color: black;
     float: right;
-    padding: 4px;
-    line-height: 2px;
+    /* padding: 3px; */
+    margin: 3px;
+    font-size: 15px;
+}
+#leftTodo {
+    width: 43%;
+    float: left;
+    margin: 10px auto;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
 }
 #delAllBtn {
-    width: 20%;
-    /* margin: 10px auto; */
-    padding: 12px;
+    padding: 10px;
+
+    margin: 0 auto 10px auto;
     background: #34e89e;  
     background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
     background: linear-gradient(to right, #0f3443, #34e89e);   
     border-radius: 10px;
     color: #fff;
-}
-#leftTodo {
-    width: 75%;
-    margin: 15px auto;
-    text-align: left;
-    font-size: 18px;
-    font-weight: bold;
+    
 }
 ul {
     width: 80%;
@@ -107,7 +116,7 @@ ul {
 }
 ul li {
     font-size: 20px;
-    padding: 10px;
+    padding: 5px;
     background-color: #eee;
     margin: 10px;
     border-radius: 10px;
@@ -115,4 +124,9 @@ ul li {
 ul li button:hover {
     cursor: pointer;
 }
-
+.searchTodo {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 10%;
+}
