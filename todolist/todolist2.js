@@ -55,18 +55,17 @@ let comp = 0;
 
 
 // 리스트 추가 함수
-function addList(newTodo) {
-    let checkBtn = document.createElement("button");    // 체크 버튼
-    checkBtn.className = "checkBtn";  
-    checkBtn.addEventListener("click", checkList);  // 체크 버튼이 클릭되면 checkList 함수 작동
+function addList() {
+    // let checkBtn = document.createElement("button");    // 체크 버튼
+    // checkBtn.className = "checkBtn";  
+    // checkBtn.addEventListener("click", checkList);  // 체크 버튼이 클릭되면 checkList 함수 작동
     
-    let li = document.createElement("li");  // 리스트를 저장할 li
-    let span = document.createElement("span");
-    span.innerText = newTodo;
+    
+    // span.innerHTML = "\u00d7";
 
-    let deleteBtn = document.createElement("button");  // 삭제 버튼
-    deleteBtn.setAttribute("class", "trash deleteBtn fa-solid fa-trash-can");
-    deleteBtn.addEventListener("click", delOneList);  // 삭제버튼 클릭시 리스트 지우기
+    // let deleteBtn = document.createElement("button");  // 삭제 버튼
+    // deleteBtn.setAttribute("class", "trash deleteBtn fa-solid fa-trash-can");
+    // deleteBtn.addEventListener("click", delOneList);  // 삭제버튼 클릭시 리스트 지우기
 
     let todoValue = document.getElementById("todo").value;  // input의 입력 값
 
@@ -84,11 +83,16 @@ function addList(newTodo) {
         if (todoValue === "") { // 입력창이 비어있다면
             alert("할 일을 입력해주세요");  // 경고창 띄욱
         } else {
-            li.append(todoValue);
-            li.appendChild(checkBtn);
-            li.appendChild(deleteBtn);
+            let li = document.createElement("li");  // 리스트를 저장할 li
+            li.innerHTML = todoValue;
+            let span = document.createElement("span");  // 삭제버튼
+            span.setAttribute("class", "trash deleteBtn fa-solid fa-trash-can"); // 삭제버튼에 휴지통 이미지 추가
+            // li.append(todoValue);
+            // li.appendChild(checkBtn);
+            li.appendChild(span);
+            // li.appendChild(deleteBtn);
             todoList.appendChild(li);
-            document.getElementById("todo").value = "";
+            document.getElementById("todo").value = ""; // 입력창 비우기
             console.log(todoList);
             // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
         // }
@@ -96,10 +100,16 @@ function addList(newTodo) {
         todo.focus();
     }
 
-    saveData();
-
-    
+    saveList();
 }
+
+todoList.addEventListener("click", function(e) {
+    if (e.target.tagName === "LI") { // span(삭제버튼)이 아닌 li가 클릭되면
+        checkList(e); // 완료한 일 체크함수 실행
+    } else if (e.target.tagName === "SPAN") { // span(삭제버튼)이 클릭되면
+        delOneList(e); // 리스트 삭제 함수 실행
+    }
+}, false);
 
 // 엔터로 리스트 추가 가능하게
 function EnterList(event) {
@@ -108,52 +118,57 @@ function EnterList(event) {
     }
 }
 
+// 완료한 일 체크 함수
+// function checkList(e) {
+//     let check = e.target.parentElement; // li
+//     let chkBtn = e.target;  // 체크 버튼
+//     // let left = todoList.children.length - comp;
+//     flag = 0;
+//     saveList();
+
+//     if (flag == 1 || chkBtn.innerHTML == "") {
+//         check.style.backgroundColor = "#bbb";
+//         check.style.textDecoration = "line-through";
+//         check.style.opacity = "0.5";
+//         chkBtn.innerHTML = "✔";
+//         chkBtn.style.lineHeight = "5px";
+//         flag = 0;
+        
+//         // compCal(1); // comp + 1
+        
+//         // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
+//         // console.log(`comp: ${comp}, left: ${left}`);
+        
+//     } else {
+//         check.style.backgroundColor = "#eee";
+//         check.style.textDecoration = "none";
+//         check.style.opacity = "1";
+//         chkBtn.innerHTML = "";
+//         flag = 1;
+
+//         // compCal(-1); // comp - 1
+
+//         // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
+        
+//     }
+
+    
+// }
 
 // 완료한 일 체크 함수
 function checkList(e) {
-    let check = e.target.parentElement; // li
-    let chkBtn = e.target;  // 체크 버튼
-    // let left = todoList.children.length - comp;
-    flag = 0;
-    saveData();
-
-    if (flag == 1 || chkBtn.innerHTML == "") {
-        check.style.backgroundColor = "#bbb";
-        check.style.textDecoration = "line-through";
-        check.style.opacity = "0.5";
-        chkBtn.innerHTML = "✔";
-        chkBtn.style.lineHeight = "5px";
-        flag = 0;
-        
-        // compCal(1); // comp + 1
-        
-        // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
-        // console.log(`comp: ${comp}, left: ${left}`);
-        
-    } else {
-        check.style.backgroundColor = "#eee";
-        check.style.textDecoration = "none";
-        check.style.opacity = "1";
-        chkBtn.innerHTML = "";
-        flag = 1;
-
-        // compCal(-1); // comp - 1
-
-        // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`;
-        
-    }
-
-    
+    e.target.classList.toggle("checked");
+    saveList();
 }
 
 // 리스트 삭제 함수
 function delOneList(e) {
-    e.target.parentElement.remove();
+    e.target.parentElement.remove(); // e.target.parentElement: 타겟의 부모 = li
     // let li = e.target.parentNode;
     // todoList.removeChild(li);
 
     // leftTodo.innerHTML = `남은 일: ${todoList.children.length}개 / 완료한 일: ${comp}개`
-    saveData();
+    saveList();
 }
 
 // 리스트 모두 삭제 함수
@@ -166,15 +181,15 @@ function delAllList() {
         todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기/
         // leftTodo.innerHTML = `남은 일: ${todoList.children.length - todoList.children.length}개, 완료한 일: ${comp}개`
     }
-    saveData();
+    saveList();
 }
 
-function saveData() {
-    localStorage.setItem("data", JSON.stringify(todoList.innerHTML));;
+function saveList() {
+    localStorage.setItem("list", JSON.stringify(todoList.innerHTML));;
 }
 
 function showList() {
-    todoList.innerHTML = JSON.parse(localStorage.getItem("data"));
+    todoList.innerHTML = JSON.parse(localStorage.getItem("list"));
 }
 
 showList();

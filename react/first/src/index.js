@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import Hello from './Hello';
 import Counter from './Counter';
 import Game from './Game';
+import InputSample from './InputSample';
+import UserList from './UserList';
 
 // react 단일페이지 애플리케이션 - SPA
 
@@ -27,7 +29,9 @@ let userObject = {
 
 root.render(
   <>
-    <Game />
+    <UserList />
+    {/* <InputSample /> */}
+    {/* <Game /> */}
     {/* <button onClick={() => {
       alert('test');
       }}>click</button>

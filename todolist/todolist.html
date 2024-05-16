@@ -16,24 +16,25 @@
                 <h1>ToDoList</h1>
                 <div id="showDate"></div>
                 <div style="display: flex;">
-                    <div id="leftTodo"></div>
-                    <button id="delAllBtn" onclick="delAllList()">Clear</button>
+                    <div id="leftTodo">남은 일: <span id="countValue"></span>개</div>
+                    <button id="delAllBtn" onclick="delAllList()">모두 삭제</button>
                 </div>
-                
-                <div style="display: flex;"> 
+                <div id="inputBox"> 
                     <input type="text" placeholder="할 일을 입력하세요" 
                     id="todo" onkeypress="EnterList(event)" autofocus>
-                    <button id="addBtn" onclick="addList()"><i class="fa-solid fa-circle-plus"></i></button>
+                    <!-- <button id="addBtn" onclick="addList()"><i class="fa-solid fa-circle-plus"></i></button> -->
+                    <button id="addBtn" onclick="addList()">추가</button>
                 </div>
-                <ul id="todoList">
-                </ul>
+                
             </div>
+            <ul id="todoList">
+            </ul>
         </div>
         <!-- <div class="searchTodo">
             <input id="searchInput" placeholder="검색">
             <button onclick="searchList()">검색</button>
         </div> -->
     </div>
-    <script src="/todolist/todolist2.js"></script>
+    <script src="/todolist/todolist.js"></script>
 </body>
 </html>
