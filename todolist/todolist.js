@@ -7,8 +7,6 @@ let today = day.toDateString("en-EN", options);
 showDate.innerHTML = today;
 
 let taskCount = 0;
-// countValue.innerHTML = taskCount;
-// displayCount();
 
 function displayCount() {
     countValue.innerHTML = taskCount;
@@ -21,23 +19,21 @@ function taskPlus(n) {
 
 // 리스트 추가 함수
 function addList() {
-    let todoValue = document.getElementById("todo").value;  // input의 입력 값
-
-    if (todoValue === "") { // 입력창이 비어있다면
-        alert("할 일을 입력해주세요");  // 경고창 띄욱
+    if (todo.value === "") { // 입력창이 비어있다면
+        alert("할 일을 입력해주세요");  // 경고창 띄우기
     } else {
         let li = document.createElement("li");  // 리스트를 저장할 li
-        li.innerHTML = todoValue;
-        let edit = document.createElement("button"); // 수정버튼
-        let span = document.createElement("span");  // 삭제버튼
-        span.setAttribute("class", "trash deleteBtn fa-solid fa-trash-can"); // 삭제버튼에 휴지통 이미지 추가
+        li.innerHTML = todo.value;
+        let editBtn = document.createElement("button"); // 수정버튼
+        let deleteBtn = document.createElement("span");  // 삭제버튼
 
-        edit.className = "editBtn";
-        edit.innerHTML = "수정";
-        li.appendChild(edit);
-        li.appendChild(span);
+        editBtn.setAttribute("class", "editBtn far fa-edit")
+        deleteBtn.setAttribute("class", "deleteBtn fa-solid fa-trash-can"); 
+        
+        li.appendChild(editBtn);
+        li.appendChild(deleteBtn);
         todoList.appendChild(li);
-        document.getElementById("todo").value = ""; // 입력창 비우기
+        todo.value = ""; // 입력창 비우기
         
         taskPlus(1);
         displayCount();
@@ -46,13 +42,14 @@ function addList() {
     }
 }
 
+
 todoList.addEventListener("click", function(e) {
     if (e.target.tagName === "LI") { // span(삭제버튼)이 아닌 li가 클릭되면
         checkList(e); // 완료한 일 체크함수 실행
     } else if (e.target.tagName === "SPAN") { // span(삭제버튼)이 클릭되면
         delOneList(e); // 리스트 삭제 함수 실행
-    } else if (e.target.className === "editBtn") {
-        editList(e);
+    } else if (e.target.tagName === "BUTTON") { // button(수정버튼)이 클릭되면
+        editList(e); // 리스트 수정 함수 실행
     }
 }, false);
 
@@ -70,11 +67,9 @@ function checkList(e) {
     if (e.target.className === "checked") {
         taskPlus(-1);
         displayCount();
-        
     } else {
         taskPlus(1);
         displayCount();
-        
     }
 }
 
@@ -100,35 +95,44 @@ function delAllList() {
     if (todoList.innerHTML == "") {    // 리스트가 비어있다면
         alert("삭제할 리스트가 없습니다.");
     } else if (yesDel) {
-        todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기/
+        todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기
         taskCount = 0;
-        displayCount();
         
+        displayCount();
     }
+    todo.value = "";
+    todo.focus();
 }
 
+// 리스트 수정 함수
 function editList(e) {
-    if (e.target.innerHTML === "수정") {
-        e.target.innerHTML = "완료";
+    if (e.target.style.color === "black" || e.target.style.color === "") {
+        e.target.style.color = "red";
+        todo.value = e.target.parentElement.firstChild.data;
         todo.focus();
     } else {
-        // console.log(todo.value);
-        console.log(e.target.parentElement);
-        todo.value = "";
-        e.target.innerHTML = "수정";
+        if (todo.value === "") {
+            alert("수정할 내용을 입력해주세요.")
+            todo.focus();
+        } else {
+            e.target.parentElement.firstChild.data = todo.value;
+            todo.value = "";
+            todo.placeholder = "할 일을 입력하세요";
+            e.target.style.color = "black";
+            todo.focus();
+        }
     }
+    saveList();
 }
 
 function saveList() {
     localStorage.setItem("list", JSON.stringify(todoList.innerHTML));;
     localStorage.setItem("count", JSON.stringify(countValue.innerHTML));
-    // localStorage.setItem("count", JSON.stringify(taskCount));
 }
 
 function showList() {
     todoList.innerHTML = JSON.parse(localStorage.getItem("list"));
     countValue.innerHTML = JSON.parse(localStorage.getItem("count"));
-    // taskCount = JSON.parse(localStorage.getItem("count"));
 }
 
 showList();
