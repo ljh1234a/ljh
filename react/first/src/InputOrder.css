@@ -1,0 +1,37 @@
+* {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+form {
+    
+}
+label {
+    width: 35%;
+    display: inline-block;
+    /* padding: 5px; */
+}
+input, select {
+    padding: 5px;
+    margin: 5px;
+}
+input {
+    width: 45%;
+}
+select {
+    width: 46.7%;
+}
+input[type="checkbox"] {
+    width: 13px;
+}
+button {
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #eee;
+}
+button:hover {
+    background-color: #bbb;
+}

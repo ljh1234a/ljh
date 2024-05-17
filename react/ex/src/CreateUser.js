@@ -1,4 +1,8 @@
 function CreateUser({username, email, onChange, onCreate}) {
+    const style = {
+        color: 'aqua'
+    };
+
     return (
         <div>
             <input 

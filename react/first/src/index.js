@@ -8,6 +8,8 @@ import Counter from './Counter';
 import Game from './Game';
 import InputSample from './InputSample';
 import UserList from './UserList';
+import InputOrder from './InputOrder';
+import Order from './Order';
 
 // react 단일페이지 애플리케이션 - SPA
 
@@ -29,7 +31,8 @@ let userObject = {
 
 root.render(
   <>
-    <UserList />
+    <Order />
+    {/* <UserList /> */}
     {/* <InputSample /> */}
     {/* <Game /> */}
     {/* <button onClick={() => {

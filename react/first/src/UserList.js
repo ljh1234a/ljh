@@ -39,7 +39,7 @@ function UserList() {
 
     const {username, email} = inputs;
     const onChange = (e) => {
-        const {name, value} = e.target
+        const {name, value} = e.target;
         setInputs({
             ...inputs,
             [name]: value

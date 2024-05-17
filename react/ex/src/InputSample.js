@@ -1,51 +1,46 @@
-import { useState, useRef } from "react";
-import "./InputSample.css"
+import { useRef, useState } from "react";
+import InputSample2 from "./InputSample2";
 
 function InputSample() {
     const [inputs, setInputs] = useState({
         name: '',
-        nickname: ''
+        age: '',
+        job: '',
     });
-    const nameInput = useRef();
 
-    const {name, nickname} = inputs; // 비구조화 할당을 통해 값 추출
+    const {name, age, job} = inputs;
+
+    const nameInput = useRef();
+    // const ageInput = useRef();
+    // const jobInput = useRef();
 
     const onChange = (e) => {
-        const {value, name} = e.target; // 우선 e.target에서 name과 value를 추출
+        const {name, value} = e.target;
         setInputs({
-            ...inputs, // 기존의 input 객체를 복사한 뒤
-            [name]: value // name키를 가진 값을 value로 설정
+            ...inputs,
+            [name]: value
         });
     };
 
     const onReset = () => {
-       setInputs({
-        name: '',
-        nickname: '',
-       });
-       nameInput.current.focus();
+        setInputs({
+            name: '',
+            age: '',
+            job: '',
+        });
+        nameInput.current.focus();
     };
 
-    return(
+    return (
         <div>
-            <input 
-                name="name"
-                placeholder="이름" 
+            <InputSample2 
+                name={name}
+                age={age}
+                job={job}
                 onChange={onChange}
-                value={name}
-                ref={nameInput} 
-            />
-            <input 
-                name="nickname"
-                placeholder="닉네임"
-                onChange={onChange} 
-                value={nickname} 
-            />
-            <button onClick={onReset}>초기화</button>
-            <div id="val">
-                <b>값: </b>
-                {name} ({nickname})
-            </div>
+                onReset={onReset}
+                nameInput={nameInput}
+                />
         </div>
     );
 }

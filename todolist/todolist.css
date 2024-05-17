@@ -68,7 +68,7 @@ input[type=text] {
 #addBtn {
     width: 13%;
     text-align: center;
-    padding: 13px;
+    padding: 13.5px;
     background: #34e89e;  
     background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
     background: linear-gradient(to right, #0f3443, #34e89e);   
@@ -96,17 +96,27 @@ button:hover {
     border: 1px solid #aaa;
     color: black;
 }
-.deleteBtn {
-    color: black;
-    float: right;
-    margin: 3px;
-    font-size: 20px;
-}
 .editBtn {
     float: right;
-    margin-right: 35px;
-    margin-top: 2.5px;
-    font-size: 20px;
+    margin-right: 40px;
+    font-size: 18px;
+    background-color: rgb(106, 135, 231);
+    padding: 9px 7px 8px 10px;
+    color: #fff;
+    border-radius: 10px;
+    width: 40px;
+    height: 35px;
+}
+.deleteBtn {
+    float: right;
+    margin-right: 5px;
+    font-size: 18px;
+    background-color: rgb(233, 92, 67);
+    padding: 9px 7px 7px 8px;
+    color: #fff;
+    border-radius: 10px;
+    width: 40px;
+    height: 35px;
 }
 #leftTodo {
     width: 43%;
@@ -117,7 +127,7 @@ button:hover {
     font-weight: bold;
 }
 #delAllBtn {
-    padding: 12px;
+    padding: 12.5px;
     margin: 0 auto 10px auto;
     background: #34e89e;  
     background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
@@ -130,10 +140,11 @@ ul {
     margin: 30px auto;
     border-radius: 20px;
     font-family: "Raleway";
+    padding: 10px;
 }
 ul li {
     font-size: 24px;
-    padding: 10px 10px 10px 50px;
+    padding: 10px 10px 14px 50px;
     background-color: #eee;
     margin: 10px;
     border-radius: 10px;
@@ -141,6 +152,7 @@ ul li {
     list-style: none;
     user-select: none;
     cursor: pointer;
+    font-weight: bold;
 }
 ul li::before {
     content: '';
@@ -155,8 +167,10 @@ ul li::before {
     left: 12px;
 }
 ul li.checked {
-    color: #aaa;
+    color: #fff;
     text-decoration: line-through;
+    background-color: #bbb;
+    
 }
 ul li.checked::before {
     background-image: url(/img/check.png);
