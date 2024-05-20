@@ -1,14 +1,15 @@
 let todoList = document.getElementById("todoList"); // 리스트를 추가할 ul
-let filter = document.getElementById("filter");
+let separate = document.getElementById("separate");
 
 // 날짜와 시간을 보여주는 함수
 function getTime() {
-    const date = new Date();
-    const options = {year: "numeric", month: "long", day: "numeric", weekday: "short"};
-    const options2 = {hour12: false}
-    const today = date.toLocaleDateString("en-EN", options);
-    const currentTime = date.toLocaleTimeString("en-EN", options2);
-    showDate.innerHTML = `${today}<br>${currentTime}`;
+    let date = new Date();
+    let option1 = {weekday:"long"}
+    let option2 = {year: "numeric", month: "long"};
+    let day = `<span id="day">${date.getDate()}</span>`
+    let day2 = `${date.toLocaleDateString("en-EN", option1)}<br>
+                <span id="day2">${date.toLocaleDateString("en-EN", option2)}</span>`;
+    showDate.innerHTML = day + day2;
 }
 
 getTime();
@@ -175,23 +176,44 @@ function editList(e) {
     saveList();
 }
 
+
+
 // 리스트 검색 함수
 function searchList() {
     for (let i = 0; i < todoList.children.length; i++) {
-        if (todoList.children[i].childNodes[0].data.includes(search.value)) { 
-            todoList.children[i].style.display = "block";
-            console.log(search.value);
-        } else if (!todoList.children[i].childNodes[0].data.includes(search.value)) {
-            todoList.children[i].style.display = "none";
+        if (all.style.color === "white") { // 전체상태에서는
+            if (todoList.children[i].childNodes[0].data.includes(search.value)) { 
+                todoList.children[i].style.display = "block";
+            }  else {
+                todoList.children[i].style.display = "none";
+            }
+        } else if (active.style.color === "white") { // 미완상태에서는
+            if (todoList.children[i].childNodes[0].data.includes(search.value) && todoList.children[i].className !== "checked") { 
+                todoList.children[i].style.display = "block";
+            }  else {
+                todoList.children[i].style.display = "none";
+            }
+            
+        } else if (complete.style.color === "white") { // 완료상태에서는
+            if (todoList.children[i].childNodes[0].data.includes(search.value) && todoList.children[i].className === "checked") {
+                todoList.children[i].style.display = "block";
+            }  else {
+                todoList.children[i].style.display = "none";
+            }
         }
     }
+    saveList();
 }
 
 // 필터 함수
 function filterList(e) {
-    if (e.target.id === "all") {   // All 버튼을 누르면
+    if (e.target.id === "all") {   // 전체 버튼을 누르면
         for (let i = 0; i < todoList.children.length; i++) {
-            todoList.children[i].style.display = "block"; // 리스트 전체 보이기
+            if (todoList.children[i].childNodes[0].data.includes(search.value)) {
+                todoList.children[i].style.display = "block"; // 리스트 전체 보이기
+            } else {
+                todoList.children[i].style.display = "none";
+            }
         }
         all.style.background = "#34e89e";
         all.style.background = "-webkit-linear-gradient(to right, #0f3443, #34e89e)";
@@ -204,12 +226,16 @@ function filterList(e) {
         complete.style.background = "white";
         complete.style.color = "#34e89e";
         
-    } else if (e.target.id === "active") { // Active 버튼을 누르면 
+    } else if (e.target.id === "active") { // 미완 버튼을 누르면 
         for (let i = 0; i < todoList.children.length; i++) {
-            if (todoList.children[i].className === "checked") { // 완료된 일은
+            if (todoList.children[i].childNodes[0].data.includes(search.value)) {
+                if (todoList.children[i].className === "checked") { // 완료된 일은
+                    todoList.children[i].style.display = "none"; // 안보이게 함
+                } else { // 완료되지 않은 일은
+                    todoList.children[i].style.display = "block"; // 보이게 함
+                }
+            } else {
                 todoList.children[i].style.display = "none"; // 안보이게 함
-            } else { // 완료되지 않은 일은
-                todoList.children[i].style.display = "block"; // 보이게 함
             }
         }
         all.style.background = "white";
@@ -221,11 +247,15 @@ function filterList(e) {
         complete.style.background = "white";
         complete.style.color = "#34e89e";
 
-    } else if (e.target.id === "complete") { // Complete 버튼을 누르면 
+    } else if (e.target.id === "complete") { // 완료 버튼을 누르면 
         for (let i = 0; i < todoList.children.length; i++) {
-            if (todoList.children[i].className === "checked") { // 완료된 일은
-                todoList.children[i].style.display = "block";  // 보이게 함
-            } else { // 완료되지 않은 일은
+            if (todoList.children[i].childNodes[0].data.includes(search.value)) {
+                if (todoList.children[i].className === "checked") { // 완료된 일은
+                    todoList.children[i].style.display = "block";  // 보이게 함
+                } else { // 완료되지 않은 일은
+                    todoList.children[i].style.display = "none"; // 안보이게 함
+                }
+            } else {
                 todoList.children[i].style.display = "none"; // 안보이게 함
             }
         }
@@ -241,7 +271,7 @@ function filterList(e) {
     saveList();
 }
 
-filter.addEventListener("click", function(e) {
+separate.addEventListener("click", function(e) {
     filterList(e);
 })
 
@@ -250,14 +280,16 @@ function saveList() {
     localStorage.setItem("list", JSON.stringify(todoList.innerHTML));;
     localStorage.setItem("taskCount", JSON.stringify(taskCount));
     localStorage.setItem("countValue", JSON.stringify(countValue.innerHTML));
-    // localStorage.setItem("filter", JSON.stringify(filter.innerHTML));
+    localStorage.setItem("separate", JSON.stringify(separate.innerHTML));
+    localStorage.setItem("search", JSON.stringify(search.value));
 }
 
 function showList() {
     todoList.innerHTML = JSON.parse(localStorage.getItem("list"));
     taskCount = JSON.parse(localStorage.getItem("taskCount"));
     countValue.innerHTML = JSON.parse(localStorage.getItem("countValue"));
-    // filter.innerHTML = JSON.parse(localStorage.getItem("filter"));
+    separate.innerHTML = JSON.parse(localStorage.getItem("separate"));
+    search.value = JSON.parse(localStorage.getItem("search"));
 }
 
 showList();

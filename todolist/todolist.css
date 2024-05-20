@@ -9,22 +9,6 @@ body {
 .container-wrap {
     position: relative;
 }
-#showDate {
-    text-align: center;
-    font-size: 50px;
-    line-height: 1.5em;
-    padding: 10px;
-    color: #AA9E8B;
-    margin: 10px auto;
-    border-radius: 50%;
-    font-weight: bold;
-    font-family: "Raleway";
-    position: absolute;
-    left: 2.5%;
-    top: 0;
-    z-index: 20;
-    width: 25%;
-}
 .container {
     background-color: #fff;
     width: 40%;
@@ -42,12 +26,33 @@ body {
     z-index: 10;
     background-color: #fff;
 }
+#showDate {
+    width: 50%;
+    font-size: 20px;
+    padding: 30px 0 30px 20px;
+    color: #AA9E8B;
+    border-radius: 50%;
+    font-weight: bold;
+    font-family: "Raleway";
+}
+#day {
+    font-size: 50px;
+    float: left;
+    margin-right: 10px;
+    line-height: 50px;
+}
+
 .title h1 {
     font-size: 40px;
-    padding: 20px;
+    padding: 30px;
     text-decoration-color: rgb(150, 150, 228);
     font-family: "Raleway";
-    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    /* justify-content: center; */
+    
+    /* justify-content: center; */
+    /* width: 100%; */
 }
 #inputBox {
     width: 75%;
@@ -151,25 +156,25 @@ button:hover {
     width: 40px;
     height: 35px;
 }
-#filter {
+#separate {
     display: flex;
     width: 75%;
     margin: 10px auto 0 auto;
     justify-content: right;
 }
-#filter button {
+#separate button {
     border: 1px solid #97dabc;
     display: inline-block;
     padding: 10px;
     color: #34e89e;
     background-color: white;
 }
-#filter button:hover {
+#separate button:hover {
     background-color: #34e89e !important;
     color: white !important;
     transition: .4s ease-in;
 }
-#filter #all {
+#separate #all {
     background: #34e89e;  
     background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  
     background: linear-gradient(to right, #0f3443, #34e89e);
@@ -196,7 +201,7 @@ ul li {
 }
 ul li::before {
     content: '';
-    background-image: url(/img/uncheck.png);
+    background-image: url(uncheck.png);
     opacity: 0.7;
     background-size: cover;
     background-position: center;
@@ -212,7 +217,7 @@ ul li.checked {
     background-color: #bbb;
 }
 ul li.checked::before {
-    background-image: url(/img/check.png);
+    background-image: url(check.png);
 }
 ul li span {
     position: absolute;
