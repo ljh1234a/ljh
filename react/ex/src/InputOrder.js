@@ -5,10 +5,17 @@ function InputOrder({giftName, countControl, giftCount, allowOrder, standardValu
         // left: "50%",
         transform: "translate(50%)"
     };
+
+    const styleForm = {
+        width: '80%',
+        margin: '0 auto',
+        border: '1px solid',
+        position: 'relative'
+    }
     
     return (
-        <>
-            <form>
+        <div>
+            <div style={styleForm}>
                 <div>
                     <label>상품명</label>
                     <input 
@@ -44,8 +51,8 @@ function InputOrder({giftName, countControl, giftCount, allowOrder, standardValu
                         value={allowOrder}
                         onChange={onChange}
                         >
-                            <option value={"허용하지 않음"}>허용하지 않음</option>
-                            <option value={"허용하지 않음"}>허용함</option>
+                            <option value="허용하지 않음">허용하지 않음</option>
+                            <option value="허용함">허용함</option>
                     </select>
                 </div>
                 <div>
@@ -60,9 +67,8 @@ function InputOrder({giftName, countControl, giftCount, allowOrder, standardValu
                 <div className="btn">
                     <button style={styleObj} onClick={onCreate}>등록</button>
                 </div>
-            </form>
-            
-        </>
+            </div>
+        </div>
     );
 }
 

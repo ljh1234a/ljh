@@ -11,20 +11,26 @@
 </head>
 <body>
     <div class="container-wrap">
+        <div id="showDate"></div>
         <div class="container">
             <div class="title">
                 <h1>ToDoList</h1>
-                <div id="showDate"></div>
-                <div style="display: flex;">
-                    <div id="leftTodo">남은 일: <span id="countValue"></span>개</div>
-                    <button id="delAllBtn" onclick="delAllList()">전체 삭제</button>
-                </div>
+
                 <div id="inputBox"> 
                     <input type="text" placeholder="할 일을 입력하세요" 
                     id="todo" onkeypress="EnterList(event)" autofocus>
                     <button id="addBtn" onclick="addList()">추가</button>
                 </div>
-                
+                <div id="subMenu">
+                    <div id="leftTodo"><span id="countValue">0</span> TASKS</div>
+                    <input id="search" placeholder="리스트 검색" oninput="searchList()">
+                    <button id="delAllBtn" onclick="delAllList()">전체 삭제</button>
+                </div>
+                <div id="filter">
+                    <button id="all">전체</button>
+                    <button id="active">미완</button>
+                    <button id="complete">완료</button>
+                </div>
             </div>
             <ul id="todoList">
             </ul>

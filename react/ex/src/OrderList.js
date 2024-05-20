@@ -81,7 +81,7 @@ function OrderList() {
                 countControl={countControl}
                 giftCount={giftCount}
                 allowOrder={allowOrder}
-                stadnardValue={standardValue}
+                standardValue={standardValue}
                 onChange={onChange}
                 onCreate={onCreate}
             />

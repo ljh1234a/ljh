@@ -3,8 +3,8 @@ function Order({order, onToggle, onRemove}) {
     return (
         <div>
             <b onClick={() => onToggle(id)}></b>
-            {/* <table>
-                <tr>
+            <table>
+                {/* <tr>
                     <th>상품명</th>
                     <th>관리유무</th>
                     <th>재고 수량</th>
@@ -12,20 +12,20 @@ function Order({order, onToggle, onRemove}) {
                     <th>기준값</th>
                     <th>수정</th>
                     <th>삭제</th>
-                </tr>
+                </tr> */}
                 <tr>
                     <td>{giftName}</td>
                     <td>{countControl}</td>
                     <td>{giftCount}</td>
                     <td>{allowOrder}</td>
                     <td>{standardValue}</td>
-                    <td>수정</td>
+                    <td><button>수정</button></td>
                     <td><button onClick={() => onRemove(id)}>삭제</button></td>
                 </tr>
-            </table> */}
-            
-            {id}. {giftName}, {countControl}, {giftCount}, {allowOrder}, {standardValue}
-            <button onClick={() => onRemove(id)}>삭제</button>
+            </table> 
+            {/* {giftName}, {countControl}, {giftCount}, {allowOrder}, {standardValue} <button>수정</button> <button>삭제</button> */}
+            {/* {id}. {giftName}, {countControl}, {giftCount}, {allowOrder}, {standardValue}
+            <button onClick={() => onRemove(id)}>삭제</button> */}
             
         </div>
     );

@@ -1,32 +1,43 @@
 let todoList = document.getElementById("todoList"); // 리스트를 추가할 ul
+let filter = document.getElementById("filter");
 
-// 오늘 날짜 보이기
-let day = new Date();
-let options = {year: "numeric", month: "long", day: "numeric", weekday: "short"};
-let today = day.toDateString("en-EN", options);
-showDate.innerHTML = today;
+// 날짜와 시간을 보여주는 함수
+function getTime() {
+    const date = new Date();
+    const options = {year: "numeric", month: "long", day: "numeric", weekday: "short"};
+    const options2 = {hour12: false}
+    const today = date.toLocaleDateString("en-EN", options);
+    const currentTime = date.toLocaleTimeString("en-EN", options2);
+    showDate.innerHTML = `${today}<br>${currentTime}`;
+}
+
+getTime();
+setInterval(getTime, 1000); // 1초마다 시간이 갱신되게
 
 let taskCount = 0; // 남은 일
-let flag = 1;  // 수정중에 리스트 추가를 막기 위한 flag
+let flag = 1;  // 리스트 수정중에 리스트 추가, 삭제 방지를 위한 flag
 
+// 남은 일 카운트하는 함수
 function displayCount() {
     countValue.innerHTML = taskCount;
 }
 
+// 리스트에 일이 추가되면 남은 일 +1, 완료 or 삭제되면 남은 일 -1
 function taskPlus(n) {
     taskCount += n;
 }
 
 // 리스트 추가 함수
 function addList() {
-    if (flag === 0) {
+    if (flag === 0) { // flag = 0 => 수정중이라면 addList() 함수 실행 x
         todo.focus();
-    } else {
+    } else { // flag != 0 => 수정중이 아니면 addList() 함수 실행 o
         if (todo.value === "") { // 입력창이 비어있다면
             alert("할 일을 입력해주세요");  // 경고창 띄우기
-        } else { // flag가 0이 아니라면(수정중이 아니라면)
+            todo.focus();
+        } else { // 제대로 입력했으면
             let li = document.createElement("li");  // 리스트를 저장할 li
-            li.innerHTML = todo.value;
+            li.innerHTML = todo.value; 
             let editBtn = document.createElement("button"); // 수정버튼
             let deleteBtn = document.createElement("span");  // 삭제버튼
     
@@ -41,7 +52,7 @@ function addList() {
             todoList.appendChild(li);
             todo.value = ""; // 입력창 비우기
             
-            taskPlus(1);
+            taskPlus(1); // 리스트가 추가되면 남은 일 +1
             displayCount();
             saveList();
     
@@ -50,14 +61,13 @@ function addList() {
     }
 }
 
-
 todoList.addEventListener("click", function(e) {
-    if (e.target.tagName === "LI") { // span(삭제버튼)이 아닌 li가 클릭되면
+    if (e.target.tagName === "LI") { // 삭제버튼, 수정버튼이 아닌 li가 클릭되면
         checkList(e); // 완료한 일 체크함수 실행
-    } else if (e.target.tagName === "SPAN") { // span(삭제버튼)이 클릭되면
-        delOneList(e); // 리스트 삭제 함수 실행
     } else if (e.target.tagName === "BUTTON") { // button(수정버튼)이 클릭되면
         editList(e); // 리스트 수정 함수 실행
+    } else if (e.target.tagName === "SPAN") { // span(삭제버튼)이 클릭되면
+        delOneList(e); // 리스트 삭제 함수 실행
     }
 }, false);
 
@@ -70,48 +80,68 @@ function EnterList(event) {
 
 // 완료한 일 체크 함수
 function checkList(e) {
-    e.target.classList.toggle("checked");
+    e.target.classList.toggle("checked"); // 체크되면 class 이름에 checked 추가
 
-    if (e.target.className === "checked") {
-        taskPlus(-1);
+    if (e.target.className === "checked") { // 체크되었으면
+        taskPlus(-1); // 남은 일 -1
         displayCount();
-    } else {
-        taskPlus(1);
+
+        if (all.style.backgroundColor === "white") {
+            for (let i = 0; i < todoList.children.length; i++) {
+                if (todoList.children[i].className === "checked") {
+                    todoList.children[i].style.display = "none";
+                } else {
+                    todoList.children[i].style.display = "block";
+                }
+            }
+        }
+        
+    } else { // 체크를 해제하면
+        taskPlus(1); // 남은 일 + 1
         displayCount();
+        
+        if (all.style.backgroundColor === "white") {
+            for (let i = 0; i < todoList.children.length; i++) {
+                if (todoList.children[i].className === "checked") {
+                    todoList.children[i].style.display = "block";
+                } else {
+                    todoList.children[i].style.display = "none";
+                }
+            }
+        }
     }
     saveList();
 }
 
 // 리스트 삭제 함수
 function delOneList(e) {
-    if (flag === 0) {
+    if (flag === 0) { // flag = 0 => 수정중이라면 delOneList(e) 함수 실행 x
         todo.focus();
-    } else if (flag !== 0) {
+    } else if (flag !== 0) { // flag != 0 => 수정중이 아니면 delOneList(e) 함수 실행 o
         e.target.parentElement.remove(); // e.target.parentElement: 타겟의 부모 = li
     
-        console.log(e.target.parentElement.className);
-        if (e.target.parentElement.className !== "checked") {
-            taskPlus(-1);
+        if (e.target.parentElement.className !== "checked") { // 체크된 상태가 아니면
+            taskPlus(-1); // 남은 일 -1
             displayCount();
-        } else {
+        } else { // 체크된 상태라면 남은 일 중복 삭제 방지를 위해 남은 일 -1 하지않음
             displayCount();
         }
         saveList();
     }
 }
 
-// 리스트 모두 삭제 함수
+// 리스트 전체 삭제 함수
 function delAllList() {
-    if (flag === 0) {
+    if (flag === 0) { // flag = 0 => 수정중이라면 delAllList() 함수 실행 x
         todo.focus();
-    } else if (flag !== 0) {
+    } else if (flag !== 0) { // flag != 0 => 수정중이 아니면 delAllList() 함수 실행 o
         let yesDel = confirm("정말로 모든 리스트를 삭제하시겠습니까?", "");
 
         if (todoList.innerHTML == "") {    // 리스트가 비어있다면
-            alert("삭제할 리스트가 없습니다.");
-        } else if (yesDel) {
-            todoList.innerHTML = "";  // 확인을 클릭하면 리스트 비우기
-            taskCount = 0;
+            alert("삭제할 리스트가 없습니다."); // 경고창 띄우기
+        } else if (yesDel) { // 확인 버틀을 누르면
+            todoList.innerHTML = "";  // 리스트 비우기
+            taskCount = 0; // 남은 일 0으로 초기화
             
             displayCount();
         }
@@ -123,38 +153,111 @@ function delAllList() {
 
 // 리스트 수정 함수
 function editList(e) {
-    if (e.target.style.color === "black" || e.target.style.color === "") {
-        e.target.style.color = "red";
+    if (e.target.style.color === "white" || e.target.style.color === "") {
+        e.target.style.color = "red"; // 수정 버튼을 누르면 버튼색을 빨간색으로 변경
         todo.placeholder = "수정중...";
         todo.value = "";
         todo.focus();
-        flag = 0; // 수정중에 addList() 함수 막기
+        flag = 0; // 수정중에 리스트 추가, 삭제 방지를 위해 flag값 변경
     } else {
-        if (todo.value === "") {
-            alert("수정할 내용을 입력해주세요.")
+        if (todo.value === "") { // 수정할 내용을 입력하지 않았으면
+            alert("수정할 내용을 입력해주세요.") // 경고창 띄우기
             todo.focus();
         } else {
             e.target.parentElement.firstChild.data = todo.value;
             todo.value = "";
             todo.placeholder = "할 일을 입력하세요";
-            e.target.style.color = "white";
+            e.target.style.color = "white"; // 수정이 끝나면 버튼색을 다시 하얀색으로 변경
             todo.focus();
-            flag = 1; // 수정이 끝나면 addList() 함수 가능하게
+            flag = 1; // 수정이 끝나면 리스트 추가, 삭제가 가능하게 flag값 변경
         }
     }
     saveList();
 }
 
+// 리스트 검색 함수
+function searchList() {
+    for (let i = 0; i < todoList.children.length; i++) {
+        if (todoList.children[i].childNodes[0].data.includes(search.value)) { 
+            todoList.children[i].style.display = "block";
+            console.log(search.value);
+        } else if (!todoList.children[i].childNodes[0].data.includes(search.value)) {
+            todoList.children[i].style.display = "none";
+        }
+    }
+}
+
+// 필터 함수
+function filterList(e) {
+    if (e.target.id === "all") {   // All 버튼을 누르면
+        for (let i = 0; i < todoList.children.length; i++) {
+            todoList.children[i].style.display = "block"; // 리스트 전체 보이기
+        }
+        all.style.background = "#34e89e";
+        all.style.background = "-webkit-linear-gradient(to right, #0f3443, #34e89e)";
+        all.style.background = "linear-gradient(to right, #0f3443, #34e89e)";
+        all.style.color ="white";
+
+        active.style.background = "white";
+        active.style.color = "#34e89e";
+
+        complete.style.background = "white";
+        complete.style.color = "#34e89e";
+        
+    } else if (e.target.id === "active") { // Active 버튼을 누르면 
+        for (let i = 0; i < todoList.children.length; i++) {
+            if (todoList.children[i].className === "checked") { // 완료된 일은
+                todoList.children[i].style.display = "none"; // 안보이게 함
+            } else { // 완료되지 않은 일은
+                todoList.children[i].style.display = "block"; // 보이게 함
+            }
+        }
+        all.style.background = "white";
+        all.style.color = "#34e89e";
+        active.style.background = "#34e89e";
+        active.style.background = "-webkit-linear-gradient(to right, #0f3443, #34e89e)";
+        active.style.background = "linear-gradient(to right, #0f3443, #34e89e)";
+        active.style.color = "white";
+        complete.style.background = "white";
+        complete.style.color = "#34e89e";
+
+    } else if (e.target.id === "complete") { // Complete 버튼을 누르면 
+        for (let i = 0; i < todoList.children.length; i++) {
+            if (todoList.children[i].className === "checked") { // 완료된 일은
+                todoList.children[i].style.display = "block";  // 보이게 함
+            } else { // 완료되지 않은 일은
+                todoList.children[i].style.display = "none"; // 안보이게 함
+            }
+        }
+        all.style.background = "white";
+        all.style.color = "#34e89e";
+        active.style.background = "white";
+        active.style.color = "#34e89e";
+        complete.style.background = "#34e89e";
+        complete.style.background = "-webkit-linear-gradient(to right, #0f3443, #34e89e)";
+        complete.style.background = "linear-gradient(to right, #0f3443, #34e89e)";
+        complete.style.color = "white";
+    }
+    saveList();
+}
+
+filter.addEventListener("click", function(e) {
+    filterList(e);
+})
+
+// 로컬 저장소 기억 함수
 function saveList() {
     localStorage.setItem("list", JSON.stringify(todoList.innerHTML));;
     localStorage.setItem("taskCount", JSON.stringify(taskCount));
     localStorage.setItem("countValue", JSON.stringify(countValue.innerHTML));
+    // localStorage.setItem("filter", JSON.stringify(filter.innerHTML));
 }
 
 function showList() {
     todoList.innerHTML = JSON.parse(localStorage.getItem("list"));
     taskCount = JSON.parse(localStorage.getItem("taskCount"));
     countValue.innerHTML = JSON.parse(localStorage.getItem("countValue"));
+    // filter.innerHTML = JSON.parse(localStorage.getItem("filter"));
 }
 
 showList();
