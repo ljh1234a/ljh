@@ -176,29 +176,29 @@ function editList(e) {
     saveList();
 }
 
-
-
 // 리스트 검색 함수
 function searchList() {
     for (let i = 0; i < todoList.children.length; i++) {
-        if (all.style.color === "white") { // 전체상태에서는
-            if (todoList.children[i].childNodes[0].data.includes(search.value)) { 
-                todoList.children[i].style.display = "block";
+        if (all.style.color === "white" || all.style.color === "") { // 전체상태에서는
+            if (todoList.children[i].childNodes[0].data.toLowerCase().includes(search.value.toLowerCase())) { // 검색창 단어와 일치하면
+                todoList.children[i].style.display = "block"; // 보이기
             }  else {
-                todoList.children[i].style.display = "none";
+                todoList.children[i].style.display = "none";  // 숨기기
             }
-        } else if (active.style.color === "white") { // 미완상태에서는
-            if (todoList.children[i].childNodes[0].data.includes(search.value) && todoList.children[i].className !== "checked") { 
-                todoList.children[i].style.display = "block";
+        } else if (active.style.color === "white" || active.style.color === "") { // 미완상태에서는
+            if (todoList.children[i].childNodes[0].data.toLowerCase().includes(search.value.toLowerCase()) && 
+                todoList.children[i].className !== "checked") { // 검색창 단어와 일치하고 체크되지 않은 일(완료되지 않은 일)
+                todoList.children[i].style.display = "block";   // 보이기
             }  else {
-                todoList.children[i].style.display = "none";
+                todoList.children[i].style.display = "none";    // 숨기기
             }
             
-        } else if (complete.style.color === "white") { // 완료상태에서는
-            if (todoList.children[i].childNodes[0].data.includes(search.value) && todoList.children[i].className === "checked") {
-                todoList.children[i].style.display = "block";
+        } else if (complete.style.color === "white" || complete.style.color === "") { // 완료상태에서는
+            if (todoList.children[i].childNodes[0].data.toLowerCase().includes(search.value.toLowerCase()) && 
+                todoList.children[i].className === "checked") { // 검색창 단어와 일치하고 체크된 일(완료된 일)
+                todoList.children[i].style.display = "block";   // 보이기
             }  else {
-                todoList.children[i].style.display = "none";
+                todoList.children[i].style.display = "none";    // 숨기기
             }
         }
     }
@@ -209,7 +209,7 @@ function searchList() {
 function filterList(e) {
     if (e.target.id === "all") {   // 전체 버튼을 누르면
         for (let i = 0; i < todoList.children.length; i++) {
-            if (todoList.children[i].childNodes[0].data.includes(search.value)) {
+            if (todoList.children[i].childNodes[0].data.toLowerCase().includes(search.value.toLowerCase())) {
                 todoList.children[i].style.display = "block"; // 리스트 전체 보이기
             } else {
                 todoList.children[i].style.display = "none";
@@ -228,7 +228,7 @@ function filterList(e) {
         
     } else if (e.target.id === "active") { // 미완 버튼을 누르면 
         for (let i = 0; i < todoList.children.length; i++) {
-            if (todoList.children[i].childNodes[0].data.includes(search.value)) {
+            if (todoList.children[i].childNodes[0].data.toLowerCase().includes(search.value.toLowerCase())) {
                 if (todoList.children[i].className === "checked") { // 완료된 일은
                     todoList.children[i].style.display = "none"; // 안보이게 함
                 } else { // 완료되지 않은 일은
@@ -249,7 +249,7 @@ function filterList(e) {
 
     } else if (e.target.id === "complete") { // 완료 버튼을 누르면 
         for (let i = 0; i < todoList.children.length; i++) {
-            if (todoList.children[i].childNodes[0].data.includes(search.value)) {
+            if (todoList.children[i].childNodes[0].data.toLowerCase().includes(search.value.toLowerCase())) {
                 if (todoList.children[i].className === "checked") { // 완료된 일은
                     todoList.children[i].style.display = "block";  // 보이게 함
                 } else { // 완료되지 않은 일은
@@ -280,16 +280,16 @@ function saveList() {
     localStorage.setItem("list", JSON.stringify(todoList.innerHTML));;
     localStorage.setItem("taskCount", JSON.stringify(taskCount));
     localStorage.setItem("countValue", JSON.stringify(countValue.innerHTML));
-    localStorage.setItem("separate", JSON.stringify(separate.innerHTML));
-    localStorage.setItem("search", JSON.stringify(search.value));
+    // localStorage.setItem("separate", JSON.stringify(separate.innerHTML));
+    // localStorage.setItem("search", JSON.stringify(search.value));
 }
 
 function showList() {
     todoList.innerHTML = JSON.parse(localStorage.getItem("list"));
     taskCount = JSON.parse(localStorage.getItem("taskCount"));
     countValue.innerHTML = JSON.parse(localStorage.getItem("countValue"));
-    separate.innerHTML = JSON.parse(localStorage.getItem("separate"));
-    search.value = JSON.parse(localStorage.getItem("search"));
+    // separate.innerHTML = JSON.parse(localStorage.getItem("separate"));
+    // search.value = JSON.parse(localStorage.getItem("search"));
 }
 
 showList();
