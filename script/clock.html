@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <div id="time"></div> -->
+</head>
+<body>
+    <script>
+        time = document.getElementById('time');
+
+        function Clock() {
+            let bg = document.createElement('div');
+            let audio = document.createElement('audio');
+            let hourHand = document.createElement('div');
+            let minHand = document.createElement('div');
+            let secHand = document.createElement('div');
+
+            this.run = function() {
+                init();
+                interval();
+            }
+
+            let init = function() {
+                document.documentElement.style.height = '100%';
+                let body = document.body;
+                body.style.height = '100%';
+                body.style.margin = 0;
+
+                setCenterElement(bg);
+                bgSize();
+                window.onresize = winResize;
+
+                let border = document.createElement('div');
+                setCenterElement(border);
+                border.style.borderRadius = '50%';
+                border.style.width = '80%';
+                border.style.height = '80%';
+                border.style.borderWidth = '5px';
+                border.style.borderStyle = 'hidden';
+                border.style.borderColor = 'black';
+                border.style.boxShadow = '1px 1px 3px black';
+                border.style.background = 'white';
+                border.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 56%, rgba(221,221,221,1) 100%)';
+
+                let logo = document.createElement('div');
+                logo.innerText = 'time';
+                setCenterElement(logo);
+                logo.style.fontSize = '1.5vw';
+                logo.style.top = '67%';
+
+                for (let i = 0; i < 60; i++) {
+                    let indicator = document.createElement('div');
+                    setCenterElement(indicator);
+
+                    if (i % 5) {
+                        indicator.style.width = '0.2%';
+                        indicator.style.height = '8%';
+                        indicator.style.backgroundColor = 'black';
+                    } else {
+                        indicator.style.width = '1%';
+                        indicator.style.height = '8%';
+                        indicator.style.backgroundColor = 'black';
+                        indicator.style.boxShadow = '-1px 2px 3px black';
+                    }
+
+                    indicator.style.transform = `translate(-50%, -50%) rotate(${i * 6}deg) translate(0, 540%)`;
+                    border.appendChild(indicator);
+                }
+
+                setCenterElement(hourHand);
+                hourHand.style.borderRadius = '50% / 90% 90% 10% 10%';
+                hourHand.style.width = '2%';
+                hourHand.style.height = '30%';
+                hourHand.style.backgroundColor = 'black';
+                hourHand.style.boxShadow = '1px 1px 4px black';
+                hourHand.style.transform = `translate(-50%, -50%,) rotate(0deg) translate(0, -40%)`;
+
+                setCenterElement(minHand);
+                minHand.style.borderRadius = '50% / 90% 90% 10% 10%';
+                minHand.style.width = '2%';
+                minHand.style.height = '30%';
+                minHand.style.backgroundColor = 'black';
+                minHand.style.boxShadow = '1px 1px 4px black';
+                minHand.style.transform = `translate(-50%, -50%,) rotate(0deg) translate(0, -40%)`;
+
+                setCenterElement(secHand);
+                secHand.style.borderRadius = '50% / 90% 90% 10% 10%';
+                secHand.style.width = '1%';
+                secHand.style.height = '42%';
+                secHand.style.backgroundColor = 'black';
+                secHand.style.boxShadow = '1px 1px 4px black';
+                secHand.style.transform = `translate(-50%, -50%,) rotate(0deg) translate(0, -40%)`;
+
+                border.appendChild(logo);
+                border.appendChild(hourHand);
+                border.appendChild(minHand);
+                border.appendChild(secHand);
+                bg.appendChild(border);
+                body.appendChild(bg);
+            }
+
+            let interval = function() {
+                setInterval(function() {
+                    let now = new Date();
+                    let hour = now.getHours();
+                    let min = now.getMinutes();
+                    let sec = now.getSeconds();
+                    let degHour = hour * 30 + min / 2;
+                    let degMin = min * 6;
+                    let degSec = sec * 6;
+
+                    hourHand.style.transform = `translate(-50%, -50%) rotate(${degHour}deg) translate(0, -40%)`;
+                    minHand.style.transform = `translate(-50%, -50%) rotate(${degMin}deg) translate(0, -40%)`;
+                    secHand.style.transform = `translate(-50%, -50%) rotate(${degSec}deg) translate(0, -40%)`;
+                }, 1000)
+            }
+
+            let flag = true;
+            let setCenterElement = function(e) {
+                e.style.position = 'absolute';
+                e.style.top = '50%';
+                e.style.left = '50%';
+                e.style.transform = `translate(-50%, -50%)`;
+            };
+            let winResize = function() {
+                bgSize();
+            };
+            let bgSize = function() {
+                let winHeight = document.body.clientHeight;
+                let winWidth = document.body.clientWidth;
+                if (winHeight > winWidth) {
+                    bg.style.height = bg.style.width = winWidth + 'px';
+                } else {
+                    bg.style.height = bg.style.width = winHeight + 'px';
+                }
+            };
+        }
+
+        const clock = new Clock();
+        clock.run();
+    </script>
+</body>
+</html>

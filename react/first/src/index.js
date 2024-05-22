@@ -31,8 +31,8 @@ let userObject = {
 
 root.render(
   <>
-    <Order />
-    {/* <UserList /> */}
+    {/* <Order /> */}
+    <UserList />
     {/* <InputSample /> */}
     {/* <Game /> */}
     {/* <button onClick={() => {
@@ -52,3 +52,126 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// 최적화 - 메모이제이션, 캐쉬 (CDN)
+// 한번 실행된 구문이나 내용을 저장 후 다시 실행시 값만 리턴
+
+// 조건과 값을 저장할 공간 - 캐쉬
+// let props = [];   // 조건 저장
+// let result = [];  // 조건에 대한 결과값 저장
+
+// function someFunc(i) {
+//   // 조건을 비교
+//   const index = props.indexOf(i); // i와 같은 값이 존재하면 해당 인덱스 리턴, 없으면 -1 리턴
+//   if (index === -1) {
+//     // 복잡한 구문
+//     console.log('복잡한 처리');
+//     props.push(i);
+//     result.push("cashe: " + i * 10);
+//     return console.log(i * 10);
+//   } else {
+//     return console.log(result[index]);
+//   }
+// }
+
+// someFunc(10);
+// someFunc(20);
+// someFunc(10);
+// someFunc(20);
+// someFunc(10);
+// someFunc(20);
+
+
+// let counter = 0;
+
+// Function to increment counter
+// const add = (function () {
+//   let counter = 0;
+//   console.log(counter);
+//   return function () {
+//     counter += 1;
+//     return counter;
+//   }
+// })();
+
+// // Call add() 3 times
+// console.log(add());
+// console.log(add());
+// console.log(add());
+
+// function someFunc() {
+//   // 클로저
+//   let props = [];
+//   let result = [];
+
+//   return (i) => {
+//     const index = props.indexOf(i);
+
+//     if (index === -1) {
+//       console.log('복잡한 처리');
+//       props.push(i);
+//       result.push("cashe: " + i * 10);
+//       return console.log(i * 10);
+//     } else {
+//       return console.log(result[index]);
+//     }
+//   }
+// }
+
+// let func = someFunc();
+// func(10);
+// func(20);
+// func(10);
+// func(20);
+// func(10);
+// func(20);
+
+// 클로저: 내부 함수에서 외부 함수의 범위에 대한 접근을 제공
+// function c() {
+//   let inC = 7; // 클로저 메소드
+
+//   console.log(inC);
+//   return function innerC() {
+//     console.log(inC);
+//   }
+// }
+
+// c();
+
+// let innerC = c();
+// innerC();
+// innerC();
+// innerC();
+
+// function counter() {
+//   let i = 0;
+
+//   return () => {
+//     i++;
+//     console.log(i);
+//   }
+// }
+
+// let closer = counter();
+// closer();
+// closer();
+// closer();
+
+// let newCloser = counter();
+// newCloser();
+// newCloser();
+// newCloser();
+
+// 비동기
+// setTimeout(콜백함수, 시간(ms)) - 특정 시간이 지난 후 작동
+// setInterval(콜백함수, 시간(ms)) - 특정 시간 간격마다 작동
+
+setTimeout(() => {
+  console.log('100');
+}, 500)
+console.log(1);
+setTimeout(() => {
+  console.log('100');
+}, 100);
+
+

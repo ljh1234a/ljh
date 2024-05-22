@@ -1,12 +1,24 @@
-function User({user}) {
+import { useEffect } from "react";
+
+function User({user, onRemove, onToggle}) {
     const {id, username, email} = user;
+
+    useEffect(() => {
+        console.log(user);
+    });
 
     return (
         <div>
-            <b>{id}. {username}: {email}</b>
+            <b 
+            style={{
+                cursor: 'pointer',
+                color: user.active ? 'green' : 'black'
+            }}
+            onClick={() => onToggle(id)}>
+            {id}. {username}</b>: {email}
+            <button onClick={() => onRemove(id)}>삭제</button>
         </div>
     );
-};
-
+}
 
 export default User;

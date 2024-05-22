@@ -1,4 +1,6 @@
-function CreateUser({username, email, onChange, onCreate}) {
+import React from "react";
+
+const CreateUser = ({username, email, onChange, onCreate}) => {
     const style = {
         color: 'aqua'
     };
@@ -20,6 +22,6 @@ function CreateUser({username, email, onChange, onCreate}) {
             <button onClick={onCreate}>등록</button>
         </div>
     );
-}
+};
 
-export default CreateUser;
+export default React.memo(CreateUser);

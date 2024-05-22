@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 비동기
+        // setTimeout(콜백함수, 시간(ms)) - 특정 시간이 지난 후 작동
+        // setInterval(콜백함수, 시간(ms)) - 특정 시간 간격마다 작동
+
+        // setTimeout(() => {
+        // console.log('100');
+        // }, 500)
+        // console.log(1);
+        // setTimeout(() => {
+        // console.log('100');
+        // }, 100);
+
+        // function myDisplayer(some) {
+        //     document.getElementById('demo').innerHTML = some;
+        // }
+
+        // function myFirst() {
+        //     myDisplayer("Hello");
+        // }
+        
+        // function mySecond() {
+        //     myDisplayer("Goodbye");
+        // }
+        
+        // //동기
+        // mySecond();
+        // myFirst();
+
+        // function myCalculator(num1, num2, myCallback) {
+        //     let sum = num1 + num2;
+        //     setTimeout(() => {
+        //         myCallback(sum);
+        //     }, 1000);
+            
+        // }
+
+        // myCalculator(5, 7, myDisplayer);
+
+        // Create an Array
+        // const myNumbers = [4, 1, -20, -7, 5, 9, -6];
+
+        // for (let i = 0; i < myNumbers.length; i++) {
+        //     console.log(myNumbers[i]);
+        // }
+
+        // for (let item of myNumbers) {
+        //     console.log(item);
+        // }
+
+        // let posNumbers = removeNeg(myNumbers, (x) => x >= 0);
+
+        // function removeNeg(numbers, callback) {
+        //     let myArr = [];
+        //     for (let num of numbers) {
+        //         if (callback(num)) {
+        //             myArr.push(num);
+        //         }
+        //     }
+        //     return myArr;
+        // }
+
+        // setTimeout(() => {
+        //     document.getElementById('demo').innerHTML = posNumbers;
+        // }, 1000);
+
+        // function overZero(x) {
+        //     return x >= 0;
+        // }
+
+        // // Call removeNeg with a callback
+        // const posNumbers = removeNeg(myNumbers, (x) => x >= 0);
+
+        // // Display Result
+        // setTimeout(() => {
+        //     document.getElementById("demo").innerHTML = posNumbers;
+        // }, 2000)
+        
+
+        // // Keep only positive numbers
+        // function removeNeg(numbers, callback) {
+        // const myArray = [];
+        // for (const x of numbers) {
+        //     if (callback(x)) {
+        //     myArray.push(x);
+        //     }
+        // }
+        // return myArray;
+        // }
+
+        function useFunc() {
+            const memo = new Map(); // 클로저 변수
+
+            return (a, b, nextFunc) => { // 콜백
+                let count = 0;
+                // 객체는 주소비교함
+                let key = a + ": " + b;
+                // console.dir(key);
+                if (!memo.has(key)) {
+                    // setInterval, setTimeout 타이머 값을 리턴
+                    const timer = setInterval(() => {
+                        console.log('연산중...');
+                        count++; // 1초마다 count 1씩 증가
+                        if (count === 5) { // 카운트가 5가 되면
+                            clearInterval(timer); // 중지
+                            console.log(a + b);
+                            if (nextFunc)
+                                nextFunc();
+                        }
+                    }, 500);
+                    // clearInterval(timer); // 중지
+
+                    memo.set(key, a + b);
+                } else {
+                    console.log(memo.get(key));
+                    if (nextFunc)
+                        nextFunc();
+                }
+            };
+        }
+
+        // 콜백 지옥
+        let closureFunc = useFunc();
+        closureFunc(1, 2, () => {
+            closureFunc(2, 3, () => {
+                closureFunc(3, 4, () => {
+                    closureFunc(4, 5, () => {
+                        closureFunc(1, 2, () => {
+                            closureFunc(1, 2);
+                        });
+                    })
+                })
+            })
+        });
+    </script>
+</body>
+</html>

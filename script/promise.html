@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id='demo'></div>
+    <div id="post"></div>
+</head>
+<body>
+    <script>
+        // function myDisplayer(some) {
+        //     document.getElementById("demo").innerHTML = some;
+        // }
+
+        // let myPromise = new Promise(function(myResolve, myReject) {
+        // let x = 0;
+
+        // // The producing code (this may take some time)
+
+        // if (x == 0) {
+        //     myResolve("OK");
+        // } else {
+        //     myReject("Error");
+        // }
+        // });
+
+        // myPromise.then(
+        // function(value) {myDisplayer(value);},
+        // function(error) {myDisplayer(error);}
+        // );
+
+        function myDisplayer(some) {
+            document.getElementById("demo").innerHTML = some;
+        }
+
+        // function getFile(myCallback) {
+        //     // Ajax(비동기적 데이터 전송/수송) - iframe 태그
+        //     let req = new XMLHttpRequest();
+        //     req.open('GET', "https://koreanjson.com/users");
+        //     req.onload = function() {
+        //         if (req.status == 200) {
+        //             myCallback(req.responseText);
+        //         } else {
+        //             myCallback("Error: " + req.status);
+        //         }
+        //     }
+            
+        //     req.send();
+        //     }
+
+        // getFile(myDisplayer);
+
+        function mySuccess(users) {
+            let arrUsers = JSON.parse(users); // 배열로 변환
+            let txt = `
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td>name</td>
+                    </tr>
+                
+            `;
+            if (Array.isArray(arrUsers)) {
+                for (const user of arrUsers) {
+                txt += `<tr>
+                    <td>${user.id}</td>
+                    <td><a href='https://koreanjson.com/posts?userId=${user.id}'>${user.name}</a></td>
+                </tr>`;
+            }
+
+            txt += `</table>`;
+            } else {
+                txt = '잘못된 데이터';
+            }
+            
+            myDisplayer(txt);
+            
+        }
+
+        function displayPost(post) {
+            document.getElementById('post').innerHTML = post;
+        }
+
+        let myPromise = new Promise(function(myResolve, myReject) {
+            let req = new XMLHttpRequest();
+            req.open('GET', "https://koreanjson.com/users");
+            req.onload = function() {
+                if (req.status == 200) {
+                    myResolve(req.response);
+                } else {
+                    myReject("File not Found");
+                }
+            };
+            req.send();
+        });
+
+        myPromise.then(
+            function(value) {mySuccess(value);},
+            function(error) {myDisplayer(error);}
+        );
+
+        // 콜백 지옥 해결 => Promise
+        function useFunc() {
+            const memo = new Map(); // 클로저 변수
+
+            return (a, b) => { // 콜백
+                return new Promise((resolve, reject) => {
+                    let count = 0;
+                    // 객체는 주소비교함
+                    let key = a + ": " + b;
+                    // console.dir(key);
+                    if (!memo.has(key)) {
+                        // setInterval, setTimeout 타이머 값을 리턴
+                        const timer = setInterval(() => {
+                            console.log('연산중...');
+                            count++; // 1초마다 count 1씩 증가
+                            if (count === 5) { // 카운트가 5가 되면
+                                clearInterval(timer); // 중지
+                                console.log(a + b);
+                                // 콜백 사용
+                                // if (nextFunc)
+                                //     nextFunc();
+                                resolve(); // 성공
+                            }
+                        }, 500);
+                        // clearInterval(timer); // 중지
+
+                        memo.set(key, a + b);
+                    } else {
+                        console.log(memo.get(key));
+                        // 콜백 사용
+                        // if (nextFunc)
+                        //     nextFunc();
+                        reject(); // 실패
+                    }
+                });
+            };  
+        }
+
+        let promiseFunc = useFunc();
+        
+        // 프로미스 체이닝
+        promiseFunc(5, 7)
+            .then(() => promiseFunc(4, 6), () => {})
+            .then(() => promiseFunc(3, 5), () => {})
+            .then(() => promiseFunc(2, 4), () => {})
+            .then(() => promiseFunc(2, 4), () => {});
+    </script>
+</body>
+</html>

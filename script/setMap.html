@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='demo'></div>
+    <script>
+        // JavaScript 세트는 고유한 값의 모음입니다.
+        // 각 값은 세트에서 한 번만 나타날 수 있습니다.
+        // 값은 모든 유형, 기본 값 또는 객체일 수 있습니다.
+
+        const letters = new Set();
+        letters.add('a');
+        letters.add('b');
+        letters.add('c');
+        letters.add('a'); // Set: 중복값 무시
+        console.dir(letters);
+
+        if (letters instanceof Set) {
+            for (const letter of letters) {
+                demo.innerText += letter; // abc
+            }
+        }
+        console.log('letters instanceof Set: ' + letters instanceof Set);
+        console.log('letters has b: ' + letters.has('b'));
+        console.log('letters has d: ' + letters.has('d'));
+
+        letters.forEach(function(value) {
+            console.log(value);
+        });
+
+        // const myIterator = letters.values(); // letters.keys()
+        // console.dir(myIterator);
+        // demo.innerHTML += '<br>';
+        // for (let entry of myIterator) {
+        //     demo.innerText += entry;
+        //     console.log(entry);
+        // }
+
+        // const myEntries = letters.entries();
+        // demo.innerHTML += '<br>';
+        // for (let entry of myEntries) {
+        //     demo.innerText += entry;
+        //     console.dir(entry);
+        // }
+
+        function makeIterator(set, type) {
+            let myEntries;
+            if (type == 1) {
+                myEntries = letters.values();
+            } else {
+                myEntries = letters.entries();
+            }
+
+            demo.innerHTML += '<br>';
+            for (const entry of myEntries) {
+                demo.innerHTML += entry + ' ';
+            }
+        }
+
+        makeIterator(letters, 1);
+        makeIterator(letters, 0);
+
+        // 맵은 키가 모든 데이터 유형일 수 있는 키-값 쌍을 보유합니다.
+        // 맵은 키의 원래 삽입 순서를 기억합니다.
+
+        // const fruits = new Map([
+        //     ["apples", 500],
+        //     ["bananas", 300],
+        //     ["oranges", 200]
+        // ]);
+
+        const fruits = new Map();
+        fruits.set('apples', 500);
+        fruits.set('bananas', 300);
+        fruits.set('oranges', 200);
+
+        console.dir(fruits);
+        console.log(fruits.get('bananas'));
+        console.log(fruits.size);
+        fruits.delete('oranges');
+        console.log(fruits);
+
+        fruits.forEach(function(key, value) {
+            console.log(key + ': ' + value);
+        })
+
+        for (const x of fruits.entries()) { // 키-값 쌍으로
+            console.log(x);
+        }
+
+        for (const x of fruits.keys()) { // 키만
+            console.log(x);
+        }
+
+        for (const x of fruits.values()) { // 값만
+            console.log(x);
+        }
+
+        console.log('----------------');
+
+        // Create Objects
+        const apples = {name: 'Apples'};
+        const bananas = {name: 'Bananas'};
+        const oranges = {name: 'Oranges'};
+
+        // Create a Map
+        const fruits2 = new Map();
+
+        // Add new Elements to the Map
+        fruits2.set(apples, 500);
+        fruits2.set(bananas, 300);
+        fruits2.set(oranges, 200);
+
+        console.log(fruits2.get(apples));
+        console.log(fruits2);
+        console.log(fruits2);
+
+        // Create an Array
+        const fruits3 = [
+            {name:"apples", quantity:300},
+            {name:"bananas", quantity:500},
+            {name:"oranges", quantity:200},
+            {name:"kiwi", quantity:150}
+        ];
+
+            // Callback function to Group Elements
+        function myCallback({ quantity }) {
+            return quantity > 200 ? "ok" : "low";
+        }
+
+        // Group by Quantity
+        const result = Map.groupBy(fruits3, myCallback);
+
+        console.log(Array.isArray(result.get('ok')));
+        for (const g of result.get('ok')) {
+            console.log(g.name + ': ' + g.quantity);
+        }
+        console.log(result.get('low'));
+        for (const g of result.get('low')) {
+            console.log(g.name + ': ' + g.quantity);
+        }
+
+        console.log('----------------------');
+        // 최적화
+        // const memo = new Map();
+
+        // function useFunc(a, b) {
+        //     let count = 0;
+        //     // 객체는 주소비교함
+        //     let key = a + ": " + b;
+        //     // console.dir(key);
+        //     if (!memo.has(key)) {
+        //         // setInterval, setTimeout 타이머 값을 리턴
+        //         const timer = setInterval(() => {
+        //             count++; // 1초마다 count 1씩 증가
+        //             console.log('연산중...');
+        //             if (count === 5) { // 카운트가 5가 되면
+        //                 clearInterval(timer); // 중지
+        //                 console.log(a + b);
+        //             }
+        //         }, 1000);
+        //         // clearInterval(timer); // 중지
+
+        //         memo.set(key, a + b);
+        //     } else {
+        //         console.log(memo.get(key));
+        //     }
+        // }
+
+        // useFunc(5, 4);
+        // useFunc(5, 4);
+        // useFunc(5, 4);
+
+        // 클로저
+        function useFunc() {
+            const memo = new Map();
+
+            return (a, b) => {
+                let count = 0;
+                // 객체는 주소비교함
+                let key = a + ": " + b;
+                // console.dir(key);
+                if (!memo.has(key)) {
+                    // setInterval, setTimeout 타이머 값을 리턴
+                    const timer = setInterval(() => {
+                        console.log('연산중...');
+                        count++; // 1초마다 count 1씩 증가
+                        if (count === 5) { // 카운트가 5가 되면
+                            clearInterval(timer); // 중지
+                            console.log(a + b);
+                        }
+                    }, 1000);
+                    // clearInterval(timer); // 중지
+
+                    memo.set(key, a + b);
+                } else {
+                    console.log(memo.get(key));
+                }
+            };
+            
+        }
+
+        let closureFunc = useFunc();
+        closureFunc(1, 2);
+        closureFunc(2, 3);
+        closureFunc(3, 4);
+        closureFunc(1, 2);
+    </script>
+</body>
+</html>

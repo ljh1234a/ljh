@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 순수타입(값), 객체(참조) 비교
+        let obj1 = {name: '홍길동', age: 25, val: {test: 1}};
+        let obj2 = {name: '홍길동', age: 25, val: {test: 1}};
+
+        let obj3 = obj1; // 같은 주소(참조에 의한 복사), obj3이 바뀌면 obj1이 같이 바뀜
+        // obj3 = Object.assign({}, obj1); // 얕은 복사
+        obj3 = {...obj1}; // 스프레드 연산자, 얕은 복사
+
+        const copy = (obj) => {
+            if (typeof obj !== 'object' || obj === null) {
+                return obj;
+            }
+
+            const deep = {};
+            for (let key in obj) { // 객체의 속성값들만큼 반복
+                deep[key] = copy(obj[key]); // 재귀함수
+            }
+
+            return deep;
+        }
+
+        obj3 = copy(obj1); // 깊은 복사
+
+        let val1 = 10;
+        let val2 = val1; // 같은 값(값에 의한 복사)
+
+        console.log(`obj1: ${obj1.name}, ${obj1.age}, ${obj1.val.test} / obj3: ${obj3.name}, ${obj3.age}, ${obj3.val.test}`);
+        console.log(`val1: ${val1} / val2: ${val2}`);
+
+        obj3.name = '마길동';
+        obj3.val.test = 10;
+        val2 = 11;
+        console.log(`obj1: ${obj1.name}, ${obj1.age}, ${obj1.val.test} / obj3: ${obj3.name}, ${obj3.age}, ${obj3.val.test}`);
+        console.log(`val1: ${val1} / val2: ${val2}`);
+
+        val2 = 10;
+
+        // 비교
+        console.log(val1 === val2);
+        console.log(obj1 === obj2);
+        console.dir(obj1);
+        console.log(Object.entries(obj1).toString());
+        console.dir(Object.entries(obj1).toString() === Object.entries(obj2).toString());
+
+        // 직렬화  
+        // JSON.stringfy(): 객체를 문자열로 변경
+        // JSON.parse(): 문자열을 객체로 변경
+        console.log(JSON.stringify(obj1) === JSON.stringify(obj2));
+        console.log(obj1);
+        newObj1 = JSON.stringify(obj1);
+        console.log(newObj1);
+        newObj2 = JSON.parse(newObj1);
+        console.log(newObj2);
+    </script>
+</body>
+</html>
