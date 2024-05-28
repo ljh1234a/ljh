@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 18px;
+            border: 1px solid #bbb;
+            border-radius: 10px;
+        }
+        input[type=button] {
+            background-color: #eee;
+            font-weight: bold;
+        }
+        input[type=button]:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        input[type=text], input[type=number] {
+            width: 100px;
+            padding: 10px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+        th:hover {
+            background-color: #aaa;
+            transition: .6s;
+        }
+        th, td {
+            border: 1px solid;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>EJS</h1>
+    <p>ejs 문법은 &lt;% 와 %&gt; 사이에 표시</p>
+    <input type="button"  onclick="displayUsers()" value="표시">
+    <div>
+        <input type="text" placeholder="이름" id="name">
+        <input type="number" placeholder="나이" id="age">
+        <input type="button" id="addBtn" onclick="addUser()" value="추가">
+    </div>
+    <div id="display" style="font-size: 22px;"></div>
+    <hr>
+    <script>
+        const users = <%- JSON.stringify(users) %>;
+
+        function displayUsers() {
+            let str = `<table>
+                            <tr>
+                                <th onclick='sortUsers("name")'>이름</th>
+                                <th onclick='sortUsers("age")'>나이</th>
+                            </tr>`;
+
+            users.forEach(user => {
+                str += 
+                    `<tr>
+                        <td>${user.name}</td>
+                        <td>${user.age}</td>
+                    </tr>`;
+            })
+
+            str += '</table>'
+            display.innerHTML = str;
+
+            // let str = '';
+
+            // users.map(item => {
+            //     str += `${item.name} ${item.age}살<br>`;
+            //     display.innerHTML += str;
+            // })
+        }
+
+        let flag = {
+            name: 0,
+            age: 0
+        };
+
+        function sortUsers(key) {
+            if (!flag[key]) {
+                users.sort((a, b) => {
+                    if (a[key] < b[key]) return -1;
+                    else return 0;
+                });
+                flag[key] = 1;
+            } else {
+                users.sort((a, b) => {
+                    if (a[key] > b[key]) return -1;
+                    else return 0;
+                    
+                });
+                flag[key] = 0;
+            }
+
+            displayUsers();
+        }
+
+        function addUser() {
+            let nameInput = document.getElementById('name');
+            let ageInput = document.getElementById('age');
+
+            if (nameInput.value === '') {
+                alert('이름을 제대로 입력해주세요');
+                nameInput.focus();
+            } else if (isNaN(ageInput.value) || ageInput.value === '') {
+                alert('나이를 제대로 입력해주세요');
+                ageInput.value = '';
+                ageInput.focus();
+            } else {
+                users.push({name: nameInput.value, age: ageInput.value});
+        
+                nameInput.value = '';
+                ageInput.value = '';
+                
+                displayUsers();
+                nameInput.focus();
+            }
+        }
+    </script>
+</body>
+</html>

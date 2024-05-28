@@ -84,14 +84,14 @@ function UserList() {
         setInputs(users.map((val, i, arr) => {
             }));
             // console.log(users);
-        }, []);
+        }, [users]);
 
     const onRemove = useCallback(
         id => {
             // console.log(id);
             setUsers(users.filter(user => user.id !== id));
             // console.log(users);
-        },[]);
+        },[users]);
 
     const count = useMemo(() => countActiveUsers(users), [users]);
 

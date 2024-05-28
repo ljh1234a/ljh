@@ -8,23 +8,21 @@ import TodoCreate from './components/TodoCreate';
 import { TodoProvider } from './TodoContext';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background: #e9ecef;
-  }
+   body {
+    background: #e9ecdf;
+   }
 `;
 
 function App() {
   return (
-    <>
-      <TodoProvider>
-        <GlobalStyle />
-          <TodoTemplate>
-            <TodoHead />
-            <TodoList />
-          <TodoCreate />
-        </TodoTemplate>
-      </TodoProvider>
-    </>
+    <div>
+      <GlobalStyle />
+      <TodoTemplate>
+        <TodoHead />
+        <TodoList />
+        <TodoCreate />
+      </TodoTemplate>
+    </div>
   );
 }
 
