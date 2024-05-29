@@ -12,11 +12,11 @@
             border: 1px solid #bbb;
             border-radius: 10px;
         }
-        input[type=button] {
+        input[type=button] ,input[type=submit] {
             background-color: #eee;
             font-weight: bold;
         }
-        input[type=button]:hover {
+        input[type=button]:hover, input[type=submit]:hover {
             background-color: #ccc;
             cursor: pointer;
         }
@@ -46,15 +46,25 @@
     <h1>EJS</h1>
     <p>ejs 문법은 &lt;% 와 %&gt; 사이에 표시</p>
     <input type="button"  onclick="displayUsers()" value="표시">
-    <div>
-        <input type="text" placeholder="이름" id="name">
+    <form method="POST" onsubmit="return chkType()">
+        <!-- <input type="text" placeholder="이름" id="name">
         <input type="number" placeholder="나이" id="age">
-        <input type="button" id="addBtn" onclick="addUser()" value="추가">
-    </div>
+        <input type="button" id="addBtn" onclick="addUser()" value="추가"> -->
+        <input type="text" name="name" placeholder="이름">
+        <input type="number" name="age" placeholder="나이">
+        <input type="hidden" name="sortOn">
+        <input type="hidden" name="flagName">
+        <input type="hidden" name="flagAge">
+        <input type="submit" value="추가">
+    </form>
     <div id="display" style="font-size: 22px;"></div>
     <hr>
     <script>
-        const users = <%- JSON.stringify(users) %>;
+        let users = <%- JSON.stringify(users) %>;
+
+        if (<%- show %>) {
+            displayUsers();
+        }
 
         function displayUsers() {
             let str = `<table>
@@ -106,26 +116,33 @@
             displayUsers();
         }
 
-        function addUser() {
-            let nameInput = document.getElementById('name');
-            let ageInput = document.getElementById('age');
+        // function addUser() {
+        //     let nameInput = document.getElementById('name');
+        //     let ageInput = document.getElementById('age');
 
-            if (nameInput.value === '') {
-                alert('이름을 제대로 입력해주세요');
-                nameInput.focus();
-            } else if (isNaN(ageInput.value) || ageInput.value === '') {
-                alert('나이를 제대로 입력해주세요');
-                ageInput.value = '';
-                ageInput.focus();
-            } else {
-                users.push({name: nameInput.value, age: ageInput.value});
+        //     if (nameInput.value === '') {
+        //         alert('이름을 제대로 입력해주세요');
+        //         nameInput.focus();
+        //     } else if (isNaN(ageInput.value) || ageInput.value === '') {
+        //         alert('나이를 제대로 입력해주세요');
+        //         ageInput.value = '';
+        //         ageInput.focus();
+        //     } else {
+        //         users.push({name: nameInput.value, age: ageInput.value});
         
-                nameInput.value = '';
-                ageInput.value = '';
+        //         nameInput.value = '';
+        //         ageInput.value = '';
                 
-                displayUsers();
-                nameInput.focus();
+        //         displayUsers();
+        //         nameInput.focus();
+        //     }
+        // }
+
+        function chkType() {
+            if (frm[0].value === '' || frm[1].value === '') {
+                return false;
             }
+            return true; 
         }
     </script>
 </body>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 18px;
+            border: 1px solid #bbb;
+            border-radius: 10px;
+        }
+        button, input[type=submit] {
+            background-color: #eee;
+            font-weight: bold;
+        }
+        button:hover, input[type=submit]:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        input[type=text], input[type=number] {
+            width: 100px;
+            padding: 10px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th {
+            background-color: #ddd;
+            cursor: pointer;
+        }
+        th:hover {
+            background-color: #aaa;
+            transition: .6s;
+        }
+        th, td {
+            border: 1px solid;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <button id="btnShowUser" onclick="showUsers()">표시</button>
+    <form method="POST" onsubmit="return chkType()">
+        <input type="text" name="name" placeholder="이름">
+        <input type="number" name="age" placeholder="나이">
+        <input type="hidden" name="sortOn">
+        <input type="hidden" name="flagName">
+        <input type="hidden" name="flagAge">
+        <input type="submit" value="추가">
+    </form>
+    <ol id="display"></ol>
+
+    <script>
+        let users = <%- JSON.stringify(users) %>;
+        let flagName = flagAge = false;
+        let frm = document.forms[0];
+
+        if (<%- show %>) {
+            showUsers();
+        }
+
+        function showUsers() {
+            display.innerHTML = '';
+
+            let str = `<table>
+                            <tr>
+                                <th onclick='sortUsers("name")'>이름</th>
+                                <th onclick='sortUsers("age")'>나이</th>
+                                <th></th>
+                            </tr>`;
+            
+            users.map(item => {
+                str += `<tr>
+                            <td>${item.name}</td>
+                            <td>${item.age}</td>
+                            <td><button>삭제</button></td>
+                        </tr>`;
+            });
+
+            str += `</table>`;
+
+            display.innerHTML = str;
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        function sortUsers(type) {
+            frm[2].value = type;
+            switch(type) {
+                case 'name':
+                    flagName = !flagName;
+                    frm[3].value = flagName;
+                    sort(type, flagName);
+                    break;
+                case 'age':
+                    flagAge = !flagAge;
+                    frm[4].value = flagName;
+                    sort(type, flagAge);
+                    break;
+                default:
+                    throw new Error('error: sort 타입 없음');
+            }
+        }
+
+        function sort(type, flag) {
+            users.sort(function(a, b) {
+                if (flag) {
+                    if (type === 'name') 
+                        return a[type] == b[type] ? 0 : a[type] > b[type] ? 1 : -1;
+                    else 
+                        return a[type] - b[type]
+                } else {
+                    if (type === 'name')
+                        return a[type] == b[type] ? 0 : a[type] > b[type] ? -1 : 1;
+                    else 
+                        return b[type] - a[type]
+                }
+            });
+            showUsers();
+        }
+
+        function chkType() {
+            if (frm[0].value === '' || frm[1].value === '') {
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

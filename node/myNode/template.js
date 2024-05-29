@@ -46,11 +46,55 @@ const users = [
     },
 ];
 
-http.createServer((req, res) => {
-    fs.readFile("useEjs.ejs", "utf-8", function(err, data) {
-        res.writeHead(200, {"Content-Type" : "text/html"});
-        res.end(ejs.render(data, {users: users}));
+function makeObject(str) {
+    let arrProps = str.split('&');
+    let obj = {};
+    arrProps.forEach(val => {
+        let arrProp = val.split("=");
+        obj[arrProp[0]] = decodeURI(arrProp[1]);
     });
+    return obj;
+}
+
+http.createServer((req, res) => {
+    if (req.method === 'GET') {
+        fs.readFile("useEjs.ejs", "utf-8", function(err, data) {
+            if (err) console.log(err.message);
+            else {
+                res.writeHead(200, {"Content-Type" : "text/html"});
+                res.end(ejs.render(data, {
+                    users: users,
+                    show: false
+                }));
+            }
+        });
+    } else {
+        req.on("data", function(user) {
+            fs.readFile("useEjs.ejs", "utf-8", function(err, data) {
+                let objUser = makeObject(user.toString());
+                let valUser = {
+                    name: objUser.name,
+                    age: objUser.age
+                };
+
+                users.push(valUser);
+                if(objUser.sortOn) {
+                    let flag = objUser.sortOn === "name" 
+                        ? objUser.flagName 
+                        : objUser.flagAge;
+                    sort(objUser.sortOn, flag);
+                }
+
+                res.writeHead(200, {"Content-Type" : "text/html"});
+                res.end(ejs.render(data, {
+                        users: users, 
+                        show: true}));
+            });
+        });
+    }
 }).listen(7777, () => {
     console.log(7777);
 });
+
+
+
