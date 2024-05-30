@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        쿠키 외부 모듈: cookie-parser
+        npm i cookie-parser
+     -->
+    <form method="POST" id="inputForm">
+      <input type="text" name="uid" id="uid" placeholder="아이디" /><br />
+      <input
+        type="password"
+        name="upass"
+        id="upass"
+        placeholder="비밀번호"
+      /><br />
+      <input type="submit" value="로그인" />
+    </form>
+    <script>
+      //   if (window.location.search === "?log=false") {
+      //     alert("아이디 또는 비밀번호가 틀렸습니다.");
+      //     document.getElementById("inputForm").firstElementChild.focus();
+      //   }
+
+        let log = <%= log %>;
+
+        if (log === false) {
+            alert('아이디 또는 비밀번호가 틀렸습니다.');
+            uid.value = '';
+            upass.value = '';
+            uid.focus();
+        }
+    </script>
+  </body>
+</html>
