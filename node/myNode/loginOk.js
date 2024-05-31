@@ -11,24 +11,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const users = [
   {
-    userName: "홍길동",
-    userId: "hong",
-    userPass: "hong123",
+    uname: "홍길동",
+    uid: "hong",
+    upass: "hong123",
   },
   {
-    userName: "김길동",
-    userId: "kim",
-    userPass: "kim123",
+    uname: "김길동",
+    uid: "kim",
+    upass: "kim123",
   },
   {
-    userName: "마길동",
-    userId: "ma",
-    userPass: "ma123",
+    uname: "마길동",
+    uid: "ma",
+    upass: "ma123",
   },
   {
-    userName: "차길동",
-    userId: "cha",
-    userPass: "cha123",
+    uname: "차길동",
+    uid: "cha",
+    upass: "cha123",
   },
 ];
 
@@ -43,7 +43,20 @@ app.get("/", (req, res) => {
       `${req.cookies.uname}님, 환영합니다!<br><a href='/logout'>로그아웃</a>`
     );
   } else {
-    res.send("<a href='/login'>로그인</a><br><a href='/signup'>회원가입</a>");
+    res.send(
+      `
+      <style>
+        a {
+          text-decoration: none;
+          color: black;
+          font-size: 18px;
+        }
+        a:hover {
+          background-color: #ccc;
+        }
+      </style>
+      <a href='/login'>로그인</a><br><a href='/signup'>회원가입</a><br><a href='/userlist'>회원목록</a>`
+    );
   }
 });
 
@@ -61,7 +74,7 @@ app.get("/login", (req, res) => {
 // 회원가입 페이지
 app.get("/signup", (req, res) => {
   res.send(`
-    <form action='POST'>
+    <form method='POST'>
         <input type='text' name='uname' placeholder='이름'><br>
         <input type='text' name='uid' placeholder='아이디'><br>
         <input type='password' name='upass' placeholder='비밀번호'><br>
@@ -70,6 +83,7 @@ app.get("/signup", (req, res) => {
     `);
 });
 
+// 회원가입 처리 페이지
 app.post("/signup", (req, res) => {
   const { uid, uname, upass } = req.body;
 
@@ -78,7 +92,6 @@ app.post("/signup", (req, res) => {
     uname: uname,
     upass: upass,
   };
-
   users.push(user);
 
   res.send(`
@@ -102,7 +115,7 @@ app.post("/login", (req, res) => {
 });
 
 function isUser(uid, upass) {
-  let user = users.find((user) => user.uid === uid && users.upass);
+  let user = users.find((user) => user.uid === uid && user.upass);
   if (user) return user.uname;
   return false;
 }
@@ -111,6 +124,57 @@ function isUser(uid, upass) {
 app.get("/logout", (req, res) => {
   res.clearCookie("auth");
   res.redirect("/");
+});
+
+// 회원목록 페이지
+app.get("/userlist", (req, res) => {
+  let str = "<table><tr><th>이름</th><th>아이디</th><th>비밀번호</th></tr>";
+
+  // for (let i = 0; i < users.length; i++) {
+  //   str += `<td>${users[i].uname}</td><td>${users[i].uid}</td><td>${users[i].upass}</td>`;
+  // }
+
+  users.forEach(
+    (user) =>
+      (str += `<tr><td>${user.uname}</td><td>${user.uid}</td><td>${user.upass}</td></tr>`)
+  );
+
+  str += "</table>";
+  res.send(`
+    <style>
+      h1 {
+        text-align: center;
+        margin: 0;
+      }
+      #home {
+        text-align: center;
+      }
+      #home a {
+        color: black;
+        text-decoration: none;
+      }
+      #home a:hover {
+        background-color: #ccc;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 10px auto;
+      }
+      th {
+        background-color: #eee;
+      }
+      tr, th, td {
+        border: 1px solid;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+      }
+    </style>
+  <div>
+    <h1>회원목록</h1>
+    <div id='home'><a href='/'>돌아가기</a></div>
+    ${str}
+  </div>`);
 });
 
 app.listen(8888, () => {
