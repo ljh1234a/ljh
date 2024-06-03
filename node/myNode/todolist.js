@@ -1,6 +1,16 @@
+/*
+ 서버 메모리 todolist
+ Get /todo 리스트 표시
+ Post /todo 내용 추가
+ Get /todo/:id 특정 내용 표시
+ Put /todo/:id 특정 내용 수정
+ Delete /todo/:id 특정 내용 삭제
+*/
+
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
-const memoryDB = (() => {
+const memoryDB = (function () {
   let myObject = {};
   let db = [];
   let id = 0;
@@ -38,13 +48,15 @@ const memoryDB = (() => {
   return myObject;
 })();
 
-const app = express();
-
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.get("/todo", (req, res) => {
   res.send(memoryDB.get());
 });
+
 app.post("/todo", (req, res) => {
+  // todo
+  // dateTodo(날짜), doTodo(해야할 일), isTodo(했는지)
   let dateTodo = req.body.dateTodo;
   let doTodo = req.body.doTodo;
   let isTodo = req.body.isTodo;
@@ -61,24 +73,27 @@ app.post("/todo", (req, res) => {
     throw new Error("Insert Error!");
   }
 });
+
 app.get("/todo/:id", (req, res) => {
   res.send(memoryDB.get(req.params.id));
 });
+
 app.put("/todo/:id", (req, res) => {
   let id = req.params.id;
-
   let dateTodo = req.body.dateTodo;
   let doTodo = req.body.doTodo;
   let isTodo = req.body.isTodo;
 
   let todo = memoryDB.get(id)[0];
+  console.log(todo);
 
   todo.dateTodo = dateTodo || todo.dateTodo;
   todo.doTodo = doTodo || todo.doTodo;
   todo.isTodo = isTodo || todo.isTodo;
 
-  res.redirect("http://localhost:8888/todo");
+  res.redirect("http://localhost:8888/todo/" + id);
 });
+
 app.delete("/todo/:id", (req, res) => {
   memoryDB.remove(req.params.id);
   res.redirect("http://localhost:8888/todo");
