@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      input {
+        padding: 10px;
+      }
+      input[type="text"] {
+        width: 300px;
+      }
+      table,
+      tr,
+      th,
+      td {
+        border-collapse: collapse;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST">
+      <input type="text" id="inputSql" placeholder="<%=query%>" />
+      <input type="submit" id="btnSql" value="버튼" />
+    </form>
+
+    <h1>Users</h1>
+    <div id="display"></div>
+
+    <script>
+      let inputSql = document.getElementById("inputSql");
+      let query = "<%- query%>";
+      console.log(query);
+
+      // btnSql.onclick = () => {
+      //   query = inputSql.value;
+      //   console.log(query);
+
+      //   let str = `<table border='1'>
+      //               <tr>
+      //                 <th>ID</th>
+      //                 <th>Name</th>
+      //                 <th>Age</th>
+      //               </tr>`;
+
+      //   <% result.forEach(tuple => { %>
+      //     str += `<tr>
+      //               <td><%= tuple.uid %></td>
+      //               <td><%= tuple.uname %></td>
+      //               <td><%= tuple.uage %></td>
+      //             </tr>`;
+      //   <% }); %>
+
+      //   str += `</table>`;
+
+      //   document.getElementById('display').innerHTML = str;
+      // };
+    </script>
+  </body>
+</html>
