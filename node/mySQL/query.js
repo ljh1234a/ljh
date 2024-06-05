@@ -28,8 +28,12 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   const { query } = req.body;
+
+  // \n 개행문자(new line)
+  // \r 개행문자(캐리지 리턴)
+  const run = query.replace(/\n|\r/g, " ");
   fs.readFile("query.html", "utf-8", (err, data) => {
-    client.query(query, (sqlErr, result) => {
+    client.query(run, (sqlErr, result) => {
       if (sqlErr) {
         res.send(
           ejs.render(data, {

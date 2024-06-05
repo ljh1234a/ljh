@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
+      }
+      #post {
+        text-align: center;
+        margin-right: 50px;
+      }
+      #post > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 50px;
+      }
+      #post > div:last-child {
+        margin-left: 50px;
+      }
+      label {
+        font-size: 18px;
+        font-weight: bold;
+        width: 10%;
+      }
+      input[type="text"],
+      textarea {
+        padding: 7px;
+        margin: 10px;
+        width: 600px;
+      }
+      textarea {
+        height: 150px;
+      }
+      input[type="submit"],
+      input[type="button"] {
+        padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+        background-color: rgb(88, 87, 87);
+        color: white;
+        font-size: 18px;
+        border-radius: 10px;
+      }
+      input[type="submit"]:hover,
+      input[type="button"]:hover {
+        background-color: #888787;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <form method="POST" id="post">
+        <h1>게시글 등록</h1>
+        <div>
+          <label>제목</label>
+          <input type="text" id="title" name="title" />
+        </div>
+        <div>
+          <label>작성자</label>
+          <input type="text" id="person" name="person" />
+        </div>
+        <div>
+          <label>내용</label>
+          <textarea id="content" name="content"></textarea>
+        </div>
+        <div>
+          <input type="submit" value="등록" onclick="alertWrite()" />
+          <a href="/"><input type="button" value="목록" /></a>
+        </div>
+      </form>
+    </div>
+    <script>
+      function alertWrite() {
+        alert("글이 등록되었습니다.");
+      }
+    </script>
+  </body>
+</html>

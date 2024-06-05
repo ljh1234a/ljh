@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "맑은 고딕";
+      }
+      #top {
+        display: flex;
+        justify-content: center;
+      }
+      #top h1 {
+        margin: 30px;
+      }
+      input[type="button"] {
+        /* height: 30px; */
+        margin: 25px 10px;
+        font-size: 18px;
+        padding: 10px;
+        border: none;
+        background-color: rgb(90, 87, 87);
+        color: white;
+        border-radius: 10px;
+      }
+      input[type="button"]:hover {
+        background-color: #928f8f;
+        cursor: pointer;
+      }
+      #search {
+        text-align: center;
+        margin-left: 50px;
+      }
+      input[type="text"],
+      input[type="submit"] {
+        padding: 10px 15px;
+        font-size: 18px;
+      }
+      input[type="text"] {
+        width: 400px;
+      }
+      input[type="submit"] {
+        background-color: rgb(90, 87, 87);
+        color: white;
+        border: none;
+        width: 100px;
+      }
+      input[type="submit"]:hover {
+        cursor: pointer;
+        background-color: #928f8f;
+      }
+      #display {
+        text-align: center;
+      }
+      #menu {
+        line-height: 40px;
+        font-weight: bold;
+        background-color: #ddd;
+      }
+      #menu,
+      #menuContent {
+        display: flex;
+        padding: 5px;
+      }
+      #menuContent a {
+        color: black;
+        text-decoration: none;
+        display: block;
+      }
+      #menuContent > div {
+        line-height: 42px;
+      }
+      #menu > form,
+      #menuContent > form {
+        margin: 0 auto;
+      }
+      .num {
+        width: 5%;
+      }
+      .title {
+        width: 50%;
+      }
+      .person {
+        width: 10%;
+      }
+      .date {
+        width: 20%;
+      }
+      .delete {
+        width: 15%;
+      }
+      #search a {
+        color: black;
+      }
+      #menuContent .title {
+        text-align: left;
+      }
+      #menuContent .title a:hover {
+        background-color: #ccc;
+      }
+      .delete {
+        border-radius: 10px;
+        width: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST">
+      <div id="top">
+        <h1>자유 게시판</h1>
+      </div>
+      <div id="search">
+        <input
+          type="text"
+          placeholder="검색어를 입력해주세요"
+          id="inputSearch"
+          value="6"
+        />
+        <form action="/search" method="POST">
+          <input type="submit" value="검색" />
+        </form>
+        <a href="/write"><input type="button" value="글쓰기" id="write" /></a>
+      </div>
+    </form>
+    <div id="display">
+      <div id="menu">
+        <div class="num">No</div>
+        <div class="title">제목</div>
+        <div class="person">작성자</div>
+        <div class="date">작성일</div>
+        <form action="/delete" method="POST">
+          <input class="delete" type="submit" value="전체 삭제" />
+        </form>
+      </div>
+      <% posts.forEach(post => { %>
+      <div id="menuContent">
+        <div class="num"><%=post.id%></div>
+        <div class="title">
+          <a href="/content/<%=post.id%>"><%=post.title%></a>
+        </div>
+        <div class="person"><%=post.person%></div>
+        <div class="date">
+          <%=post.created.toLocaleDateString()%>
+          <%=post.created.toLocaleTimeString('kr-KR')%>
+        </div>
+        <form action="/delete/<%=post.id%>" method="POST">
+          <input class="delete" type="submit" value="삭제" />
+        </form>
+      </div>
+      <% }) %>
+    </div>
+    <script>
+      let inputSearch = document.getElementById("inputSearch");
+    </script>
+  </body>
+</html>
