@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>보기</title>
+  </head>
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    a {
+        color: black;
+        text-decoration: none;
+        padding: 10px;
+        background-color: rgb(167, 167, 167);
+        font-weight: bold;
+        color: white;
+    }
+    a:hover {
+        background-color: #ccc;
+        cursor: pointer;
+    }
+    #topMenu {
+        display: flex;
+    }
+    #topMenu > a {
+        padding: 15px;
+    }
+    #content-wrap {
+        font-size: 18px;
+        /* border: 1px solid #bbb; */
+        border-radius: 20px;
+        height: 90vh;
+        width: 800px;
+        margin: 10px auto;
+        background-color: rgb(221, 231, 252);
+    }
+    #content-wrap > div:first-child {
+        display: flex;
+        font-weight: bold;
+        align-items: center;
+        height: 10vh;
+        width: 650px;
+        margin: 0 auto;
+    }
+    #content-wrap > div > div:first-child {
+        width: 10%;
+    }
+    #content-wrap > div > div:nth-child(2) {
+        width: 57%;
+    }
+    #content-wrap > div > div:last-child {
+        width: 33%;
+    }
+    #content-wrap > div:last-child {
+        width: 650px;
+        margin: 0 auto;
+    }
+  </style>
+  <body>
+    <!-- 
+        메뉴: 리스트, 등록 
+        다른 페이지를 삽입: include
+    -->
+
+    <!-- <span><a href="/">메인</a></span>
+    <span><a href="/insert">등록</a></span> -->
+    <div id="topMenu">
+        <%- include(process.cwd() + '/headmenu.html') %>
+        <a href="/edit/<%= result.board_id %>">수정</a>
+        <a onclick="askDel()"">삭제</a>
+    </div>
+    <!-- <form action="/delete/<%= result.board_id %>" method="POST">
+      <input type="submit" value="삭제" />
+    </form> -->
+    
+    <div id="content-wrap">
+        <div>
+            <div>No.<%= result.board_id %></div>
+            <div><%= result.board_title %></div>
+            <div>
+                <%= result.board_date.toLocaleDateString() %> 
+                <%= result.board_date.toLocaleTimeString() %>
+            </div>
+        </div>
+        <div>
+            <%= result.board_content %>
+        </div>
+    </div>
+    
+    <script>
+      function askDel() {
+        let isDel = confirm("정말로 삭제하시겠습니까?");
+        if (isDel) {
+          location.href = "/delete/<%= result.board_id %>";
+        }
+      }
+    </script>
+  </body>
+</html>

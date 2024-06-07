@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>수정</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    a {
+      color: black;
+      text-decoration: none;
+      padding: 10px;
+      background-color: rgb(167, 167, 167);
+      font-weight: bold;
+      color: white;
+    }
+    a:hover {
+      background-color: #ccc;
+      cursor: pointer;
+    }
+    #topMenu {
+      display: flex;
+    }
+    #topMenu > a {
+      padding: 15px;
+    }
+    #inputForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+    #title {
+      padding: 5px;
+      width: 500px;
+    }
+    #content {
+      padding: 5px;
+      margin-top: 20px;
+      width: 500px;
+      height: 300px;
+    }
+    #insert {
+      margin-top: 20px;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 10px;
+      background-color: #bbb;
+      font-weight: bold;
+    }
+    #insert:hover {
+      background-color: #ccc;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div id="topMenu"><%- include(process.cwd() + '/headmenu.html') %></div>
+    <h1 style="text-align: center">수정</h1>
+    <form id="inputForm" method="POST">
+      <input
+        id="title"
+        type="text"
+        name="title"
+        placeholder="제목"
+        value="<%= result.board_title %>"
+      />
+      <textarea id="content" name="content">
+<%= result.board_content %></textarea
+      >
+
+      <input id="insert" type="submit" value="완료" />
+    </form>
+  </body>
+</html>

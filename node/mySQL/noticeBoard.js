@@ -123,6 +123,21 @@ app.post("/delete/:id", (req, res) => {
 
 app.get("/update/:id", (req, res) => {
   const { id } = req.params;
+  const { title, person, content } = req.body;
+
+  fs.readFile("noticeBoardUpdate.html", "utf-8", (err, data) => {
+    if (err) console.log(err.message);
+    else {
+      res.send(
+        ejs.render(data, {
+          id: id,
+          title: title,
+          person: person,
+          content: content,
+        })
+      );
+    }
+  });
 });
 
 app.post("/update/:id", (req, res) => {
