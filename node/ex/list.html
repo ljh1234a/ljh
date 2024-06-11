@@ -1,0 +1,88 @@
+<%- include(process.cwd() + '/header.html') %>
+<body>
+    <script>
+        console.dir(<%-JSON.stringify(results)%>);
+    </script>
+    <%- include(process.cwd() + '/headmenu.html') %>
+    <div id="paginArea"></div>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>내용</th>
+            <th>날짜</th>
+        </tr>
+
+        <% if(results[0].length === 0) { %>
+            <tr><td colspan="3">등록된 데이터 없음.</td></tr>
+        <% } %>
+
+        <% results[0].forEach(function(item, index) { %>
+            <tr>
+                <td><%= item.board_id %></td>
+                <td><a href="/view/<%= item.board_id %>"><%= item.board_content %></a></td>
+                <td><%= item.board_date %></td>
+            </tr>
+        <% }); %>
+    </table>
+    
+    <script>
+        const results = <%- JSON.stringify(results) %>;
+        let page = <%= page %>;
+        let per = <%= per %>;
+        let block = <%= block %>;        
+
+        /*
+            target: 표시하고 싶은 요소
+            start: 시작 위치
+            totalCount: 전체 레코드 수
+            rowPerPage: 한 페이지에 표시할 레코드 수
+            blockSet: 링크 표시 수
+            first: 처음을 표시할 문장이나 모양
+            pre: 이전을 표시할 문장이나 모양
+        */
+        function paging(target, start, totalCount, rowPerPage, blockSet, first, pre, next, last) {
+            let output = "";
+            let page = pre_start = 0;
+            output += `<a href='/0'>${first}</a> &nbsp;`;
+
+            page = Math.floor(start / (rowPerPage * blockSet));
+            if (totalCount > rowPerPage) {
+                if (start + 1 > rowPerPage * blockSet) {
+                pre_start = page * rowPerPage * blockSet - rowPerPage;
+                output += `<a href='/${pre_start}'>${pre}</a>`;
+                } else output += pre;
+            }
+
+            if (totalCount > 0) output += ' | ';
+
+            for (let i = 0;  i < blockSet; i++) {
+                let ln = (page * blockSet + i) * rowPerPage;
+                page_num = page * blockSet + i + 1;
+                if (ln < totalCount) {
+                if (ln != start) output += `<a href='/${ln}'>${page_num}</a> | `;
+                else output += `[<b>${page_num}</b>] | `;
+                }
+            }
+
+            if (totalCount > ((page + 1) * rowPerPage * blockSet)) {
+                let n_start = (page + 1) * rowPerPage * blockSet;
+                output += `<a href='/${n_start}'>${next}</a>`;
+            } else output += next;
+
+            let end_start = Math.floor(totalCount / rowPerPage) * rowPerPage;
+            
+            if(!(totalCount % rowPerPage)) {
+                end_start -= rowPerPage;
+            }
+            
+            output += `&nbsp; <a href='/${end_start}'>${last}</a>`;
+
+            target.innerHTML = output;
+        }
+
+        
+        
+        paging(paginArea, page, results[1][0]["recodeCount"], per, block, "처음", "이전", "다음", "끝");
+    </script>
+</body>
+</html>

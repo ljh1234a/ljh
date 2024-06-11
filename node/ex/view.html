@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="topMenu">
+        <%- include(process.cwd() + '/headmenu.html') %>
+        <a href="/board/edit/<%= result.board_id %>">수정</a>
+        <a onclick="askDel()"">삭제</a>
+    </div>
+    <!-- <form action="/delete/<%= result.board_id %>" method="POST">
+      <input type="submit" value="삭제" />
+    </form> -->
+    
+    <div id="content-wrap">
+        <div>
+            <div>No.<%= result.board_id %></div>
+            <div><%= result.board_title %></div>
+            <div>
+                <%= result.board_date.toLocaleDateString() %> 
+                <%= result.board_date.toLocaleTimeString() %>
+            </div>
+        </div>
+        <div>
+            <%= result.board_content %>
+        </div>
+    </div>
+    
+    <script>
+      function askDel() {
+        let isDel = confirm("정말로 삭제하시겠습니까?");
+        if (isDel) {
+          location.href = "/board/delete/<%= result.board_id %>";
+        }
+      }
+    </script>
+</body>
+</html>

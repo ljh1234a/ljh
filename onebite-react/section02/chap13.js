@@ -1,10 +1,35 @@
-const promise = new Promise(() => {
-  // 비동기 작업 실행하는 함수
-  // executor
+function add10(num) {
+  const promise = new Promise((resolve, reject) => {
+    // 비동기 작업 실행하는 함수
+    // executor
 
-  setTimeout(() => {
-    console.log("안녕");
-  }, 2000);
-});
+    setTimeout(() => {
+      if (typeof num === "number") {
+        resolve(num + 10);
+      } else {
+        reject("num이 숫자가 아닙니다");
+      }
+    }, 2000);
+  });
 
-console.log(promise);
+  return promise;
+}
+
+// then 메서드(성공), catch 메서드(실패)
+// promise 체이닝: then, catch 연결
+
+const p = add10(0);
+p.then((result) => {
+  console.log(result);
+  return add10(result);
+})
+  .then((result) => {
+    console.log(result);
+    return add10(undefined);
+  })
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });

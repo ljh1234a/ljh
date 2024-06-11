@@ -63,27 +63,70 @@ client.query("SELECT count(*) as recodeCount FROM board", (err, result) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  fs.readFile("list.html", "utf-8", (err, data) => {
-    const sql1 = "SELECT * FROM board ORDER BY board_id DESC;";
+const per = 18;
+const block = 10;
+
+app.get("/board/", function (req, res) {
+  let page = 0;
+  getList(page, res);
+});
+app.get("/board/list/:page", function (req, res) {
+  let { page } = req.params;
+  if (!page) {
+    page = 0;
+    getList(page, res);
+  } else {
+    getList(page, res);
+  }
+});
+function getList(page, res) {
+  fs.readFile("list.html", "utf-8", function (err, data) {
+    const sql1 = `SELECT * FROM board ORDER BY board_id DESC LIMIT ${page}, ${per};`;
     const sql2 = "SELECT count(*) as recodeCount FROM board;";
-    client.query(sql1 + sql2, (err, result) => {
+    client.query(sql1 + sql2, function (err, result) {
+      // console.log(results[1][0].recodeCount);
+
       res.send(
         ejs.render(data, {
           result: result,
+          per: per,
+          page: page,
+          block: block,
         })
       );
     });
   });
-});
+}
 
-app.get("/insert", (req, res) => {
+// app.get(["/", "/:page"], function (req, res) {
+//   const per = 15;
+//   const block = 10;
+//   let { page } = req.params;
+//   if (!page) page = 0;
+
+//   fs.readFile("list.html", "utf-8", function (err, data) {
+//     const sql1 = `SELECT * FROM board ORDER BY board_id DESC LIMIT ${page}, ${per};`;
+//     const sql2 = "SELECT count(*) as recodeCount FROM board;";
+//     client.query(sql1 + sql2, function (err, result) {
+//       res.send(
+//         ejs.render(data, {
+//           result: result,
+//           per: per,
+//           page: page,
+//           block: block,
+//         })
+//       );
+//     });
+//   });
+// });
+
+app.get("/board/insert", (req, res) => {
   fs.readFile("insert.html", "utf-8", (err, data) => {
     res.send(data);
   });
 });
 
-app.post("/insert", (req, res) => {
+app.post("/board/insert", (req, res) => {
   const { title, content } = req.body;
   const date = new Date();
   const created_time = `
@@ -97,16 +140,16 @@ app.post("/insert", (req, res) => {
         console.log(err.sqlMessage);
         return;
       } else {
-        res.redirect("/");
+        res.redirect("/board/");
       }
     }
   );
 });
 
-app.get("/view/:id", (req, res) => {
+app.get("/board/view/:id", (req, res) => {
   const { id } = req.params;
   if (!id) {
-    res.redirect("/");
+    res.redirect("/board/");
   }
   fs.readFile("view.html", "utf-8", (err, data) => {
     client.query(
@@ -122,7 +165,7 @@ app.get("/view/:id", (req, res) => {
   });
 });
 
-app.get("/edit/:id", (req, res) => {
+app.get("/board/edit/:id", (req, res) => {
   const { id } = req.params;
 
   fs.readFile("edit.html", "utf-8", (err, data) => {
@@ -139,7 +182,7 @@ app.get("/edit/:id", (req, res) => {
   });
 });
 
-app.post("/edit/:id", (req, res) => {
+app.post("/board/edit/:id", (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
 
@@ -150,13 +193,13 @@ app.post("/edit/:id", (req, res) => {
         console.log(err.sqlMessage);
         return;
       } else {
-        res.redirect(`/view/${id}`);
+        res.redirect(`/board/view/${id}`);
       }
     }
   );
 });
 
-app.get("/delete/:id", (req, res) => {
+app.get("/board/delete/:id", (req, res) => {
   const { id } = req.params;
 
   client.query(`DELETE FROM board WHERE board_id = ${id}`, (err, result) => {
@@ -164,57 +207,13 @@ app.get("/delete/:id", (req, res) => {
       console.log(err.sqlMessage);
       return;
     } else {
-      res.redirect("/");
+      res.redirect("/board/");
     }
   });
 });
 
-// app.get("/", "/:page", (req, res) => {
-//   const per = 15;
-//   const block = 10;
-//   let { page } = req.params;
-//   if (!page) page = 0;
-
-//   fs.readFile("list.html", "utf-8", (err, data) => {
-//     const sql1 = `SELECT * FROM board ORDER BY board_id DESC LIMIT ${page}, ${per};`;
-//     const sql2 = "SELECT count(*) as recodeCount FROM board;";
-//     client.query(sql1 + sql2, (err, result) => {
-//       res.send(
-//         ejs.render(data, {
-//           result: result,
-//           per: per,
-//           page: page,
-//           block: block,
-//         })
-//       );
-//     });
-//   });
-// });
-
-app.get(["/", "/:page"], function (req, res) {
-  const per = 15;
-  const block = 10;
-  let { page } = req.params;
-  if (!page) page = 0;
-
-  fs.readFile("list.html", "utf-8", function (err, data) {
-    const sql1 = `SELECT * FROM board ORDER BY board_id DESC LIMIT ${page}, ${per};`;
-    const sql2 = "SELECT count(*) as recodeCount FROM board;";
-    client.query(sql1 + sql2, function (err, result) {
-      res.send(
-        ejs.render(data, {
-          result: result,
-          per: per,
-          page: page,
-          block: block,
-        })
-      );
-    });
-  });
-});
-
 app.all("*", (req, res) => {
-  res.send('존재하지 않는 페이지<br><a href="/">돌아가기</a>');
+  res.send('존재하지 않는 페이지<br><a href="/board/">돌아가기</a>');
 });
 
 app.listen(port, () => {

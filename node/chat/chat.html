@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <!-- 중요 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- <link rel="stylesheet" href="/css/chat.css" /> -->
+    <style>
+      #people {
+        text-align: center;
+        margin-top: 30px;
+        font-weight: bold;
+      }
+      #container-wrap {
+        position: relative;
+      }
+      #container {
+        width: 450px;
+        margin: 30px auto 70px auto;
+        height: calc(100vh - 160px);
+        overflow-y: auto;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: rgb(217, 183, 228);
+      }
+      #container::-webkit-scrollbar {
+        display: none;
+      }
+      #search {
+        position: absolute;
+        display: flex;
+        top: 0;
+        width: 450px;
+        justify-content: center;
+        margin-right: 10px;
+        z-index: 10;
+      }
+      #myName {
+        padding: 10px;
+        font-weight: bold;
+      }
+      #searchInput {
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      #searchBtn {
+        background-color: rgb(217, 183, 228);
+      }
+      #searchBtn img {
+        width: 25px;
+      }
+      #searchBtn img:hover {
+        opacity: 0.5;
+      }
+      #display {
+        position: relative;
+        margin-bottom: 20px;
+      }
+      /* div.red,
+      div.blue {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+      }
+      div.red {
+        background-color: red;
+        top: 100px;
+        left: 300px;
+      }
+      div.blue {
+        background-color: blue;
+        top: 100px;
+        left: 200px;
+      } */
+      #message {
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid #bbb;
+        width: 300px;
+      }
+      #dataName {
+        font-weight: bold;
+      }
+      #myDataMessage {
+        background-color: yellow;
+        border-radius: 10px;
+        padding: 10px;
+        line-height: 60px;
+      }
+      #otherDataMessage {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+        line-height: 60px;
+      }
+      #dataTime {
+        font-size: 12px;
+      }
+      button {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      #me {
+        text-align: right;
+        display: block;
+        margin-right: 40px;
+      }
+      #other {
+        text-align: left;
+        display: block;
+      }
+      #sendBtn {
+        background-color: yellow;
+      }
+      #sendBtn:hover {
+        opacity: 0.5;
+      }
+      #bottom {
+        bottom: 0;
+        position: absolute;
+        z-index: 100;
+        margin-left: 15px;
+        padding-bottom: 10px;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="people">참여자 :</div>
+    <div id="container-wrap">
+      <div id="container">
+        <div id="search">
+          <div id="myName"></div>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder=" 대화 내용 검색"
+            onkeypress="enterSearch(event)"
+          />
+          <button id="searchBtn" onclick="searchMessage()">
+            <img
+              src="https://cdn.icon-icons.com/icons2/2406/PNG/512/search_magnifier_icon_145939.png"
+            />
+          </button>
+        </div>
+        <ul id="display" style="list-style: none"></ul>
+        <!-- <div class="red" id="red"></div>
+        <div class="blue" id="blue"></div> -->
+
+        <!-- <button id="up">위</button>
+        <button id="down">아래</button>
+        <button id="left">왼쪽</button>
+        <button id="right">오른쪽</button> -->
+        <div id="bottom">
+          <!-- <input type="text" id="uname" placeholder="이름" /> -->
+          <input
+            type="text"
+            id="message"
+            placeholder="메시지"
+            onkeypress="enterSend(event)"
+          />
+          <button id="sendBtn" onclick="sendMessage()">전송</button>
+          <input type="color" id="ucolor" value="#A8F0F5" />
+        </div>
+      </div>
+    </div>
+    <script>
+      // 이름 입력받기
+      let uname = prompt("이름을 입력하세요.");
+
+      if (!uname || uname === " ") {
+        window.location.reload();
+        alert("이름을 제대로 입력하지 않았습니다.");
+      } else {
+        alert(`반갑습니다! ${uname}님`);
+      }
+
+      myName.innerHTML = `${uname}`;
+      message.focus();
+
+      console.dir(io);
+      const socket = io.connect();
+
+      // 메시지 전송 함수
+      function sendMessage() {
+        const options = { hour: "numeric", minute: "numeric" };
+
+        // 사용자 이벤트
+        socket.emit("msg", {
+          uname: uname,
+          message: message.value,
+          ucolor: ucolor.value,
+          time: new Date().toLocaleTimeString("ko-KR", options),
+        });
+
+        message.value = "";
+        message.focus();
+      }
+
+      // up.onclick = function () {
+      //   let top = parseInt(
+      //     window.getComputedStyle(red).getPropertyValue("top")
+      //   );
+      //   socket.emit("redUp", { topPos: top });
+      // };
+
+      // socket.on("redUp", function (data) {
+      //   red.style.top = data.topPos - 5 + "px";
+      //   console.log(data);
+      // });
+
+      socket.on("showMsg", function (data) {
+        let str = "";
+        str += "<li>";
+
+        // 메시지를 입력하지 않았으면 경고창 띄우기
+        if (data.message == "" || data.message == " ") {
+          alert("보낼 메세지를 입력하세요");
+          message.focus();
+        } else {
+          if (data.uname === uname) {
+            // 본인은 오른쪽에 노란색으로 메시지 표시
+            str += `<span id = 'me'>
+                      <span id='dataName'>${data.uname}</span><br>
+                      <span id='dataTime'>${data.time}</span> 
+                      <span id='myDataMessage'>${data.message}</span>
+                    </span><br>`;
+          } else {
+            // 다른 사람은 왼쪽에 흰색으로 메시지 표시
+            str += `<span id = 'other'>
+                      <span id='dataName'>${data.uname}</span><br>
+                      <span id='otherDataMessage'>${data.message}</span> 
+                      <span id='dataTime'>${data.time}</span> 
+                    </span><br>`;
+          }
+          str += "</li>";
+
+          display.insertAdjacentHTML("beforeend", str);
+
+          document.getElementById("container").style.background = data.ucolor;
+          document.getElementById("bottom").style.background = data.ucolor;
+          document.getElementById("myName").style.background = data.ucolor;
+          document.getElementById("searchBtn").style.background = data.ucolor;
+
+          // 채팅이 입력되면 자동으로 스크롤 아래로 이동
+          container.scrollTop = container.scrollHeight;
+        }
+      });
+
+      // 메시지 내용 검색 기능 함수
+      function searchMessage() {
+        for (let i = 0; i < myDataMessage.length; i++) {
+          if (searchInput.value == "" || searchInput.value == " ") {
+            myDataMessage[i].style.backgroundColor = "yellow";
+            myDataMessage[i].style.color = "black";
+          } else if (myDataMessage[i].innerText.includes(searchInput.value)) {
+            myDataMessage[i].style.backgroundColor = "black";
+            myDataMessage[i].style.color = "white";
+          } else {
+            myDataMessage[i].style.backgroundColor = "yellow";
+            myDataMessage[i].style.color = "black";
+          }
+        }
+
+        for (let i = 0; i < otherDataMessage.length; i++) {
+          if (searchInput.value == "" || searchInput.value == " ") {
+            otherDataMessage[i].style.backgroundColor = "white";
+            otherDataMessage[i].style.color = "black";
+          } else if (
+            otherDataMessage[i].innerText.includes(searchInput.value)
+          ) {
+            otherDataMessage[i].style.backgroundColor = "black";
+            otherDataMessage[i].style.color = "white";
+          } else {
+            otherDataMessage[i].style.backgroundColor = "white";
+            otherDataMessage[i].style.color = "black";
+          }
+        }
+
+        searchInput.focus();
+        searchInput.value = "";
+      }
+
+      // 참여자 업데이트 함수
+      function updateUsers(users) {
+        people.innerHTML = `참여자 : ${users.join(", ")}`;
+      }
+
+      socket.on("updateUsers", function (users) {
+        updateUsers(users);
+      });
+
+      // 엔터키로 메시지를 전송할 수 있게 하는 함수
+      function enterSend(event) {
+        if (event.keyCode == "13") {
+          sendMessage();
+        }
+      }
+
+      // 엔터키로 메시지를 검색할 수 있게 하는 함수
+      function enterSearch(event) {
+        if (event.keyCode == "13") {
+          searchMessage();
+        }
+      }
+    </script>
+  </body>
+</html>

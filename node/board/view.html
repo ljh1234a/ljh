@@ -47,13 +47,13 @@
         margin: 0 auto;
     }
     #content-wrap > div > div:first-child {
-        width: 10%;
+        width: 15%;
     }
     #content-wrap > div > div:nth-child(2) {
-        width: 57%;
+        width: 50%;
     }
     #content-wrap > div > div:last-child {
-        width: 33%;
+        width: 35%;
     }
     #content-wrap > div:last-child {
         width: 650px;
@@ -70,7 +70,7 @@
     <span><a href="/insert">등록</a></span> -->
     <div id="topMenu">
         <%- include(process.cwd() + '/headmenu.html') %>
-        <a href="/edit/<%= result.board_id %>">수정</a>
+        <a href="/board/edit/<%= result.board_id %>">수정</a>
         <a onclick="askDel()"">삭제</a>
     </div>
     <!-- <form action="/delete/<%= result.board_id %>" method="POST">
@@ -95,7 +95,7 @@
       function askDel() {
         let isDel = confirm("정말로 삭제하시겠습니까?");
         if (isDel) {
-          location.href = "/delete/<%= result.board_id %>";
+          location.href = "/board/delete/<%= result.board_id %>";
         }
       }
     </script>
