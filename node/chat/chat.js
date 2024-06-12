@@ -22,26 +22,38 @@ let users = {};
 io.sockets.on("connection", function (so) {
   console.dir(so);
 
-  so.on("msg", function (data) {
-    console.log(data);
-
+  so.on("In", function (data) {
     users[so.id] = data.uname;
-
+    io.sockets.emit("userIn", { uname: data.uname });
     io.sockets.emit("updateUsers", Object.values(users));
-
-    // public 모든 클라이언트에게 전송
-    io.sockets.emit("showMsg", data);
-
-    // broadcast 자신을 제외한 클라이언트들에게 전송
-    // so.broadcast.emit("showMsg", data);
-
-    // private 특정 클라이언트에게만 전송
-    // io.sockets.to(id).emit()
   });
+
+  so.on("msg", function (data) {
+    io.sockets.emit("showMsg", data);
+  });
+
+  // so.on("msg", function (data) {
+  //   console.log(data);
+
+  //   users[so.id] = data.uname;
+
+  //   io.sockets.emit("updateUsers", Object.values(users));
+
+  //   // public 모든 클라이언트에게 전송
+  //   io.sockets.emit("showMsg", data);
+
+  //   // broadcast 자신을 제외한 클라이언트들에게 전송
+  //   // so.broadcast.emit("showMsg", data);
+
+  //   // private 특정 클라이언트에게만 전송
+  //   // io.sockets.to(id).emit()
+  // });
 
   // 클라이언트가 연결을 끊을 때 참여자 업데이트
   so.on("disconnect", function () {
+    const uname = users[so.id];
     delete users[so.id];
+    io.sockets.emit("userOut", { uname: uname });
     io.sockets.emit("updateUsers", Object.values(users));
   });
 

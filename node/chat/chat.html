@@ -8,6 +8,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <!-- <link rel="stylesheet" href="/css/chat.css" /> -->
     <style>
+      .inOut {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 30px;
+        margin-right: 15px;
+      }
       #people {
         text-align: center;
         margin-top: 30px;
@@ -177,11 +183,22 @@
     </div>
     <script>
       // 이름 입력받기
-      let uname = prompt("이름을 입력하세요.");
+      let uname = prompt("이름을 입력하세요. (미입력 시 익명)");
+      let anonymous = [
+        "라이언",
+        "무지",
+        "어피치",
+        "프로도",
+        "네오",
+        "튜브",
+        "제이지",
+        "콘",
+      ];
 
-      if (!uname || uname === " ") {
-        window.location.reload();
-        alert("이름을 제대로 입력하지 않았습니다.");
+      // 이름 미입력 시 anonymous 배열에서 랜덤으로 이름 가져오기
+      if (!uname || uname.trim() === "") {
+        alert("익명으로 채팅방에 접속합니다.");
+        uname = anonymous[Math.floor(Math.random() * anonymous.length)];
       } else {
         alert(`반갑습니다! ${uname}님`);
       }
@@ -191,6 +208,8 @@
 
       console.dir(io);
       const socket = io.connect();
+
+      socket.emit("In", { uname: uname });
 
       // 메시지 전송 함수
       function sendMessage() {
@@ -225,8 +244,8 @@
         str += "<li>";
 
         // 메시지를 입력하지 않았으면 경고창 띄우기
-        if (data.message == "" || data.message == " ") {
-          alert("보낼 메세지를 입력하세요");
+        if (data.message.trim() === "") {
+          alert("보낼 메세지를 입력하세요.");
           message.focus();
         } else {
           if (data.uname === uname) {
@@ -241,7 +260,7 @@
             str += `<span id = 'other'>
                       <span id='dataName'>${data.uname}</span><br>
                       <span id='otherDataMessage'>${data.message}</span> 
-                      <span id='dataTime'>${data.time}</span> 
+                      <span id='dataTime'>${data.time}</span>
                     </span><br>`;
           }
           str += "</li>";
@@ -258,10 +277,22 @@
         }
       });
 
+      socket.on("userIn", function (data) {
+        let str = `<li class = 'inOut''><span>${data.uname}님이 들어왔습니다.</span></li>`;
+        display.insertAdjacentHTML("beforeend", str);
+        container.scrollTop = container.scrollHeight;
+      });
+
+      socket.on("userOut", function (data) {
+        let str = `<li class = 'inOut'><span>${data.uname}님이 나갔습니다.</span></li>`;
+        display.insertAdjacentHTML("beforeend", str);
+        container.scrollTop = container.scrollHeight;
+      });
+
       // 메시지 내용 검색 기능 함수
       function searchMessage() {
         for (let i = 0; i < myDataMessage.length; i++) {
-          if (searchInput.value == "" || searchInput.value == " ") {
+          if (searchInput.value.trim() === "") {
             myDataMessage[i].style.backgroundColor = "yellow";
             myDataMessage[i].style.color = "black";
           } else if (myDataMessage[i].innerText.includes(searchInput.value)) {
@@ -274,7 +305,7 @@
         }
 
         for (let i = 0; i < otherDataMessage.length; i++) {
-          if (searchInput.value == "" || searchInput.value == " ") {
+          if (searchInput.value.trim() === "") {
             otherDataMessage[i].style.backgroundColor = "white";
             otherDataMessage[i].style.color = "black";
           } else if (
