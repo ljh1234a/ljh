@@ -66,22 +66,6 @@
         position: relative;
         margin-bottom: 20px;
       }
-      /* div.red,
-      div.blue {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-      }
-      div.red {
-        background-color: red;
-        top: 100px;
-        left: 300px;
-      }
-      div.blue {
-        background-color: blue;
-        top: 100px;
-        left: 200px;
-      } */
       #message {
         padding: 5px;
         font-size: 16px;
@@ -89,22 +73,22 @@
         border: 1px solid #bbb;
         width: 300px;
       }
-      #dataName {
+      .dataName {
         font-weight: bold;
       }
-      #myDataMessage {
+      .myDataMessage {
         background-color: yellow;
         border-radius: 10px;
         padding: 10px;
         line-height: 60px;
       }
-      #otherDataMessage {
+      .otherDataMessage {
         background-color: white;
         border-radius: 10px;
         padding: 10px;
         line-height: 60px;
       }
-      #dataTime {
+      .dataTime {
         font-size: 12px;
       }
       button {
@@ -161,15 +145,7 @@
           </button>
         </div>
         <ul id="display" style="list-style: none"></ul>
-        <!-- <div class="red" id="red"></div>
-        <div class="blue" id="blue"></div> -->
-
-        <!-- <button id="up">위</button>
-        <button id="down">아래</button>
-        <button id="left">왼쪽</button>
-        <button id="right">오른쪽</button> -->
         <div id="bottom">
-          <!-- <input type="text" id="uname" placeholder="이름" /> -->
           <input
             type="text"
             id="message"
@@ -184,6 +160,7 @@
     <script>
       // 이름 입력받기
       let uname = prompt("이름을 입력하세요. (미입력 시 익명)");
+
       let anonymous = [
         "라이언",
         "무지",
@@ -196,17 +173,17 @@
       ];
 
       // 이름 미입력 시 anonymous 배열에서 랜덤으로 이름 가져오기
-      if (!uname || uname.trim() === "") {
+
+      if (uname) {
+        alert(`반갑습니다! ${uname}님`);
+      } else if (!uname) {
         alert("익명으로 채팅방에 접속합니다.");
         uname = anonymous[Math.floor(Math.random() * anonymous.length)];
-      } else {
-        alert(`반갑습니다! ${uname}님`);
       }
 
       myName.innerHTML = `${uname}`;
       message.focus();
 
-      console.dir(io);
       const socket = io.connect();
 
       socket.emit("In", { uname: uname });
@@ -227,18 +204,6 @@
         message.focus();
       }
 
-      // up.onclick = function () {
-      //   let top = parseInt(
-      //     window.getComputedStyle(red).getPropertyValue("top")
-      //   );
-      //   socket.emit("redUp", { topPos: top });
-      // };
-
-      // socket.on("redUp", function (data) {
-      //   red.style.top = data.topPos - 5 + "px";
-      //   console.log(data);
-      // });
-
       socket.on("showMsg", function (data) {
         let str = "";
         str += "<li>";
@@ -248,19 +213,19 @@
           alert("보낼 메세지를 입력하세요.");
           message.focus();
         } else {
-          if (data.uname === uname) {
+          if (data.uname === uname && data.sid === socket.id) {
             // 본인은 오른쪽에 노란색으로 메시지 표시
             str += `<span id = 'me'>
-                      <span id='dataName'>${data.uname}</span><br>
-                      <span id='dataTime'>${data.time}</span> 
-                      <span id='myDataMessage'>${data.message}</span>
+                      <span class='dataName'>${data.uname}</span><br>
+                      <span class='dataTime'>${data.time}</span> 
+                      <span class='myDataMessage'>${data.message}</span>
                     </span><br>`;
           } else {
             // 다른 사람은 왼쪽에 흰색으로 메시지 표시
             str += `<span id = 'other'>
-                      <span id='dataName'>${data.uname}</span><br>
-                      <span id='otherDataMessage'>${data.message}</span> 
-                      <span id='dataTime'>${data.time}</span>
+                      <span class='dataName'>${data.uname}</span><br>
+                      <span class='otherDataMessage'>${data.message}</span> 
+                      <span class='dataTime'>${data.time}</span>
                     </span><br>`;
           }
           str += "</li>";
@@ -272,13 +237,13 @@
           document.getElementById("myName").style.background = data.ucolor;
           document.getElementById("searchBtn").style.background = data.ucolor;
 
-          // 채팅이 입력되면 자동으로 스크롤 아래로 이동
+          // 채팅이 입력되면 자동으로 가장 아래로 이동
           container.scrollTop = container.scrollHeight;
         }
       });
 
       socket.on("userIn", function (data) {
-        let str = `<li class = 'inOut''><span>${data.uname}님이 들어왔습니다.</span></li>`;
+        let str = `<li class = 'inOut'><span>${data.uname}님이 들어왔습니다.</span></li>`;
         display.insertAdjacentHTML("beforeend", str);
         container.scrollTop = container.scrollHeight;
       });
@@ -291,31 +256,35 @@
 
       // 메시지 내용 검색 기능 함수
       function searchMessage() {
-        for (let i = 0; i < myDataMessage.length; i++) {
-          if (searchInput.value.trim() === "") {
-            myDataMessage[i].style.backgroundColor = "yellow";
-            myDataMessage[i].style.color = "black";
-          } else if (myDataMessage[i].innerText.includes(searchInput.value)) {
-            myDataMessage[i].style.backgroundColor = "black";
-            myDataMessage[i].style.color = "white";
+        const myDataMessages = document.querySelectorAll(".myDataMessage");
+        const otherDataMessages =
+          document.querySelectorAll(".otherDataMessage");
+
+        for (let i = 0; i < myDataMessages.length; i++) {
+          if (searchInput.value === "" || searchInput.value.trim() === "") {
+            myDataMessages[i].style.backgroundColor = "yellow";
+            myDataMessages[i].style.color = "black";
+          } else if (myDataMessages[i].innerText.includes(searchInput.value)) {
+            myDataMessages[i].style.backgroundColor = "black";
+            myDataMessages[i].style.color = "white";
           } else {
-            myDataMessage[i].style.backgroundColor = "yellow";
-            myDataMessage[i].style.color = "black";
+            myDataMessages[i].style.backgroundColor = "yellow";
+            myDataMessages[i].style.color = "black";
           }
         }
 
-        for (let i = 0; i < otherDataMessage.length; i++) {
-          if (searchInput.value.trim() === "") {
-            otherDataMessage[i].style.backgroundColor = "white";
-            otherDataMessage[i].style.color = "black";
+        for (let i = 0; i < otherDataMessages.length; i++) {
+          if (searchInput.value === "" || searchInput.value.trim() === "") {
+            otherDataMessages[i].style.backgroundColor = "white";
+            otherDataMessages[i].style.color = "black";
           } else if (
-            otherDataMessage[i].innerText.includes(searchInput.value)
+            otherDataMessages[i].innerText.includes(searchInput.value)
           ) {
-            otherDataMessage[i].style.backgroundColor = "black";
-            otherDataMessage[i].style.color = "white";
+            otherDataMessages[i].style.backgroundColor = "black";
+            otherDataMessages[i].style.color = "white";
           } else {
-            otherDataMessage[i].style.backgroundColor = "white";
-            otherDataMessage[i].style.color = "black";
+            otherDataMessages[i].style.backgroundColor = "white";
+            otherDataMessages[i].style.color = "black";
           }
         }
 
