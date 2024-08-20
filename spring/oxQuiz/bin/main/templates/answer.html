@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>OX 퀴즈 애플리케이션: 해답</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 250px);
+            width: 100%;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        a:hover {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color: #6495ED">OX 퀴즈 애플리케이션: ANSWER</h1>
+<div class="container">
+    <h2 th:text="${trueMsg}" style="color:blue">메시지 표시 영역</h2>
+    <h2 th:text="${falseMsg}" style="color:red">메시지 표시 영역</h2>
+    <div style="display: flex">
+        <a th:href="@{/quiz/play}">다시하기&nbsp&nbsp</a>
+        <a th:href="@{/quiz}">돌아가기</a>
+    </div>
+
+</div>
+</body>
+</html>
