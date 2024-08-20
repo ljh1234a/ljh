@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container ul {
+            display: flex;
+            background-color: #49D69B;
+            list-style: none;
+        }
+        .container ul li {
+            display: flex;
+            align-items: center;
+        }
+        .container ul li.right-align {
+
+        }
+        .container ul li a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            text-align: center;
+        }
+        .container ul li a:hover {
+            background-color: #fff;
+            color: #49D69B;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li>
+            <a href="/" style="font-weight: bold">Shop</a>
+        </li>
+        <li class="right-align" th:if="${session.userName == null}">
+            <a href="/user/save">회원가입</a>
+        </li>
+        <li class="right-align" th:if="${session.userName == null}">
+            <a href="/user/login">로그인</a>
+        </li>
+        <li class="right-align" th:if="${session.userName != null}">
+            <span th:text="${session.userName}"></span>
+            <span>님</span><br>
+        </li>
+        <li class="right-align" th:if="${session.userName != null}">
+            <a href="/user/logout">로그아웃</a>
+        </li>
+        <li class="right-align">
+            <a href="/user/info">회원 목록</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

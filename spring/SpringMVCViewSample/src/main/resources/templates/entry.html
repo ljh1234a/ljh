@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<h3><a th:href="@{/hello/function/1}">기능-1</a></h3>
+<h3><a th:href="@{/hello/function/2}">기능-2</a></h3>
+<h3><a th:href="@{/hello/function/3}">기능-3</a></h3>
+
+<form th:action="@{/hello/confirm}" method="post" enctype="multipart/form-data">
+    <input type="submit" th:formaction="@{/hello/send}" name="a" value="A">
+    <input type="submit" th:formaction="@{/hello/send}" name="b" value="B">
+    <input type="submit" th:formaction="@{/hello/send}" name="c" value="C">
+    <div>
+        <label for="name">이름: </label>
+        <input type="text" id="name" name="name">
+    </div>
+    <div>
+        <label for="age">나이: </label>
+        <input type="number" id="age" name="age" min="1" max="100">
+    </div>
+    <div>
+        <label for="birth">생년월일: </label>
+        <input type="date" id="birth" name="birth">
+    </div>
+    <input type="submit" value="전송">
+    <input type="submit" th:formaction="@{/hello/confirm2}" method="post" value="전송2">
+    <br>
+    <div>
+        <label for="check">check</label>
+        <input type="checkbox" id="check" name="check">
+    </div>
+    <div>
+        <label for="radio">radio</label>
+        <input type="radio" id="radio" name="radio">
+    </div>
+    <div>
+        <label for="imgFile">파일: </label>
+        <input type="file" id="imgFile" name="imgFile">
+    </div>
+</form>
+</body>
+</html>

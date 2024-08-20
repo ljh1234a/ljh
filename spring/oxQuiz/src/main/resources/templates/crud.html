@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>OX 퀴즈 애플리케이션</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        table, th, td {
+            border: 1px solid #aaa;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 6px;
+        }
+        .title {
+            font-weight: bold;
+        }
+        .content {
+            margin: 10px 0;
+        }
+        input[type=submit] {
+            border: none;
+            background-color: gray;
+            cursor: pointer;
+            color: #fff;
+            padding: 6px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type=submit]:hover {
+            background-color: #ccc;
+        }
+        .center {
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        a:hover {
+            opacity: 0.5;
+        }
+        #play {
+            color: violet;
+            font-size: 24px;
+            margin-left: 20px;
+        }
+        #play:hover {
+            opacity: 0.5;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header h3 {
+            margin-right: 10px;
+            position: absolute;
+            left: 8px;
+        }
+        .form-container {
+            margin: 0;
+            padding: 0
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<h1 style="color: #6495ED">OX 퀴즈 애플리케이션: CRUD</h1>
+<div class="header">
+    <h3 th:text="${title}">제목</h3>
+    <a th:href="@{/quiz/play}" id="play" style="font-size: 32px">Game Start!</a>
+</div>
+
+<div class="form-container">
+    <p th:if="${complete}" th:text="${complete}" style="color: blue"></p>
+    <form method="post"
+          th:action="${quizForm.newQuiz} ? @{/quiz/insert} : @{/quiz/update}"
+          th:object="${quizForm}">
+        <label class="title">문제</label><br>
+        <textarea rows="5" cols="70" th:field="*{question}" class="content"></textarea>
+        <br>
+        <div th:if="${#fields.hasErrors('question')}" th:errors="*{question}"
+             style="color:red"></div>
+        <label class="title">정답</label><br>
+        <input type="radio" value="true" th:field="*{answer}" class="content" style="margin-bottom: 0;"> O
+        <br>
+        <input type="radio" value="false" th:field="*{answer}" class="content"> X
+        <br>
+        <div th:if="${#fields.hasErrors('answer')}" th:errors="*{answer}"
+             style="color:red"></div>
+        <label class="title">출제자 </label>
+        <input type="text" th:field="*{author}" style="padding: 5px"/>
+        <br>
+        <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+             style="color:red"></div>
+        <input th:if="${id}" type="hidden" th:field="*{id}" >
+        <input type="submit" th:value="${btn}">
+    </form>
+</div>
+
+<hr>
+<div th:if="${quizForm.newQuiz}">
+    <h3>등록된 퀴즈 목록</h3>
+    <p th:if="${delcomplete}" th:text="${delcomplete}" style="color: blue"></p>
+    <p th:if="${msg}" th:text="${msg}" style="color:red"></p>
+    <table th:unless="${#lists.isEmpty(list)}"
+           style="table-layout: fixed;">
+        <tr>
+            <th>No</th>
+            <th>문제</th>
+            <th>정답</th>
+            <th>출제자</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <tr th:each="obj : ${list}" >
+            <td th:text="${obj.id}" class="center"></td>
+            <td th:text="${obj.question}"></td>
+            <td th:text="${obj.answer} == true ? 'O' : 'X'" class="center"></td>
+            <td th:text="${obj.author}" class="center"></td>
+            <td class="btn">
+                <form method="get" th:action="@{/quiz/{id}(id=${obj.id})}">
+                    <input type="submit" value="수정" class="center" id="editBtn">
+                </form>
+            </td>
+            <td class="btn">
+                <form method="post" th:action="@{/quiz/delete}">
+                    <input type="hidden" name="id" th:value="${obj.id}">
+                    <input type="submit" value="삭제" class="center" id="delBtn">
+                </form>
+            </td>
+        </tr>
+    </table>
+    <p th:if="${#lists.isEmpty(list)}">새로운 퀴즈를 등록해주세요</p>
+</div>
+<p th:unless="${quizForm.newQuiz}">
+    <a href="#" th:href="@{/quiz}">돌아가기</a>
+</p>
+</body>
+</html>

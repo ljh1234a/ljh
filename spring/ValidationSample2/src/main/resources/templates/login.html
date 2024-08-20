@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+</head>
+<body>
+<form method="post" th:action="@{/login_ok}">
+    <div>
+        <input type="text" name="userId" placeholder="ID">
+    </div>
+    <div>
+        <input type="password" name="userPw" placeholder="Password">
+    </div>
+    <div>
+        <input type="submit" value="로그인">
+    </div>
+    <div th:text="${loginFail}"></div>
+</form>
+</body>
+</html>

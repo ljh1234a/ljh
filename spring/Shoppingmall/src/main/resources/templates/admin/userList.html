@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>회원목록</title>
+    <link rel="stylesheet" href="/css/users.css">
+</head>
+<body>
+<header>
+    <div class="topMenu">
+        <a href="/shop">Shop</a>
+    </div>
+    <div th:if="${session.user != null && session.user.role == 'ROLE_ADMIN'}" class="topMenu">
+        <a href="/shop/admin/product">상품관리</a>
+    </div>
+    <div th:if="${session.user != null}" class="topMenu">
+        <span th:text="${session.user.username}"></span>님
+        <a href="/shop/logout">로그아웃</a>
+    </div>
+    <div th:if="${session.user == null}" class="topMenu">
+        <a href="/shop/login">로그인</a>
+        <a href="/shop/register">회원가입</a>
+    </div>
+</header>
+<div class="container">
+    <h1>회원목록</h1>
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>연락처</th>
+            <th>보유 금액</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.tel}"></td>
+            <td th:text="${user.money}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

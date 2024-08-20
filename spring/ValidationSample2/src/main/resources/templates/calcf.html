@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title.entry}">제목</title>
+    <style>
+        .err {
+            color: red;
+        }
+        span {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/result}" method="post" th:object="${calcForm}">
+    <div>
+        <span>
+            <div>
+                <input type="number" th:field="*{leftNum}">
+            </div>
+            <div>
+                <div class="err" th:if="${#fields.hasErrors('leftNum')}" th:errors="*{leftNum}"></div>
+            </div>
+        </span>
+        +
+        <span>
+            <div>
+                <input type="number" th:field="*{rightNum}">
+            </div>
+            <div>
+                <div th:if="${#fields.hasErrors('rightNum')}" th:text="${#fields.errors('rightNum')}"></div>
+            </div>
+        </span>
+
+    </div>
+<!--    <input type="submit" value="계산">-->
+    <button type="submit" th:text="#{button.send}"></button>
+    <ul th:if="${#fields.hasErrors('*')}">
+        <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+    </ul>
+</form>
+</body>
+</html>
